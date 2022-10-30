@@ -8,6 +8,7 @@ export default {
   component: LoginButton,
   argTypes: {
     backgroundColor: { control: "color" },
+    hover: { control: "color" },
   },
 } as unknown as ComponentMeta<typeof LoginButton>;
 

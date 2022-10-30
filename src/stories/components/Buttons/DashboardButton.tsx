@@ -18,7 +18,9 @@ export const DashboardButton: any = ({
 }: ButtonProps) => {
   return (
     <>
-      <Button variant="contained">Contained</Button>
+      <Button variant="contained" sx={{ backgroundColor }}>
+        {label}
+      </Button>
     </>
   );
 };

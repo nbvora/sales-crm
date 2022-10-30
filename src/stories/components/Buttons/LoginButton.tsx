@@ -6,6 +6,7 @@ interface ButtonProps {
   backgroundColor?: any;
   size?: "medium";
   label?: string;
+  hover?: any;
   onClick?: () => void;
 }
 
@@ -14,6 +15,7 @@ export const LoginButton: any = ({
   size = "medium",
   backgroundColor,
   label,
+  hover,
   ...props
 }: ButtonProps) => {
   return (
@@ -30,8 +32,9 @@ export const LoginButton: any = ({
               color: "white",
             },
           }}
+          {...props}
         >
-          Login
+          {label}
         </Button>
       </div>
     </>
