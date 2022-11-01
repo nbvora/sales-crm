@@ -2,6 +2,8 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import { Modal } from "../Modal/Modal";
+import { Box } from "@mui/material";
+
 interface ConfirmModalProps {
   primary?: boolean;
   backgroundColor?: any;
@@ -37,7 +39,7 @@ export const ConfirmationModal: any = ({
   };
   return (
     <>
-      <div>
+      <Box>
         <Button variant="outlined" onClick={handleClickOpen}>
           {labelName}
         </Button>
@@ -49,7 +51,7 @@ export const ConfirmationModal: any = ({
         >
           <Modal label={label} labelYes={labelYes} labelNo={labelNo} />
         </Dialog>
-      </div>
+      </Box>
     </>
   );
 };

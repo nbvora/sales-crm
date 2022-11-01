@@ -6,6 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { DashboardButton } from "../Buttons/DashboardButton";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { Box } from "@mui/material";
 
 interface ModalProps {
   backgroundColor?: any;
@@ -33,16 +34,8 @@ export const Modal: any = ({
   };
   return (
     <>
-      <div className="Modal">
-        <div
-          className="icon"
-          style={{
-            marginLeft: 90,
-            marginTop: 15,
-            height: 60,
-            width: 60,
-          }}
-        >
+      <Box className="Modal">
+        <Box className="icon" sx={{ marginLeft: 11, marginTop: 3 }}>
           <ErrorOutlineIcon
             sx={{
               color: "#facea8",
@@ -54,7 +47,7 @@ export const Modal: any = ({
               justifyContent: "center",
             }}
           />
-        </div>
+        </Box>
         <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -69,7 +62,7 @@ export const Modal: any = ({
             <DashboardButton label={labelNo} />
           </Button>
         </DialogActions>
-      </div>
+      </Box>
     </>
   );
 };
