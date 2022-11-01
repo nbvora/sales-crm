@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { RadioButton } from "./RadioButton";
 
 export default {
-  title: "RadioButton",
+  title: "RadioComponent",
   component: RadioButton,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -15,8 +15,8 @@ const Template: ComponentStory<typeof RadioButton> = (args) => (
   <RadioButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const RadioButtons = Template.bind({});
+RadioButtons.args = {
   label: "RadioButton",
   label1: "RadioButton",
 };

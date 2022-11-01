@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CheckboxButton } from "./CheckboxButton";
 
 export default {
-  title: "CheckboxButton",
+  title: "CheckboxComponent",
   component: CheckboxButton,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof CheckboxButton> = (args) => (
   <CheckboxButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const CheckboxButtons = Template.bind({});
+CheckboxButtons.args = {
   label: "CheckboxButton",
 };

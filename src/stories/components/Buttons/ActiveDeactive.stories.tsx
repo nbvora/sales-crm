@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ActiveDeactive } from "./ActiveDeactive";
 
 export default {
-  title: "ActiveDeactiveButton",
+  title: "ActiveDeactiveComponent",
   component: ActiveDeactive,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof ActiveDeactive> = (args) => (
   <ActiveDeactive {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const ActiveDeactiveToggle = Template.bind({});
+ActiveDeactiveToggle.args = {
   label: "Active-Deactive",
 };

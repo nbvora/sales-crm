@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { LoginButton } from "./LoginButton";
 
 export default {
-  title: "button",
+  title: "LoginComponent",
   component: LoginButton,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof LoginButton> = (args) => (
   <LoginButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const LoginButtons = Template.bind({});
+LoginButtons.args = {
   label: "Login",
 };
