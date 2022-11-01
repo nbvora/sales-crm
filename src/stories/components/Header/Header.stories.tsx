@@ -1,10 +1,10 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import NavBarr from "./Header";
+import NavBar from "./Header";
 export default {
   title: "HeaderComponent",
-  component: NavBarr,
-} as unknown as ComponentMeta<typeof NavBarr>;
-const Template: ComponentStory<typeof NavBarr> = () => <NavBarr />;
+  component: NavBar,
+} as unknown as ComponentMeta<typeof NavBar>;
+const Template: ComponentStory<typeof NavBar> = () => <NavBar />;
 export const Header = Template.bind({});
 Header.args = {};

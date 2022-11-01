@@ -1,8 +1,8 @@
 import React from "react";
 import { AppBar } from "@mui/material";
-import { Userinfo } from "../Dropdowns/UserInfoDropdown.stories";
+import { UserInfo } from "../Dropdowns/UserInfoDropdown.stories";
 
-const NavBarr = (): any => {
+const NavBar = (): any => {
   return (
     <>
       <AppBar
@@ -13,10 +13,10 @@ const NavBarr = (): any => {
           justifyContent: "center",
         }}
       >
-        <Userinfo />
+        <UserInfo />
       </AppBar>
     </>
   );
 };
 
-export default NavBarr;
+export default NavBar;

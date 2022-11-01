@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Search from "./Search";
 export default {
-  title: "SearchComponents",
+  title: "SearchComponent",
   component: Search,
 } as unknown as ComponentMeta<typeof Search>;
 const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;

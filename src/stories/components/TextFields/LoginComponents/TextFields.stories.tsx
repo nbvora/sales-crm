@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import TextFields from "./TextFields";
 export default {
-  title: "loginComponents",
+  title: "loginComponent",
   component: TextFields,
 } as unknown as ComponentMeta<typeof TextFields>;
 interface TextFieldprops {

@@ -7,7 +7,7 @@ import VpnKeySharpIcon from "@mui/icons-material/VpnKeySharp";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import PortraitSharpIcon from "@mui/icons-material/PortraitSharp";
 
-const UserInfoDrodown = (): any => {
+const UserInfoDropdown = (): any => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -61,4 +61,4 @@ const UserInfoDrodown = (): any => {
   );
 };
 
-export default UserInfoDrodown;
+export default UserInfoDropdown;

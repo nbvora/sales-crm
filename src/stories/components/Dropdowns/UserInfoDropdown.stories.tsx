@@ -1,12 +1,12 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import UserInfoDrodown from "./UserInfoDrodown";
+import UserInfoDropdown from "./UserInfoDropdown";
 export default {
-  title: "Drodown",
-  component: UserInfoDrodown,
-} as unknown as ComponentMeta<typeof UserInfoDrodown>;
-const Template: ComponentStory<typeof UserInfoDrodown> = () => (
-  <UserInfoDrodown />
+  title: "Dropdown",
+  component: UserInfoDropdown,
+} as unknown as ComponentMeta<typeof UserInfoDropdown>;
+const Template: ComponentStory<typeof UserInfoDropdown> = () => (
+  <UserInfoDropdown />
 );
-export const Userinfo = Template.bind({});
-Userinfo.args = {};
+export const UserInfo = Template.bind({});
+UserInfo.args = {};
