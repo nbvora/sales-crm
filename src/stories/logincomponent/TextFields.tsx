@@ -27,7 +27,6 @@ const TextFields = ({
         id="input-with-icon-textfield"
         className={classes.root}
         inputProps={{
-          focused: true,
           style: {
             width: 300,
             height: 20,
@@ -38,7 +37,7 @@ const TextFields = ({
         }}
         endAdornment={
           <InputAdornment position="end">
-            {type === "text" ? <PersonIcon /> : <LockIcon />}
+            {type === "password" ? <LockIcon /> : <PersonIcon />}
           </InputAdornment>
         }
         placeholder={placeholder}
