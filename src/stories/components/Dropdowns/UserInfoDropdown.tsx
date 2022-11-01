@@ -54,7 +54,7 @@ const UserInfoDropdown = (): any => {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <LogoutSharpIcon sx={{ marginRight: "20px" }} />
-          Log out
+          Log Out
         </MenuItem>
       </Menu>
     </>
