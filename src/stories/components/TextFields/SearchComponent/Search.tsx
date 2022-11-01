@@ -2,10 +2,10 @@ import React from "react";
 import { TextField } from "@mui/material";
 
 interface Searchprops {
-  HandleChange: () => void;
+  handleChange: () => void;
 }
 
-const Search = ({ HandleChange }: Searchprops): any => {
+const Search = ({ handleChange }: Searchprops): any => {
   return (
     <TextField
       id="outlined-basic"
@@ -19,7 +19,7 @@ const Search = ({ HandleChange }: Searchprops): any => {
         },
       }}
       variant="outlined"
-      onChange={HandleChange}
+      onChange={handleChange}
     />
   );
 };

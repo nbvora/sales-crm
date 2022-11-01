@@ -1,16 +1,16 @@
 import React from "react";
 import { InputAdornment, OutlinedInput } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-interface TextFieldprops {
+interface TextFieldProps {
   placeholder: string;
   type: string;
-  HandleChange: () => void;
+  handleChange: () => void;
 }
 const ResetPassword = ({
   placeholder,
   type,
-  HandleChange,
-}: TextFieldprops): any => {
+  handleChange,
+}: TextFieldProps): any => {
   return (
     <>
       <OutlinedInput
@@ -31,7 +31,7 @@ const ResetPassword = ({
         }
         placeholder={placeholder}
         type={type}
-        onChange={HandleChange}
+        onChange={handleChange}
       />
     </>
   );

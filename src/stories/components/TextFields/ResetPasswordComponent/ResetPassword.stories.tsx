@@ -5,20 +5,20 @@ export default {
   title: "ResetPasswordComponent",
   component: ResetPassword,
 } as unknown as ComponentMeta<typeof ResetPassword>;
-interface TextFieldprops {
+interface TextFieldProps {
   placeholder: string;
   type: string;
-  HandleChange: () => void;
+  handleChange: () => void;
 }
 const Template: ComponentStory<typeof ResetPassword> = ({
   placeholder,
   type,
-  HandleChange,
-}: TextFieldprops) => (
+  handleChange,
+}: TextFieldProps) => (
   <ResetPassword
     placeholder={placeholder}
     type={type}
-    HandleChange={HandleChange}
+    handleChange={handleChange}
   />
 );
 

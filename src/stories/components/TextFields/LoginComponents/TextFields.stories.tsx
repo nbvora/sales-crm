@@ -5,20 +5,20 @@ export default {
   title: "LoginComponent",
   component: TextFields,
 } as unknown as ComponentMeta<typeof TextFields>;
-interface TextFieldprops {
+interface TextFieldProps {
   placeholder: string;
   type: string;
-  HandleChange: () => void;
+  handleChange: () => void;
 }
 const Template: ComponentStory<typeof TextFields> = ({
   placeholder,
   type,
-  HandleChange,
-}: TextFieldprops) => (
+  handleChange,
+}: TextFieldProps) => (
   <TextFields
     placeholder={placeholder}
     type={type}
-    HandleChange={HandleChange}
+    handleChange={handleChange}
   />
 );
 

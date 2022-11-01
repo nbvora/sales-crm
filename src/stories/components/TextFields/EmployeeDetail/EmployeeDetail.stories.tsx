@@ -1,23 +1,22 @@
 import React from "react";
 import EmployeeDetail from "./EmployeeDetail";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { title } from "process";
 export default {
   title: "EmployeeDetailComponent",
   component: EmployeeDetail,
 } as unknown as ComponentMeta<typeof EmployeeDetail>;
-interface TextFieldprops {
+interface TextFieldProps {
   title?: string;
-  HandleChange?: () => void;
+  handleChange?: () => void;
 }
 const Template: ComponentStory<typeof EmployeeDetail> = ({
   title,
-  HandleChange,
-}: TextFieldprops) => (
-  <EmployeeDetail title={title} HandleChange={HandleChange} />
+  handleChange,
+}: TextFieldProps) => (
+  <EmployeeDetail title={title} handleChange={handleChange} />
 );
 
-export const EmployeeFeilds = Template.bind({});
-EmployeeFeilds.args = {
+export const EmployeeFields = Template.bind({});
+EmployeeFields.args = {
   title: "string",
 };

@@ -1,18 +1,18 @@
 import React from "react";
-import { OutlinedInput, InputAdornment, makeStyles } from "@material-ui/core";
+import { OutlinedInput, InputAdornment } from "@material-ui/core";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
 
-interface TextFieldprops {
+interface TextFieldProps {
   placeholder: string;
   type: string;
-  HandleChange: () => void;
+  handleChange: () => void;
 }
 const TextFields = ({
   placeholder,
   type,
-  HandleChange,
-}: TextFieldprops): any => {
+  handleChange,
+}: TextFieldProps): any => {
   return (
     <>
       <OutlinedInput
@@ -33,7 +33,7 @@ const TextFields = ({
         }
         placeholder={placeholder}
         type={type}
-        onChange={HandleChange}
+        onChange={handleChange}
       />
     </>
   );
