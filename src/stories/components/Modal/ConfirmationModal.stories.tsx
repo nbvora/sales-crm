@@ -12,8 +12,8 @@ const Template: ComponentStory<typeof ConfirmationModal> = (args) => (
   <ConfirmationModal {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const ConfirmationModalPopUp = Template.bind({});
+ConfirmationModalPopUp.args = {
   labelName: "ConfirmationModal",
   label: "string",
   labelYes: "string",

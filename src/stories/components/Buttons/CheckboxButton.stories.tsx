@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof CheckboxButton> = (args) => (
   <CheckboxButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Checkbox = Template.bind({});
+Checkbox.args = {
   label: "CheckboxButton",
 };

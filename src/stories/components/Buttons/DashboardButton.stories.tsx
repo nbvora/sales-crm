@@ -15,8 +15,8 @@ const Template: ComponentStory<typeof DashboardButton> = (args) => (
   <DashboardButton {...args} />
 );
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Dashboard = Template.bind({});
+Dashboard.args = {
   label: "DashboardButton",
   backgroundColor: "string",
 };

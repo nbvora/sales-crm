@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof SwitchButton> = (args) => (
   <SwitchButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Switch = Template.bind({});
+Switch.args = {
   label: "Switch",
 };

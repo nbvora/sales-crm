@@ -15,8 +15,8 @@ const Template: ComponentStory<typeof RadioButton> = (args) => (
   <RadioButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Radio = Template.bind({});
+Radio.args = {
   label: "RadioButton",
   label1: "RadioButton",
 };

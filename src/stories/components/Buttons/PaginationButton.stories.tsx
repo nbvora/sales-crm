@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof PaginationButton> = (args) => (
   <PaginationButton {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Pagination = Template.bind({});
+Pagination.args = {
   label: "PaginationButton",
 };

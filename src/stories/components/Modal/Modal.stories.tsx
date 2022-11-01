@@ -10,8 +10,8 @@ export default {
 
 const Template: ComponentStory<typeof Modal> = (args) => <Modal {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const ModalTemplate = Template.bind({});
+ModalTemplate.args = {
   label: "string",
   labelYes: "string",
   labelNo: "string",
