@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import UserInfoDropdown from "./UserInfoDropdown";
 export default {
-  title: "Dropdown",
+  title: "DropdownComponent",
   component: UserInfoDropdown,
 } as unknown as ComponentMeta<typeof UserInfoDropdown>;
 const Template: ComponentStory<typeof UserInfoDropdown> = () => (

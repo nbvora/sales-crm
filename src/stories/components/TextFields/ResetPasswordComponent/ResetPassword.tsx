@@ -1,14 +1,12 @@
 import React from "react";
-import { OutlinedInput, InputAdornment, makeStyles } from "@material-ui/core";
-import PersonIcon from "@mui/icons-material/Person";
-import LockIcon from "@mui/icons-material/Lock";
-
+import { InputAdornment, OutlinedInput } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
 interface TextFieldprops {
   placeholder: string;
   type: string;
   HandleChange: () => void;
 }
-const TextFields = ({
+const ResetPassword = ({
   placeholder,
   type,
   HandleChange,
@@ -28,7 +26,7 @@ const TextFields = ({
         }}
         endAdornment={
           <InputAdornment position="end">
-            {type === "password" ? <LockIcon /> : <PersonIcon />}
+            <EmailIcon />
           </InputAdornment>
         }
         placeholder={placeholder}
@@ -39,4 +37,4 @@ const TextFields = ({
   );
 };
 
-export default TextFields;
+export default ResetPassword;
