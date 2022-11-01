@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ActiveDeactive } from "./ActiveDeactive";
 
 export default {
-  title: "ActiveDeactiveButton",
+  title: "ActiveDeactiveComponent",
   component: ActiveDeactive,
   argTypes: {
     backgroundColor: { control: "color" },

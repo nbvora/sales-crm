@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SwitchButton } from "./SwitchButton";
 
 export default {
-  title: "SwitchButton",
+  title: "SwitchComponent",
   component: SwitchButton,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof SwitchButton> = (args) => (
   <SwitchButton {...args} />
 );
 
-export const Switch = Template.bind({});
-Switch.args = {
+export const SwitchButtons = Template.bind({});
+SwitchButtons.args = {
   label: "Switch",
 };

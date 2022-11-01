@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { DashboardButton } from "./DashboardButton";
 
 export default {
-  title: "DashboardButton",
+  title: "DashboardComponent",
   component: DashboardButton,
   argTypes: {
     backgroundColor: { control: "color" },
@@ -15,8 +15,8 @@ const Template: ComponentStory<typeof DashboardButton> = (args) => (
   <DashboardButton {...args} />
 );
 
-export const Dashboard = Template.bind({});
-Dashboard.args = {
+export const DashboardButtons = Template.bind({});
+DashboardButtons.args = {
   label: "DashboardButton",
   backgroundColor: "string",
 };
