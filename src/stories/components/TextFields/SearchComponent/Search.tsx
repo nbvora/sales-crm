@@ -1,11 +1,11 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-interface Searchprops {
+interface SearchProps {
   handleChange: () => void;
 }
 
-const Search = ({ handleChange }: Searchprops): any => {
+const Search = ({ handleChange }: SearchProps): any => {
   return (
     <TextField
       id="outlined-basic"
