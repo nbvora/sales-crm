@@ -4,7 +4,8 @@ import { Container } from '@mui/material';
 // components
 import Page from '../components/Page';
 // sections
-import { ComponentHero, ComponentOther, ComponentFoundation, ComponentMUI } from '../sections/overview';
+// commenting this because path is not found--
+// import { ComponentHero, ComponentOther, ComponentFoundation, ComponentMUI } from '../sections/overview';
 
 // ----------------------------------------------------------------------
 
@@ -22,11 +23,11 @@ export default function ComponentsOverview() {
   return (
     <Page title="Components Overview">
       <RootStyle>
-        <ComponentHero />
+        {/* <ComponentHero /> */}
         <Container>
-          <ComponentFoundation />
-          <ComponentMUI />
-          <ComponentOther />
+          {/* <ComponentFoundation /> */}
+          {/* <ComponentMUI /> */}
+          {/* <ComponentOther /> */}
         </Container>
       </RootStyle>
     </Page>
