@@ -1,8 +1,8 @@
 {
-  "root": ,
+  "root": true,
   "env": {
     "browser": true,
-    "node": true
+    "node": true;
   },
   "extends": ["airbnb", "plugin:jsx-a11y/recommended", "plugin:react-hooks/recommended", "prettier"],
   "plugins": ["react", "react-hooks", "prettier"],
