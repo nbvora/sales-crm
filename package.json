@@ -101,6 +101,7 @@
     "react-slick": "^0.28.0",
     "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
+    "redux-saga": "^1.2.1",
     "rehype-raw": "^6.1.0",
     "simplebar": "^5.3.6",
     "simplebar-react": "^2.3.6",
