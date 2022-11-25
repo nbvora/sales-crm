@@ -31,9 +31,9 @@ const navConfig = [
         path: PATH_DASHBOARD.user.root,
         icon: ICONS.user,
         children: [
-          { title: 'profile', path: PATH_DASHBOARD.user.profile },
-          { title: 'cards', path: PATH_DASHBOARD.user.cards },
-          { title: 'list', path: PATH_DASHBOARD.user.list },
+          { title: 'Product Category', path: PATH_DASHBOARD.user.profile },
+          { title: 'Product', path: PATH_DASHBOARD.user.cards },
+          { title: 'Stock Management', path: PATH_DASHBOARD.user.list },
         ],
       },
       { title: 'Vendors', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
