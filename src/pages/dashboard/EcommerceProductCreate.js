@@ -1,5 +1,7 @@
-// ----------------------------------------------------------------------
-
 export default function EcommerceProductCreate() {
-  return <h1>Employees Target</h1>;
+  return (
+    <>
+      <h1>employees</h1>
+    </>
+  );
 }
