@@ -15,3 +15,12 @@ export function* signupSaga() {
     // yield put({ type: "TODO_FETCH_FAILED" });
   }
 }
+
+export function* resetPasswordSaga(resetData) {
+  try {
+    const data = yield { email: resetData };
+    console.log(data);
+  } catch (e) {
+    // yield put({ type: "TODO_FETCH_FAILED" });
+  }
+}

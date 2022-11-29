@@ -3,8 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Button, Container, Typography } from '@mui/material';
-// layouts
-import LogoOnlyLayout from '../../layouts/LogoOnlyLayout';
 // routes
 import { PATH_AUTH } from '../../routes/paths';
 // components
@@ -33,8 +31,6 @@ export default function ResetPassword() {
   return (
     <Page title="Reset Password" sx={{ height: 1 }}>
       <RootStyle>
-        <LogoOnlyLayout />
-
         <Container>
           <Box sx={{ maxWidth: 480, mx: 'auto' }}>
             {!sent ? (
