@@ -7,10 +7,11 @@ import { useForm } from 'react-hook-form';
 import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // hooks
+import sagaActions from '../../../redux/actions';
+import { dispatch } from '../../../redux/store';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
-
 // ----------------------------------------------------------------------
 
 ResetPasswordForm.propTypes = {
@@ -27,7 +28,7 @@ export default function ResetPasswordForm({ onSent, onGetEmail }) {
 
   const methods = useForm({
     resolver: yupResolver(ResetPasswordSchema),
-    defaultValues: { email: 'demo@minimals.cc' },
+    defaultValues: { email: '' },
   });
 
   const {
@@ -35,12 +36,13 @@ export default function ResetPasswordForm({ onSent, onGetEmail }) {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (resetData) => {
+    dispatch({ type: sagaActions.RESETPASSWORD_SAGA, resetData });
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       if (isMountedRef.current) {
         onSent();
-        onGetEmail(data.email);
+        onGetEmail(resetData.email);
       }
     } catch (error) {
       console.error(error);
