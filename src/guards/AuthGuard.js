@@ -5,6 +5,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 // pages
 import Login from '../pages/auth/Login';
+import { useSelector } from '../redux/store';
 // components
 import LoadingScreen from '../components/LoadingScreen';
 
@@ -15,7 +16,8 @@ AuthGuard.propTypes = {
 };
 
 export default function AuthGuard({ children }) {
-  const { isAuthenticated, isInitialized } = useAuth();
+  const { isAuthenticated } = useSelector((state) => state.login);
+  const { isInitialized } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 

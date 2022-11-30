@@ -1,5 +1,5 @@
 const sagaActions = {
-  INITIALIZE_SAGA: 'Initialize_Saga',
+  LOG_OUT: 'LOG_OUT',
   SIGNUP_SAGA: 'SIGNUP_SAGA',
 };
 

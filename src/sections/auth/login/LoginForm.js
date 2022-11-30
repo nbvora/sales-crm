@@ -1,6 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import * as Yup from 'yup';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,10 +9,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
-import { PATH_AUTH } from '../../../routes/paths';
+import { dispatch } from 'src/redux/store';
+import { PATH_AUTH, PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
-import useAuth from '../../../hooks/useAuth';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
+
+import { useSelector } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
@@ -19,10 +23,10 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { login } = useAuth();
+  const { isAuthenticated } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
-
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -47,10 +51,9 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = methods;
-
   const onSubmit = async (data) => {
     try {
-      await login(data.email, data.password);
+      await dispatch({ type: sagaActions.SIGNUP_SAGA, data });
     } catch (error) {
       console.error(error);
       reset();
@@ -60,6 +63,11 @@ export default function LoginForm() {
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(PATH_DASHBOARD.general.app);
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>

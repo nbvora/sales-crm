@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Typography } from '@mui/material';
 // hooks
-import useAuth from '../../../hooks/useAuth';
+import { useSelector } from '../../../redux/store';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
@@ -30,7 +30,7 @@ NavbarAccount.propTypes = {
 };
 
 export default function NavbarAccount({ isCollapse }) {
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.login);
 
   return (
     <Link underline="none" color="inherit" component={RouterLink} to={PATH_DASHBOARD.user.account}>
