@@ -51,7 +51,6 @@ export default function Router() {
         { path: 'verify', element: <VerifyCode /> },
       ],
     },
-
     // Dashboard Routes
     {
       path: 'dashboard',
