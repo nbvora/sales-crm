@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { isLogin, isLogout } from '../../slices/login';
+import { isLogin, isLogout, isInitialized } from '../../slices/login';
 import { setSession } from '../../../utils/jwt';
 
 export function* logOut() {
@@ -24,6 +24,21 @@ export function* signupSaga(state) {
     if (Token !== null) {
       yield put(isLogin(user));
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function* initialize() {
+  try {
+    const Token = window.localStorage.getItem('token');
+    const response = yield axios.get('/api/account/my-account', {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    });
+    const { user } = response.data;
+    yield put(isInitialized(user));
   } catch (error) {
     console.log(error);
   }

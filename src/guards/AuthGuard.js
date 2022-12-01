@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 // hooks
+import sagaActions from '../redux/actions';
+import { dispatch, useSelector } from '../redux/store';
 import useAuth from '../hooks/useAuth';
 // pages
 import Login from '../pages/auth/Login';
-import { useSelector } from '../redux/store';
+
 // components
 import LoadingScreen from '../components/LoadingScreen';
 
@@ -21,10 +23,13 @@ export default function AuthGuard({ children }) {
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
+  useEffect(() => {
+    dispatch({ type: sagaActions.INTIALIZED });
+  }, []);
+
   if (!isInitialized) {
     return <LoadingScreen />;
   }
-
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);

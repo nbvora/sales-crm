@@ -10,13 +10,19 @@ const login = createSlice({
   name: 'login',
   initialState,
   reducers: {
+    isInitialized(state, action) {
+      const user = action.payload;
+      return {
+        ...state,
+        isAuthenticated: true,
+        user,
+      };
+    },
     isLoding(state) {
       state.isInitialized = true;
     },
     isLogin(state, action) {
-      console.log(action.payload);
       const user = action.payload;
-      console.log(user);
       return {
         ...state,
         isAuthenticated: true,
@@ -36,4 +42,4 @@ const login = createSlice({
 });
 
 export default login.reducer;
-export const { isLogin, isLogout, isLoding } = login.actions;
+export const { isLogin, isLogout, isLoding, isInitialized } = login.actions;

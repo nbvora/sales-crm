@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,11 +10,10 @@ import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
 import { dispatch } from 'src/redux/store';
-import { PATH_AUTH, PATH_DASHBOARD } from '../../../routes/paths';
+import { PATH_AUTH } from '../../../routes/paths';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
-import { useSelector } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
 // components
 import Iconify from '../../../components/Iconify';
@@ -23,11 +22,10 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { isAuthenticated } = useSelector((state) => state.login);
-
   const isMountedRef = useIsMountedRef();
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setemail] = useState('demo@minimals.cc');
+  const [password, setpassword] = useState('demo1234');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -35,8 +33,8 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
+    email,
+    password,
     remember: true,
   };
 
@@ -51,9 +49,9 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = methods;
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     try {
-      await dispatch({ type: sagaActions.SIGNUP_SAGA, data });
+      dispatch({ type: sagaActions.SIGNUP_SAGA, data });
     } catch (error) {
       console.error(error);
       reset();
@@ -63,19 +61,22 @@ export default function LoginForm() {
     }
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(PATH_DASHBOARD.general.app);
-    }
-  }, [isAuthenticated, navigate]);
+  const handleemail = (e) => {
+    setemail(e.target.value);
+  };
+  const handlepassword = (e) => {
+    setpassword(e.target.value);
+  };
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="email" label="Email address" handlechange={handleemail} />
 
         <RHFTextField
+          handlechange={handlepassword}
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
