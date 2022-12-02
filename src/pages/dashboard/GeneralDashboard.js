@@ -14,7 +14,7 @@ const TABLE_HEAD = [
   { id: 'status', label: 'Sub Total Amount', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
-const STOKE_HEAD = [
+const STOCKE_HEAD = [
   { id: 'name', label: 'Vendors', alignRight: false },
   { id: 'company', label: 'Vendor Type', alignRight: false },
   { id: 'role', label: 'Total Qty', alignRight: false },
@@ -32,14 +32,13 @@ export default function GeneralDashboard() {
         Stock List
       </Typography>
       <Box sx={{ marginTop: 2, marginBottom: 6 }}>
-        <StockList tableColumn={STOKE_HEAD} tableRows={stoks} edit={edit} />
+        <StockList tableColumn={STOCKE_HEAD} tableRows={stoks} edit={edit} />
       </Box>
       <Typography sx={{ marginLeft: 4 }} variant="h4" gutterBottom>
         Distributor List
       </Typography>
       <Box sx={{ marginTop: 2, marginBottom: 4 }}>
         <DistributorList tableColumn={TABLE_HEAD} tableRows={ditributor} />
-        {/* <CommonTable tableColumn={TABLE_HEAD} tableRows={_userList} edit={edit} checkbox={checkboxes} /> */}
       </Box>
     </Page>
   );

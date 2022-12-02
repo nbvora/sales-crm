@@ -8,7 +8,7 @@ import productReducer from './slices/product';
 import calendarReducer from './slices/calendar';
 import kanbanReducer from './slices/kanban';
 import loginReducer from './slices/login';
-import dashboardReducer from './slices/stoklist';
+import dashboardReducer from './slices/dashboard';
 
 // ----------------------------------------------------------------------
 

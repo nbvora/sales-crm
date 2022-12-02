@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { getDistributor } from '../../slices/stoklist';
+import { getDistributor } from '../../slices/dashboard';
 import { _userList } from '../../../_mock';
 
 export function* distributerSaga() {

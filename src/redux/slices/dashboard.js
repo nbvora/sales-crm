@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  stoks: null,
+  stocks: null,
   ditributor: null,
 };
 const dashboard = createSlice({
