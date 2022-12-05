@@ -1,6 +1,9 @@
 const sagaActions = {
   INITIALIZE_SAGA: 'Initialize_Saga',
   SIGNUP_SAGA: 'SIGNUP_SAGA',
+  LEADTABLE_SAGA: 'LEADTABLE_SAGA',
+  ORDERTABLE_SAGA: 'ORDERTABLE_SAGA',
+  DISCUSSIONTABLE_SAGA: 'DISCUSSIONTABLE_SAGA',
 };
 
 export default sagaActions;
