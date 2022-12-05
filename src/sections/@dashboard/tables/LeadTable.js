@@ -16,26 +16,25 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Box,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
-import useSettings from '../../hooks/useSettings';
+import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
-import Page from '../../components/Page';
-import Label from '../../components/Label';
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import SearchNotFound from '../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user/list';
-
+import Page from '../../../components/Page';
+import Label from '../../../components/Label';
+import Scrollbar from '../../../components/Scrollbar';
+import SearchNotFound from '../../../components/SearchNotFound';
+import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import { UserListHead, UserListToolbar, UserMoreMenu } from '../user/list';
 // ----------------------------------------------------------------------
-CommonTable.propTypes = {
+LeadTable.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
 };
-export default function CommonTable({ tableRows, tableColumn }) {
+export default function LeadTable({ tableRows, tableColumn }) {
   const theme = useTheme();
   const { themeStretch } = useSettings();
 
@@ -112,24 +111,31 @@ export default function CommonTable({ tableRows, tableColumn }) {
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="User List"
+          heading="Leads"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' },
+            { name: 'Leads', href: PATH_DASHBOARD.lead.root },
+            { name: 'Lead Import', href: PATH_DASHBOARD.lead.leadImport },
+            { name: 'New Lead', href: PATH_DASHBOARD.lead.newLeads },
+
+            // { name: 'User', href: PATH_DASHBOARD.user.root },
+            // { name: 'List' },
           ]}
           action={
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to={PATH_DASHBOARD.user.newUser}
-              startIcon={<Iconify icon={'eva:plus-fill'} />}
-            >
-              New User
-            </Button>
+            <Box sx={{ display: 'flex', justifyContent: 'end', position: 'relative', right: 20 }}>
+              <Button variant="contained" component={RouterLink} to={PATH_DASHBOARD.lead.leadImport}>
+                Lead Import
+              </Button>
+              <Button
+                sx={{ position: 'relative', borderRadius: 1, left: 10 }}
+                variant="contained"
+                component={RouterLink}
+                to={PATH_DASHBOARD.lead.newLeads}
+              >
+                Add New Lead
+              </Button>
+            </Box>
           }
         />
-
         <Card>
           <UserListToolbar
             numSelected={selected.length}
@@ -243,6 +249,7 @@ function getComparator(order, orderBy) {
 
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
+
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
