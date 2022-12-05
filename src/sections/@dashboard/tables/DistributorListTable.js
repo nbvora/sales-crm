@@ -34,6 +34,7 @@ DistributorList.propTypes = {
 export default function DistributorList({ tableRows, tableColumn }) {
   const edit = true;
   const theme = useTheme();
+  const tableName = 'DistributorList';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -96,6 +97,7 @@ export default function DistributorList({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
+            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -129,16 +131,22 @@ export default function DistributorList({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
                           <Label
                             variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
                             color={(status === 'banned' && 'error') || 'success'}
@@ -148,7 +156,7 @@ export default function DistributorList({ tableRows, tableColumn }) {
                         </TableCell>
 
                         {edit && (
-                          <TableCell align="right">
+                          <TableCell align="right" sx={{ padding: '5px' }}>
                             <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
                           </TableCell>
                         )}

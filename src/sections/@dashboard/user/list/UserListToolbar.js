@@ -12,6 +12,7 @@ const RootStyle = styled(Toolbar)(({ theme }) => ({
   height: 96,
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
   padding: theme.spacing(0, 1, 0, 3),
 }));
 
@@ -22,9 +23,10 @@ UserListToolbar.propTypes = {
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,
   onDeleteUsers: PropTypes.func,
+  tableName: PropTypes.string,
 };
 
-export default function UserListToolbar({ numSelected, filterName, onFilterName, onDeleteUsers }) {
+export default function UserListToolbar({ numSelected, filterName, onFilterName, onDeleteUsers, tableName }) {
   const theme = useTheme();
   const isLight = theme.palette.mode === 'light';
 
@@ -42,6 +44,18 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName,
           {numSelected} selected
         </Typography>
       ) : (
+        <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
+          {tableName}
+        </Typography>
+      )}
+
+      {numSelected > 0 ? (
+        <Tooltip title="Delete">
+          <IconButton onClick={onDeleteUsers}>
+            <Iconify icon={'eva:trash-2-outline'} />
+          </IconButton>
+        </Tooltip>
+      ) : (
         <InputStyle
           stretchStart={240}
           value={filterName}
@@ -55,20 +69,6 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName,
             ),
           }}
         />
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton onClick={onDeleteUsers}>
-            <Iconify icon={'eva:trash-2-outline'} />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <Iconify icon={'ic:round-filter-list'} />
-          </IconButton>
-        </Tooltip>
       )}
     </RootStyle>
   );

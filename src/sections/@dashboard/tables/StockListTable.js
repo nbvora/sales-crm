@@ -33,6 +33,7 @@ StockList.propTypes = {
 };
 export default function StockList({ tableRows, tableColumn, edit }) {
   const theme = useTheme();
+  const tableName = 'Stock List';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -95,6 +96,7 @@ export default function StockList({ tableRows, tableColumn, edit }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
+            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -128,16 +130,22 @@ export default function StockList({ tableRows, tableColumn, edit }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell sx={{ padding: '5px' }} align="left">
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell sx={{ padding: '5px' }} align="left">
                           <Label
                             variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
                             color={(status === 'banned' && 'error') || 'success'}
@@ -147,7 +155,7 @@ export default function StockList({ tableRows, tableColumn, edit }) {
                         </TableCell>
 
                         {edit && (
-                          <TableCell align="right">
+                          <TableCell sx={{ padding: '5px' }} align="right">
                             <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
                           </TableCell>
                         )}

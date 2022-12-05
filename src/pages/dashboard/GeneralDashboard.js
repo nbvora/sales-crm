@@ -1,4 +1,4 @@
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector } from '../../redux/store';
 import Page from '../../components/Page';
 import StockList from '../../sections/@dashboard/tables/StockListTable';
@@ -28,16 +28,10 @@ export default function GeneralDashboard() {
 
   return (
     <Page title="General: App">
-      <Typography sx={{ marginLeft: 4 }} variant="h4" gutterBottom>
-        Stock List
-      </Typography>
-      <Box sx={{ marginTop: 2, marginBottom: 6 }}>
+      <Box>
         <StockList tableColumn={STOCKE_HEAD} tableRows={stoks} edit={edit} />
       </Box>
-      <Typography sx={{ marginLeft: 4 }} variant="h4" gutterBottom>
-        Distributor List
-      </Typography>
-      <Box sx={{ marginTop: 2, marginBottom: 4 }}>
+      <Box sx={{ marginTop: 4 }}>
         <DistributorList tableColumn={TABLE_HEAD} tableRows={ditributor} />
       </Box>
     </Page>
