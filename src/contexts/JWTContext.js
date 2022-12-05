@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // utils
 import axios from '../utils/axios';
 import { isValidToken, setSession } from '../utils/jwt';
+import sagaActions from '../redux/actions';
 
 // ----------------------------------------------------------------------
 
@@ -109,19 +110,11 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
-      email,
-      password,
-    });
-    const { accessToken, user } = response.data;
-
-    setSession(accessToken);
-    dispatch({
-      type: 'LOGIN',
-      payload: {
-        user,
-      },
-    });
+    try {
+      dispatch({ type: sagaActions.SIGNUP_SAGA, email, password });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const register = async (email, password, firstName, lastName) => {

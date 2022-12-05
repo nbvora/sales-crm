@@ -4,10 +4,12 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
+import { dispatch, useSelector } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
+
 // routes
 import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
 // hooks
-import useAuth from '../../../hooks/useAuth';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
 import MyAvatar from '../../../components/MyAvatar';
@@ -36,7 +38,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth();
+  const { user } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
 
@@ -54,7 +56,7 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await dispatch({ type: sagaActions.LOG_OUT });
       navigate(PATH_AUTH.login, { replace: true });
 
       if (isMountedRef.current) {
