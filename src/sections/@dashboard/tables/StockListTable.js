@@ -22,16 +22,14 @@ import Page from '../../../components/Page';
 import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../user/list';
+import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
 StockList.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
-  edit: PropTypes.bool,
-  // checkbox: PropTypes.bool,
 };
-export default function StockList({ tableRows, tableColumn, edit }) {
+export default function StockList({ tableRows, tableColumn }) {
   const theme = useTheme();
   const tableName = 'Stock List';
   const { themeStretch } = useSettings();
@@ -71,12 +69,6 @@ export default function StockList({ tableRows, tableColumn, edit }) {
   const handleFilterByName = (filterName) => {
     setFilterName(filterName);
     setPage(0);
-  };
-
-  const handleDeleteUser = (userId) => {
-    const deleteUser = userList.filter((user) => user.id !== userId);
-    setSelected([]);
-    setUserList(deleteUser);
   };
 
   const handleDeleteMultiUser = (selected) => {
@@ -153,12 +145,6 @@ export default function StockList({ tableRows, tableColumn, edit }) {
                             {sentenceCase(status)}
                           </Label>
                         </TableCell>
-
-                        {edit && (
-                          <TableCell sx={{ padding: '5px' }} align="right">
-                            <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
-                          </TableCell>
-                        )}
                       </TableRow>
                     );
                   })}

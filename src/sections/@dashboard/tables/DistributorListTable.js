@@ -22,17 +22,14 @@ import Page from '../../../components/Page';
 import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../user/list';
+import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
 DistributorList.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
-  //   edit: PropTypes.bool,
-  // checkbox: PropTypes.bool,
 };
 export default function DistributorList({ tableRows, tableColumn }) {
-  const edit = true;
   const theme = useTheme();
   const tableName = 'DistributorList';
   const { themeStretch } = useSettings();
@@ -72,12 +69,6 @@ export default function DistributorList({ tableRows, tableColumn }) {
   const handleFilterByName = (filterName) => {
     setFilterName(filterName);
     setPage(0);
-  };
-
-  const handleDeleteUser = (userId) => {
-    const deleteUser = userList.filter((user) => user.id !== userId);
-    setSelected([]);
-    setUserList(deleteUser);
   };
 
   const handleDeleteMultiUser = (selected) => {
@@ -154,12 +145,6 @@ export default function DistributorList({ tableRows, tableColumn }) {
                             {sentenceCase(status)}
                           </Label>
                         </TableCell>
-
-                        {edit && (
-                          <TableCell align="right" sx={{ padding: '5px' }}>
-                            <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
-                          </TableCell>
-                        )}
                       </TableRow>
                     );
                   })}
