@@ -78,12 +78,17 @@ export default function Router() {
           path: 'user',
           children: [
             { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
-            { path: 'profile', element: <UserProfile /> },
-            { path: 'cards', element: <UserCards /> },
-            { path: 'list', element: <UserList /> },
-            { path: 'new', element: <UserCreate /> },
-            { path: ':name/edit', element: <UserCreate /> },
+            { path: 'profile', element: <ProductCategory /> },
+            { path: 'cards', element: <ProductList /> },
+            { path: 'list', element: <StockManagement /> },
+            { path: 'new', element: <StockDetail /> },
             { path: 'account', element: <UserAccount /> },
+            { path: ':name/editproductcategory', element: <EditProductCategory /> },
+            { path: ':name/editproduct', element: <EditProduct /> },
+            { path: 'addcategory', element: <AddCategory /> },
+            { path: 'productimport', element: <ProductImport /> },
+            { path: 'addnewproduct', element: <Addproduct /> },
+            { path: 'stockimport', element: <StockImport /> },
           ],
         },
         {
@@ -134,10 +139,16 @@ const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBoo
 const EcommerceProductCreate = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductCreate')));
 const EcommerceCheckout = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckout')));
 const BlogPosts = Loadable(lazy(() => import('../pages/dashboard/BlogPosts')));
-const UserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
-const UserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
-const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
+const ProductCategory = Loadable(lazy(() => import('../pages/dashboard/ProductCategory')));
+const ProductList = Loadable(lazy(() => import('../pages/dashboard/ProductList')));
+const StockManagement = Loadable(lazy(() => import('../pages/dashboard/StockManagement')));
 const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
-const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
+const StockDetail = Loadable(lazy(() => import('../pages/dashboard/StockDetail')));
+const EditProductCategory = Loadable(lazy(() => import('../pages/dashboard/EditProductCategory')));
+const EditProduct = Loadable(lazy(() => import('../pages/dashboard/EditProduct')));
+const AddCategory = Loadable(lazy(() => import('../pages/dashboard/AddCategory')));
+const ProductImport = Loadable(lazy(() => import('../pages/dashboard/ProductImprt')));
+const Addproduct = Loadable(lazy(() => import('../pages/dashboard/AddProduct')));
+const StockImport = Loadable(lazy(() => import('../pages/dashboard/StockImport')));
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));

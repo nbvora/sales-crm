@@ -21,12 +21,11 @@ import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 
 // ----------------------------------------------------------------------
 
-UserNewForm.propTypes = {
-  isEdit: PropTypes.bool,
+AddStock.propTypes = {
   currentUser: PropTypes.object,
 };
 
-export default function UserNewForm({ isEdit, currentUser }) {
+export default function AddStock({ currentUser }) {
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -81,20 +80,18 @@ export default function UserNewForm({ isEdit, currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentUser) {
+    if (currentUser) {
       reset(defaultValues);
     }
-    if (!isEdit) {
-      reset(defaultValues);
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentUser]);
+  }, [currentUser]);
 
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      enqueueSnackbar('Create success!');
       navigate(PATH_DASHBOARD.user.list);
     } catch (error) {
       console.error(error);
@@ -122,14 +119,12 @@ export default function UserNewForm({ isEdit, currentUser }) {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status !== 'active' ? 'error' : 'success'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
+            <Label
+              color={values.status !== 'active' ? 'error' : 'success'}
+              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
+            >
+              {values.status}
+            </Label>
 
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
@@ -155,35 +150,33 @@ export default function UserNewForm({ isEdit, currentUser }) {
               />
             </Box>
 
-            {isEdit && (
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value !== 'active'}
-                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-              />
-            )}
+            <FormControlLabel
+              labelPlacement="start"
+              control={
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <Switch
+                      {...field}
+                      checked={field.value !== 'active'}
+                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
+                    />
+                  )}
+                />
+              }
+              label={
+                <>
+                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Banned
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    Apply disable account
+                  </Typography>
+                </>
+              }
+              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
+            />
 
             <RHFSwitch
               name="isVerified"
@@ -236,7 +229,7 @@ export default function UserNewForm({ isEdit, currentUser }) {
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create User' : 'Save Changes'}
+                Add
               </LoadingButton>
             </Stack>
           </Card>
