@@ -16,10 +16,7 @@ import Scrollbar from '../Scrollbar';
 import { IconButtonAnimate, varFade } from '../animate';
 //
 import ToggleButton from './ToggleButton';
-import SettingMode from './SettingMode';
-import SettingLayout from './SettingLayout';
 import SettingStretch from './SettingStretch';
-import SettingDirection from './SettingDirection';
 import SettingFullscreen from './SettingFullscreen';
 import SettingColorPresets from './SettingColorPresets';
 
@@ -27,12 +24,13 @@ import SettingColorPresets from './SettingColorPresets';
 
 const RootStyle = styled(m.div)(({ theme }) => ({
   ...cssStyles(theme).bgBlur({ color: theme.palette.background.paper, opacity: 0.92 }),
-  top: 0,
+  top: 80,
   right: 0,
   bottom: 0,
   display: 'flex',
   position: 'fixed',
   overflow: 'hidden',
+  height: '80%',
   width: NAVBAR.BASE_WIDTH,
   flexDirection: 'column',
   margin: theme.spacing(2),
@@ -117,21 +115,6 @@ export default function Settings() {
 
               <Scrollbar sx={{ flexGrow: 1 }}>
                 <Stack spacing={3} sx={{ p: 3 }}>
-                  <Stack spacing={1.5}>
-                    <Typography variant="subtitle2">Mode</Typography>
-                    <SettingMode />
-                  </Stack>
-
-                  <Stack spacing={1.5}>
-                    <Typography variant="subtitle2">Direction</Typography>
-                    <SettingDirection />
-                  </Stack>
-
-                  <Stack spacing={1.5}>
-                    <Typography variant="subtitle2">Layout</Typography>
-                    <SettingLayout />
-                  </Stack>
-
                   <Stack spacing={1.5}>
                     <Typography variant="subtitle2">Presets</Typography>
                     <SettingColorPresets />
