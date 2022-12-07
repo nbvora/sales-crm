@@ -62,6 +62,11 @@ export default function UserMoreMenu({ onDelete, userName }) {
           <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
           Edit
         </MenuItem>
+
+        <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.lead.root}/${paramCase(userName)}/view`}>
+          <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
+          View
+        </MenuItem>
       </MenuPopover>
     </>
   );

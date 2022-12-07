@@ -35,10 +35,6 @@ export default function UserListHead({
   onRequestSort,
   onSelectAllClick,
 }) {
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
   return (
     <TableHead>
       <TableRow>
@@ -59,7 +55,7 @@ export default function UserListHead({
               hideSortIcon
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
+              onClick={() => onRequestSort(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (

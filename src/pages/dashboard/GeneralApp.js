@@ -13,7 +13,6 @@ const TABLE_HEAD = [
   { id: '' },
 ];
 
-console.log('_userList.....', _userList);
 export default function GeneralApp() {
   return (
     <Page title="General: App">
