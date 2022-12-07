@@ -62,16 +62,16 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'app', element: <GeneralDashboard /> },
-        { path: 'ecommerce', element: <GeneralEcommerce /> },
-        { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'banking', element: <GeneralBanking /> },
-        { path: 'booking', element: <GeneralBooking /> },
+        { path: 'ecommerce', element: <GeneralVendors /> },
+        { path: 'analytics', element: <GeneralCustomers /> },
+        { path: 'banking', element: <GeneralLeads /> },
+        { path: 'booking', element: <GeneralOrder /> },
 
         {
           path: 'e-commerce',
           children: [
-            { path: 'product/:name/edit', element: <EcommerceProductCreate /> },
-            { path: 'checkout', element: <EcommerceCheckout /> },
+            { path: 'product/:name/edit', element: <EmployeeTarget /> },
+            { path: 'checkout', element: <EmployeeList /> },
           ],
         },
         {
@@ -95,7 +95,7 @@ export default function Router() {
           path: 'blog',
           children: [
             { element: <Navigate to="/dashboard/blog/posts" replace />, index: true },
-            { path: 'posts', element: <BlogPosts /> },
+            { path: 'posts', element: <Invoice /> },
           ],
         },
       ],
@@ -132,13 +132,13 @@ const ResetPassword = Loadable(lazy(() => import('../pages/auth/ResetPassword'))
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // Dashboard
 const GeneralDashboard = Loadable(lazy(() => import('../pages/dashboard/GeneralDashboard')));
-const GeneralEcommerce = Loadable(lazy(() => import('../pages/dashboard/GeneralEcommerce')));
-const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
-const GeneralBanking = Loadable(lazy(() => import('../pages/dashboard/GeneralBanking')));
-const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
-const EcommerceProductCreate = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductCreate')));
-const EcommerceCheckout = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckout')));
-const BlogPosts = Loadable(lazy(() => import('../pages/dashboard/BlogPosts')));
+const GeneralVendors = Loadable(lazy(() => import('../pages/dashboard/GeneralVendors')));
+const GeneralCustomers = Loadable(lazy(() => import('../pages/dashboard/GeneralCustomers')));
+const GeneralLeads = Loadable(lazy(() => import('../pages/dashboard/GeneralLeads')));
+const GeneralOrder = Loadable(lazy(() => import('../pages/dashboard/GeneralOrder')));
+const EmployeeTarget = Loadable(lazy(() => import('../pages/dashboard/EmployeeTarget')));
+const EmployeeList = Loadable(lazy(() => import('../pages/dashboard/EmployeeList')));
+const Invoice = Loadable(lazy(() => import('../pages/dashboard/Invoice')));
 const ProductCategory = Loadable(lazy(() => import('../pages/dashboard/ProductCategory')));
 const ProductList = Loadable(lazy(() => import('../pages/dashboard/ProductList')));
 const StockManagement = Loadable(lazy(() => import('../pages/dashboard/StockManagement')));
