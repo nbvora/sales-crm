@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,10 +12,10 @@ import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // utils
 
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 // components
-import { FormProvider, RHFTextField } from '../../components/hook-form';
+import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -94,9 +94,17 @@ export default function AddCategory({ isEdit, currentUser }) {
               <RHFTextField name="name" label="Category Name" />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.user.profile}`}
+              >
+                cancle
+              </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Save
+                Add
               </LoadingButton>
             </Stack>
           </Card>

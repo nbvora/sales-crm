@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { paramCase } from 'change-case';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,23 +10,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // utils
-import { fData } from '../../utils/formatNumber';
+import { fData } from '../../../utils/formatNumber';
 // routes
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries } from '../../_mock';
+import { countries, _userList } from '../../../_mock';
 // components
-import Label from '../../components/Label';
-import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../components/hook-form';
+import Label from '../../../components/Label';
+import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-AddProduct.propTypes = {
-  isEdit: PropTypes.bool,
-  currentUser: PropTypes.object,
-};
+export default function EditEmployee() {
+  const { name = '' } = useParams();
 
-export default function AddProduct({ isEdit, currentUser }) {
+  const currentUser = _userList.find((user) => paramCase(user.name) === name);
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -81,20 +79,18 @@ export default function AddProduct({ isEdit, currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentUser) {
+    if (currentUser) {
       reset(defaultValues);
     }
-    if (!isEdit) {
-      reset(defaultValues);
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentUser]);
+  }, [currentUser]);
 
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      enqueueSnackbar('Create success!');
       navigate(PATH_DASHBOARD.user.list);
     } catch (error) {
       console.error(error);
@@ -122,14 +118,12 @@ export default function AddProduct({ isEdit, currentUser }) {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status !== 'active' ? 'error' : 'success'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
+            <Label
+              color={values.status !== 'active' ? 'error' : 'success'}
+              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
+            >
+              {values.status}
+            </Label>
 
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
@@ -155,35 +149,33 @@ export default function AddProduct({ isEdit, currentUser }) {
               />
             </Box>
 
-            {isEdit && (
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value !== 'active'}
-                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-              />
-            )}
+            <FormControlLabel
+              labelPlacement="start"
+              control={
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <Switch
+                      {...field}
+                      checked={field.value !== 'active'}
+                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
+                    />
+                  )}
+                />
+              }
+              label={
+                <>
+                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Banned
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    Apply disable account
+                  </Typography>
+                </>
+              }
+              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
+            />
 
             <RHFSwitch
               name="isVerified"
@@ -214,8 +206,8 @@ export default function AddProduct({ isEdit, currentUser }) {
               }}
             >
               <RHFTextField name="name" label="Product Name" />
-              <RHFTextField name="email" label="Product Price" />
-              <RHFTextField name="phoneNumber" label="Dealer/Distributor Price " />
+              <RHFTextField name="email" label="Dealer/Distributor Price" />
+              <RHFTextField name="phoneNumber" label="MRP" />
 
               <RHFSelect name="country" label="Product Category" placeholder="Country">
                 <option value="" />
@@ -226,15 +218,21 @@ export default function AddProduct({ isEdit, currentUser }) {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="city" label="Product HSN Code" />
-              <RHFTextField name="address" label="SuperStockist Price " />
-              <RHFTextField name="zipCode" label="Product Stock " />
-              <RHFTextField name="company" label="Product Cartoon Size" />
+              <RHFTextField name="state" label="Product Cartoon Size" />
+              <RHFTextField name="city" label="Product Stock " />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.eCommerce.checkout}`}
+              >
+                cancle
+              </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create User' : 'Save Changes'}
+                Add
               </LoadingButton>
             </Stack>
           </Card>

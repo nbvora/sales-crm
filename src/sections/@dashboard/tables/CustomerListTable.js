@@ -1,14 +1,11 @@
-import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
   Avatar,
-  Button,
-  Checkbox,
   TableRow,
   TableBody,
   TableCell,
@@ -16,27 +13,26 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Box,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../routes/paths';
 // hooks
-import useSettings from '../../hooks/useSettings';
+import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
-import Page from '../../components/Page';
-import Label from '../../components/Label';
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import SearchNotFound from '../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user/list';
+import Page from '../../../components/Page';
+import Scrollbar from '../../../components/Scrollbar';
+import { PATH_DASHBOARD } from '../../../routes/paths';
+import SearchNotFound from '../../../components/SearchNotFound';
+import Iconify from '../../../components/Iconify';
+import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
-CommonTable.propTypes = {
+CustomerListTable.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
 };
-export default function CommonTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
+export default function CustomerListTable({ tableRows, tableColumn }) {
+  const tableName = 'Customer List';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -56,6 +52,7 @@ export default function CommonTable({ tableRows, tableColumn }) {
 
   const handleSelectAllClick = () => {
     setchecked(!checked);
+
     if (checked) {
       const newSelecteds = userList.map((n) => n.name);
       setSelected(newSelecteds);
@@ -63,20 +60,6 @@ export default function CommonTable({ tableRows, tableColumn }) {
     }
 
     setSelected([]);
-  };
-  const handleClick = (name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
-    setSelected(newSelected);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -88,13 +71,11 @@ export default function CommonTable({ tableRows, tableColumn }) {
     setFilterName(filterName);
     setPage(0);
   };
-
   const handleDeleteUser = (userId) => {
     const deleteUser = userList.filter((user) => user.id !== userId);
     setSelected([]);
     setUserList(deleteUser);
   };
-
   const handleDeleteMultiUser = (selected) => {
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
@@ -106,31 +87,18 @@ export default function CommonTable({ tableRows, tableColumn }) {
   const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
+  const ICON = {
+    mr: 2,
+    width: 20,
+    height: 20,
+  };
 
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="User List"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' },
-          ]}
-          action={
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to={PATH_DASHBOARD.user.newUser}
-              startIcon={<Iconify icon={'eva:plus-fill'} />}
-            >
-              New User
-            </Button>
-          }
-        />
-
         <Card>
           <UserListToolbar
+            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -141,6 +109,7 @@ export default function CommonTable({ tableRows, tableColumn }) {
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
                 <UserListHead
+                  checkbox={false}
                   order={order}
                   orderBy={orderBy}
                   headLabel={tableColumn}
@@ -151,7 +120,7 @@ export default function CommonTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    const { id, name, role, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -163,29 +132,36 @@ export default function CommonTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
-                        </TableCell>
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
                         </TableCell>
-
-                        <TableCell align="right">
-                          <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          0
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          <Iconify
+                            icon={'eva:trash-2-outline'}
+                            sx={{ ...ICON, color: 'error.main' }}
+                            onClick={() => handleDeleteUser(id)}
+                          />
+                          <Box
+                            component={RouterLink}
+                            to={`${PATH_DASHBOARD.analytics.root}/${paramCase(name)}/editcustomer`}
+                          >
+                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
+                          </Box>
                         </TableCell>
                       </TableRow>
                     );

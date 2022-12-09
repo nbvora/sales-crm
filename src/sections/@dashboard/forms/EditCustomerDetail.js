@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { paramCase } from 'change-case';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,18 +14,17 @@ import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries } from '../../../_mock';
+import { countries, _userList } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
 import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-EditProduct.propTypes = {
-  currentUser: PropTypes.object,
-};
+export default function EditCustomerDetail() {
+  const { name = '' } = useParams();
 
-export default function EditProduct({ currentUser }) {
+  const currentUser = _userList.find((user) => paramCase(user.name) === name);
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -223,7 +222,15 @@ export default function EditProduct({ currentUser }) {
               <RHFTextField name="city" label="Product Stock " />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.analytics.root}`}
+              >
+                cancle
+              </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Add
               </LoadingButton>
