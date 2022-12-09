@@ -12,7 +12,6 @@ const TABLE_HEAD = [
   { id: 'role', label: 'Invoice Number', alignRight: false },
   { id: 'isVerified', label: 'Invoice Date', alignRight: false },
   { id: 'status', label: 'Sub Total Amount', alignRight: false },
-  { id: 'Action', label: 'Action', alignRight: false },
 ];
 const STOCKE_HEAD = [
   { id: 'name', label: 'Vendors', alignRight: false },

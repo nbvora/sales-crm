@@ -4,7 +4,6 @@ import { Navigate, useLocation } from 'react-router-dom';
 // hooks
 import sagaActions from '../redux/actions';
 import { dispatch, useSelector } from '../redux/store';
-import useAuth from '../hooks/useAuth';
 // pages
 import Login from '../pages/auth/Login';
 
@@ -18,8 +17,7 @@ AuthGuard.propTypes = {
 };
 
 export default function AuthGuard({ children }) {
-  const { isAuthenticated } = useSelector((state) => state.login);
-  const { isInitialized } = useAuth();
+  const { isAuthenticated, user } = useSelector((state) => state.login);
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
@@ -29,7 +27,7 @@ export default function AuthGuard({ children }) {
     dispatch({ type: sagaActions.GET_DISTRIBUTERS });
   }, []);
 
-  if (!isInitialized) {
+  if (!user) {
     return <LoadingScreen />;
   }
   if (!isAuthenticated) {

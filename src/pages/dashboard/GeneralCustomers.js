@@ -30,7 +30,7 @@ export default function GeneralAnalytics() {
         <Button
           variant="outlined"
           component={RouterLink}
-          to={`${PATH_DASHBOARD.analytics.addcustomer}`}
+          to={`/dashboard${PATH_DASHBOARD.analytics.addcustomer}`}
           startIcon={<Iconify icon={'eva:plus-fill'} />}
         >
           Add New Customer
