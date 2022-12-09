@@ -1,7 +1,6 @@
 import { Button, Stack } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import VendorsList from '../../sections/@dashboard/tables/VendorsListTable';
-// import CustomerListTable from '../../sections/@dashboard/tables/CustomerListTable';
 import { PATH_DASHBOARD } from '../../routes/paths';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
