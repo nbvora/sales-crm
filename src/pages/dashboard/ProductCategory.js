@@ -16,7 +16,7 @@ export default function ProductCategory() {
     <Page title="User: Profile">
       <Button
         sx={{ marginLeft: '78%', width: '181px' }}
-        variant="contained"
+        variant="outlined"
         component={RouterLink}
         to={`${PATH_DASHBOARD.user.root}/addcategory`}
         startIcon={<Iconify icon={'eva:plus-fill'} />}

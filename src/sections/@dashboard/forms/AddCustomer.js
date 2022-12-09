@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,11 +21,11 @@ import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 
 // ----------------------------------------------------------------------
 
-AddStock.propTypes = {
+AddCustomer.propTypes = {
   currentUser: PropTypes.object,
 };
 
-export default function AddStock({ currentUser }) {
+export default function AddCustomer({ currentUser }) {
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -227,7 +227,15 @@ export default function AddStock({ currentUser }) {
               <RHFTextField name="role" label="Role" />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.analytics.root}`}
+              >
+                cancle
+              </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Add
               </LoadingButton>

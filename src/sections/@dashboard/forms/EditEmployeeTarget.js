@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { paramCase } from 'change-case';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,31 +14,49 @@ import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
+import { countries, _userList } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
-import { FormProvider, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-EditCategory.propTypes = {
-  currentUser: PropTypes.object,
-};
+export default function EditEmployeeTarget() {
+  const { name = '' } = useParams();
 
-export default function EditCategory({ currentUser }) {
+  const currentUser = _userList.find((user) => paramCase(user.name) === name);
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-
+    email: Yup.string().required('Email is required').email(),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    address: Yup.string().required('Address is required'),
+    country: Yup.string().required('country is required'),
+    company: Yup.string().required('Company is required'),
+    state: Yup.string().required('State is required'),
+    city: Yup.string().required('City is required'),
+    role: Yup.string().required('Role Number is required'),
     avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentUser?.name || '',
+      email: currentUser?.email || '',
+      phoneNumber: currentUser?.phoneNumber || '',
+      address: currentUser?.address || '',
+      country: currentUser?.country || '',
+      state: currentUser?.state || '',
+      city: currentUser?.city || '',
+      zipCode: currentUser?.zipCode || '',
       avatarUrl: currentUser?.avatarUrl || '',
+      isVerified: currentUser?.isVerified || true,
+      status: currentUser?.status,
+      company: currentUser?.company || '',
+      role: currentUser?.role || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -72,7 +90,7 @@ export default function EditCategory({ currentUser }) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar('Update success!');
+      enqueueSnackbar('Create success!');
       navigate(PATH_DASHBOARD.user.list);
     } catch (error) {
       console.error(error);
@@ -100,14 +118,13 @@ export default function EditCategory({ currentUser }) {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>
-            (
             <Label
               color={values.status !== 'active' ? 'error' : 'success'}
               sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
             >
               {values.status}
             </Label>
-            )
+
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
                 name="avatarUrl"
@@ -131,6 +148,7 @@ export default function EditCategory({ currentUser }) {
                 }
               />
             </Box>
+
             <FormControlLabel
               labelPlacement="start"
               control={
@@ -158,6 +176,22 @@ export default function EditCategory({ currentUser }) {
               }
               sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
             />
+
+            <RHFSwitch
+              name="isVerified"
+              labelPlacement="start"
+              label={
+                <>
+                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    Email Verified
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    Disabling this will automatically send the user a verification email
+                  </Typography>
+                </>
+              }
+              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+            />
           </Card>
         </Grid>
 
@@ -171,12 +205,34 @@ export default function EditCategory({ currentUser }) {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Category Name" />
+              <RHFTextField name="name" label="Product Name" />
+              <RHFTextField name="email" label="Dealer/Distributor Price" />
+              <RHFTextField name="phoneNumber" label="MRP" />
+
+              <RHFSelect name="country" label="Product Category" placeholder="Country">
+                <option value="" />
+                {countries.map((option) => (
+                  <option key={option.code} value={option.label}>
+                    {option.label}
+                  </option>
+                ))}
+              </RHFSelect>
+
+              <RHFTextField name="state" label="Product Cartoon Size" />
+              <RHFTextField name="city" label="Product Stock " />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                component={RouterLink}
+                to={`${PATH_DASHBOARD.eCommerce.editById}`}
+              >
+                cancle
+              </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Save Changes
+                Add
               </LoadingButton>
             </Stack>
           </Card>
