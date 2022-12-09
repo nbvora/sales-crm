@@ -76,6 +76,14 @@ export default function Router() {
           ],
         },
         {
+          path: 'vendor',
+          children: [
+            { path: ':name/editvendor', element: <EditVendor /> },
+            { path: 'addvendor', element: <AddVendor /> },
+            { path: 'vendorimport', element: <VendorImport /> },
+          ],
+        },
+        {
           path: 'employee',
           children: [
             { path: 'employeetarget', element: <EmployeeTarget /> },
@@ -182,12 +190,15 @@ const AddCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/Add
 const AddEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/AddEmployeeTarget')));
 const Addproduct = Loadable(lazy(() => import('../sections/@dashboard/forms/AddProduct')));
 const EditCustomerDetail = Loadable(lazy(() => import('../sections/@dashboard/forms/EditCustomerDetail')));
+const EditVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/EditVendors')));
 const EditEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/EditEmployeeTarget')));
 const EditEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/EditEmployee')));
 const EditProductCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProductcatagory')));
 const AddCustomer = Loadable(lazy(() => import('../sections/@dashboard/forms/AddCustomer')));
+const AddVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/AddVendor')));
 const AddEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/AddEmployee')));
 const AddInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/AddInvoice')));
 const EditInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/EditInvoice')));
 const CustomerImport = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerImport')));
+const VendorImport = Loadable(lazy(() => import('../sections/@dashboard/forms/VendorImport')));
 const EmployeeImport = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeImport')));
