@@ -89,6 +89,12 @@ export const PATH_DASHBOARD = {
     addcustomer: (ROOTS_DASHBOARD, '/customer/addcustomer'),
     customerimport: (ROOTS_DASHBOARD, '/customer/customerimport'),
   },
+  vendor: {
+    root: path(ROOTS_DASHBOARD, '/vendor'),
+    editvendor: (ROOTS_DASHBOARD, '/vendor/reece-chung/editvendor'),
+    addvendor: (ROOTS_DASHBOARD, '/vendor/addvendor'),
+    vendorimport: (ROOTS_DASHBOARD, '/vendor/vendorimport'),
+  },
   blog: {
     root: path(ROOTS_DASHBOARD, '/invoice'),
     posts: path(ROOTS_DASHBOARD, '/invoice/posts'),

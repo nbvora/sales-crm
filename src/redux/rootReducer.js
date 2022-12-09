@@ -9,6 +9,7 @@ import calendarReducer from './slices/calendar';
 import kanbanReducer from './slices/kanban';
 import loginReducer from './slices/login';
 import dashboardReducer from './slices/dashboard';
+import vendorsReducer from './slices/vendors';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   product: persistReducer(productPersistConfig, productReducer),
   login: loginReducer,
   dashboard: dashboardReducer,
+  vendors: vendorsReducer,
 });
 
 export { rootPersistConfig, rootReducer };

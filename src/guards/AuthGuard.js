@@ -25,6 +25,7 @@ export default function AuthGuard({ children }) {
     dispatch({ type: sagaActions.INTIALIZED });
     dispatch({ type: sagaActions.GET_STOCKES });
     dispatch({ type: sagaActions.GET_DISTRIBUTERS });
+    dispatch({ type: sagaActions.GET_VENDORS });
   }, []);
 
   if (!user) {

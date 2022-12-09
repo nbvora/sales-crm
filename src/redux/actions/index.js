@@ -4,6 +4,7 @@ const sagaActions = {
   SIGNUP_SAGA: 'SIGNUP_SAGA',
   GET_STOCKES: 'GET_STOCKES',
   GET_DISTRIBUTERS: 'GET_DISTRIBUTERS',
+  GET_VENDORS: 'GET_VENDORS',
 };
 
 export default sagaActions;
