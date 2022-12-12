@@ -2,7 +2,6 @@ import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   Table,
@@ -15,7 +14,6 @@ import {
   Typography,
   TableContainer,
   TablePagination,
-  MenuItem,
 } from '@mui/material';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
@@ -28,13 +26,13 @@ import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { UserListHead, UserListToolbar } from '../user/list';
-import Iconify from '../../../components/Iconify';
+
 // ----------------------------------------------------------------------
-OrderDeatilTable.propTypes = {
+ViewInvoiceDeatilTable.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
 };
-export default function OrderDeatilTable({ tableRows, tableColumn }) {
+export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
   const theme = useTheme();
   const { themeStretch } = useSettings();
 
@@ -101,16 +99,14 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
-  const ICON = {
-    mr: 2,
-    width: 20,
-    height: 20,
-  };
-
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs heading="Order Detail" links={[{ name: 'Order Detail', href: PATH_DASHBOARD.order.root }]} />
+        <HeaderBreadcrumbs
+          heading="Invoice Detail"
+          links={[{ name: '', href: PATH_DASHBOARD.order.viewInvoiceDetail }]}
+        />
+
         <Card>
           <UserListToolbar
             numSelected={selected.length}
@@ -164,12 +160,6 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
                           >
                             {sentenceCase(status)}
                           </Label>
-                        </TableCell>
-
-                        <TableCell align="right">
-                          <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.order.viewInvoiceDetail}`}>
-                            <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
-                          </MenuItem>
                         </TableCell>
                       </TableRow>
                     );
@@ -226,7 +216,6 @@ function getComparator(order, orderBy) {
 
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
-
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;

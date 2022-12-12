@@ -1,7 +1,11 @@
 import { put } from 'redux-saga/effects';
-import { getorderDetail } from '../../slices/orderDetail';
+import { getorderDetail, getviewInvoiceDetail } from '../../slices/orderDetail';
 import { _userList } from '../../../_mock';
 
 export function* orderDetailSaga() {
   yield put(getorderDetail(_userList));
+}
+
+export function* viewInvoiceDetailSaga() {
+  yield put(getviewInvoiceDetail(_userList));
 }

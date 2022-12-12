@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   error: null,
   orderDetail: null,
+  viewInvoiceDetail: null,
 };
 const orders = createSlice({
   name: 'orders',
@@ -20,8 +21,12 @@ const orders = createSlice({
       state.isLoading = false;
       state.orderDetail = action.payload;
     },
+    getviewInvoiceDetail(state, action) {
+      state.isLoading = false;
+      state.orderDetail = action.payload;
+    },
   },
 });
 
 export default orders.reducer;
-export const { startLoading, hasError, getorderDetail } = orders.actions;
+export const { startLoading, hasError, getorderDetail, getviewInvoiceDetail } = orders.actions;
