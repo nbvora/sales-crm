@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import DiscussionTable from '../tables/DiscussionTable';
 import OrderTable from '../tables/OrderTable';
 import ColorToggleButton from '../../../components/buttons/ToggleButton';
+import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 
 const TABLE_HEAD = [
   { id: 1, label: 'Date', alignRight: false },
@@ -29,6 +31,13 @@ export default function ViewLeadDetailForm() {
 
   return (
     <>
+      <HeaderBreadcrumbs
+        heading="Leads"
+        links={[
+          { name: 'Leads', href: PATH_DASHBOARD.lead.root },
+          { name: 'Lead Detail', href: PATH_DASHBOARD.lead.leadDetail },
+        ]}
+      />
       <ColorToggleButton />
       <Box sx={{ position: 'relative', top: 10 }}>
         <OrderTable tableColumn={TABLE_HEAD} tableRows={orderTable} />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, CardActionArea, RadioGroup, Box } from '@mui/material';
+import { Grid, CardActionArea, RadioGroup } from '@mui/material';
 import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 import useSettings from '../../hooks/useSettings';
 import { BoxMask } from '.';

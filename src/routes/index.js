@@ -72,6 +72,7 @@ export default function Router() {
           children: [
             { path: 'leadImport', element: <LeadImportForm /> },
             { path: 'newLeads', element: <AddNewLeadForm /> },
+            { path: 'leadDetail', element: <ViewLeadDetailForm /> },
           ],
         },
         {
@@ -139,7 +140,8 @@ const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralA
 const Leads = Loadable(lazy(() => import('../pages/dashboard/Leads')));
 const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImportForm')));
 const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/AddNewLeadForm')));
-const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
+const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
+const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/Orders')));
 const EcommerceProductCreate = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductCreate')));
 const EcommerceCheckout = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckout')));
 const BlogPosts = Loadable(lazy(() => import('../pages/dashboard/BlogPosts')));

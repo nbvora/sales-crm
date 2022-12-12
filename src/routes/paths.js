@@ -84,6 +84,7 @@ export const PATH_DASHBOARD = {
     root: path(ROOTS_DASHBOARD, '/leads'),
     leadImport: path(ROOTS_DASHBOARD, '/leads/leadImport'),
     newLeads: path(ROOTS_DASHBOARD, '/leads/newLeads'),
+    leadDetail: path(ROOTS_DASHBOARD, '/leads/leadDetail'),
   },
 };
 
