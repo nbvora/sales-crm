@@ -39,7 +39,7 @@ export const PATH_DASHBOARD = {
     ecommerce: path(ROOTS_DASHBOARD, '/vendors'),
     analytics: path(ROOTS_DASHBOARD, '/customer'),
     banking: path(ROOTS_DASHBOARD, '/leads'),
-    booking: path(ROOTS_DASHBOARD, '/order'),
+    booking: path(ROOTS_DASHBOARD, '/orders'),
   },
   mail: {
     root: path(ROOTS_DASHBOARD, '/mail'),
@@ -109,6 +109,18 @@ export const PATH_DASHBOARD = {
     employeerole: path(ROOTS_DASHBOARD, '/settings/employeerole'),
     supplychain: path(ROOTS_DASHBOARD, '/settings/supplychain'),
     orderqnty: path(ROOTS_DASHBOARD, '/settings/orderqnty'),
+  },
+  lead: {
+    root: path(ROOTS_DASHBOARD, '/leads'),
+    leadImport: path(ROOTS_DASHBOARD, '/leads/leadImport'),
+    newLeads: path(ROOTS_DASHBOARD, '/leads/newLeads'),
+    leadDetail: path(ROOTS_DASHBOARD, '/leads/leadDetail'),
+    viewLeadDetail: path(ROOTS_DASHBOARD, '/leads/viewLeadDetail'),
+    editlead: path(ROOTS_DASHBOARD, '/leads/reece-chung/editlead'),
+  },
+  order: {
+    root: path(ROOTS_DASHBOARD, '/orders'),
+    viewInvoiceDetail: path(ROOTS_DASHBOARD, '/orders/viewInvoiceDetail'),
   },
 };
 

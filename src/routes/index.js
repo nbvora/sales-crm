@@ -10,7 +10,6 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
-
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
@@ -64,9 +63,22 @@ export default function Router() {
         { path: 'app', element: <GeneralDashboard /> },
         { path: 'vendors', element: <GeneralVendors /> },
         { path: 'customer', element: <GeneralCustomers /> },
-        { path: 'leads', element: <GeneralLeads /> },
-        { path: 'order', element: <GeneralOrder /> },
-
+        { path: 'leads', element: <Leads /> },
+        { path: 'orders', element: <Orders /> },
+        {
+          path: 'leads',
+          children: [
+            { path: 'leadImport', element: <LeadImportForm /> },
+            { path: 'newLeads', element: <AddNewLeadForm /> },
+            { path: 'viewLeadDetail', element: <ViewLeadDetailForm /> },
+            { path: ':name/editlead', element: <EditLeads /> },
+            { path: 'leadDetail', element: <ViewLeadDetailForm /> },
+          ],
+        },
+        {
+          path: 'orders',
+          children: [{ path: 'viewInvoiceDetail', element: <ViewInvoiceDeatilForm /> }],
+        },
         {
           path: 'customer',
           children: [
@@ -165,14 +177,18 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 const GeneralDashboard = Loadable(lazy(() => import('../pages/dashboard/GeneralDashboard')));
 const GeneralVendors = Loadable(lazy(() => import('../pages/dashboard/GeneralVendors')));
 const GeneralCustomers = Loadable(lazy(() => import('../pages/dashboard/GeneralCustomers')));
-const GeneralLeads = Loadable(lazy(() => import('../pages/dashboard/GeneralLeads')));
-const GeneralOrder = Loadable(lazy(() => import('../pages/dashboard/GeneralOrder')));
 const EmployeeTarget = Loadable(lazy(() => import('../pages/dashboard/EmployeeTarget')));
 const EmployeeList = Loadable(lazy(() => import('../pages/dashboard/EmployeeList')));
 const Invoice = Loadable(lazy(() => import('../pages/dashboard/Invoice')));
 const ProductCategory = Loadable(lazy(() => import('../pages/dashboard/ProductCategory')));
 const ProductList = Loadable(lazy(() => import('../pages/dashboard/ProductList')));
 const StockManagement = Loadable(lazy(() => import('../pages/dashboard/StockManagement')));
+const Leads = Loadable(lazy(() => import('../pages/dashboard/Leads')));
+const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImportForm')));
+const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/AddNewLeadForm')));
+const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
+const Orders = Loadable(lazy(() => import('../pages/dashboard/Orders')));
+const ViewInvoiceDeatilForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewInvoiceDeatilForm')));
 const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
 const EmployeeRole = Loadable(lazy(() => import('../pages/dashboard/EmployeeRole')));
 const SupplyChain = Loadable(lazy(() => import('../pages/dashboard/SupplyChain')));
@@ -182,6 +198,7 @@ const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 
 // form section
+const EditLeads = Loadable(lazy(() => import('../sections/@dashboard/forms/EditLeads')));
 const StockImport = Loadable(lazy(() => import('../sections/@dashboard/forms/StockImport')));
 const ProductImport = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductImprt')));
 const EditProduct = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProduct')));

@@ -4,6 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 // hooks
 import sagaActions from '../redux/actions';
 import { dispatch, useSelector } from '../redux/store';
+import { _userList } from '../_mock';
 // pages
 import Login from '../pages/auth/Login';
 
@@ -29,6 +30,9 @@ export default function AuthGuard({ children }) {
     dispatch({ type: sagaActions.GET_CUSTOMERS });
     dispatch({ type: sagaActions.GET_EMPLOYEE });
     dispatch({ type: sagaActions.GET_INVOICE });
+    dispatch({ type: sagaActions.LEADTABLE_SAGA });
+    dispatch({ type: sagaActions.ORDERDETAIL_SAGA });
+    dispatch({ type: sagaActions.VIEWINVOICEDETAIL_SAGA });
   }, []);
 
   if (!user) {
