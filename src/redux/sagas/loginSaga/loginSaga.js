@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { isLogin, isLogout, isInitialized } from '../../slices/login';
 import { setSession } from '../../../utils/jwt';
+import { isLogin, isLogout, isInitialized } from '../../slices/login';
 
 export function* logOut() {
   yield put(isLogout());

@@ -10,6 +10,9 @@ import kanbanReducer from './slices/kanban';
 import loginReducer from './slices/login';
 import dashboardReducer from './slices/dashboard';
 import vendorsReducer from './slices/vendors';
+import customersReducer from './slices/customers';
+import employeeReducer from './slices/employee';
+import invoiceReducer from './slices/invoice';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +39,9 @@ const rootReducer = combineReducers({
   login: loginReducer,
   dashboard: dashboardReducer,
   vendors: vendorsReducer,
+  customers: customersReducer,
+  employee: employeeReducer,
+  invoice: invoiceReducer,
 });
 
 export { rootPersistConfig, rootReducer };

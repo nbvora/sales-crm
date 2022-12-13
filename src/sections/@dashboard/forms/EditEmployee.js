@@ -9,6 +9,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
+// redux
+import { dispatch } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
@@ -89,9 +92,11 @@ export default function EditEmployee() {
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
+      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
+      dispatch({ type: sagaActions.EDIT_EMPLOYEE_LIST, data });
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.eCommerce.checkout);
     } catch (error) {
       console.error(error);
     }

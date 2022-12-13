@@ -4,7 +4,7 @@ import InvoiceListTable from '../../sections/@dashboard/tables/InvoiceListTable'
 import { PATH_DASHBOARD } from '../../routes/paths';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
-import { _userList } from '../../_mock';
+import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Product Name', alignRight: false },
@@ -15,9 +15,11 @@ const TABLE_HEAD = [
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 
-export default function BlogPosts() {
+export default function Invoice() {
+  const { invoice } = useSelector((state) => state.invoice);
+
   return (
-    <Page title="Blog: Posts">
+    <Page title="General: Invoice">
       <Button
         sx={{ marginLeft: '78%', width: '181px' }}
         variant="outlined"
@@ -28,7 +30,7 @@ export default function BlogPosts() {
         Add New Invoice
       </Button>
       <Box sx={{ marginTop: '31px' }}>
-        <InvoiceListTable tableColumn={TABLE_HEAD} tableRows={_userList} />
+        <InvoiceListTable tableColumn={TABLE_HEAD} tableRows={invoice} />
       </Box>
     </Page>
   );

@@ -15,6 +15,9 @@ import {
   TablePagination,
   Box,
 } from '@mui/material';
+import { dispatch } from '../../../redux/store';
+
+import sagaActions from '../../../redux/actions';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
@@ -72,11 +75,13 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
     setPage(0);
   };
   const handleDeleteUser = (userId) => {
+    dispatch({ type: sagaActions.DELETE_VENDORS, userId });
     const deleteUser = userList.filter((user) => user.id !== userId);
     setSelected([]);
     setUserList(deleteUser);
   };
   const handleDeleteMultiUser = (selected) => {
+    dispatch({ type: sagaActions.DELETE_VENDORS, selected });
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
     setUserList(deleteUsers);

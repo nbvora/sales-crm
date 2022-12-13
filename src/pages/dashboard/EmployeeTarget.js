@@ -3,8 +3,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import EmployeeTargetTable from '../../sections/@dashboard/tables/EmployeeTargetTable';
 import { PATH_DASHBOARD } from '../../routes/paths';
 import Page from '../../components/Page';
-import { _userList } from '../../_mock';
 import Iconify from '../../components/Iconify';
+import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Product Name', alignRight: false },
@@ -15,9 +15,11 @@ const TABLE_HEAD = [
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 export default function EmployeeTarget() {
+  const { employee } = useSelector((state) => state.employee);
+
   return (
     <>
-      <Page title="Emplyee target">
+      <Page title="Employee: Employeetarget">
         <Button
           sx={{ marginLeft: '78%', width: '181px' }}
           variant="outlined"
@@ -28,7 +30,7 @@ export default function EmployeeTarget() {
           Add New Target
         </Button>
         <Box sx={{ marginTop: '31px' }}>
-          <EmployeeTargetTable tableColumn={TABLE_HEAD} tableRows={_userList} />
+          <EmployeeTargetTable tableColumn={TABLE_HEAD} tableRows={employee} />
         </Box>
       </Page>
     </>

@@ -10,6 +10,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // utils
+import { dispatch } from '../../../redux/store';
+
+import sagaActions from '../../../redux/actions';
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -64,7 +67,7 @@ export default function AddInvoice({ currentUser }) {
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
+    // resolver: yupResolver(NewUserSchema),
     defaultValues,
   });
 
@@ -90,9 +93,11 @@ export default function AddInvoice({ currentUser }) {
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
+      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
+      dispatch({ type: sagaActions.ADD_INVOICE, data });
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.blog.posts);
     } catch (error) {
       console.error(error);
     }
