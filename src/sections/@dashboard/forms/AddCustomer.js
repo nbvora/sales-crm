@@ -10,6 +10,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // utils
+import { dispatch } from '../../../redux/store';
+
+import sagaActions from '../../../redux/actions';
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -40,7 +43,7 @@ export default function AddCustomer({ currentUser }) {
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
     role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    // avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
@@ -90,9 +93,11 @@ export default function AddCustomer({ currentUser }) {
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
+      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
+      dispatch({ type: sagaActions.ADD_CUSTOMERS, data });
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.general.analytics);
     } catch (error) {
       console.error(error);
     }
@@ -207,8 +212,8 @@ export default function AddCustomer({ currentUser }) {
               }}
             >
               <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
               <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="email" label="Email Address" />
 
               <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />

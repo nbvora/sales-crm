@@ -11,22 +11,15 @@ RHFTextField.propTypes = {
   handlechange: PropTypes.func,
 };
 
-export default function RHFTextField({ name, handlechange, ...other }) {
-  const { control } = useFormContext();
+export default function RHFTextField({ name, label }) {
+  const { control, register } = useFormContext();
 
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <TextField
-          {...field}
-          fullWidth
-          error={!!error}
-          helperText={error?.message}
-          {...other}
-          onChange={handlechange}
-        />
+        <TextField {...field} fullWidth error={!!error} helperText={error?.message} label={label} />
       )}
     />
   );

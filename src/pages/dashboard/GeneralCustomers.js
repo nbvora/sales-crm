@@ -4,7 +4,7 @@ import CustomerListTable from '../../sections/@dashboard/tables/CustomerListTabl
 import { PATH_DASHBOARD } from '../../routes/paths';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
-import { _userList } from '../../_mock';
+import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Product Name', alignRight: false },
@@ -15,9 +15,11 @@ const TABLE_HEAD = [
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 
-export default function GeneralAnalytics() {
+export default function GeneralCustomers() {
+  const { customers } = useSelector((state) => state.customers);
+
   return (
-    <Page title="General: Analytics">
+    <Page title="General: Customers">
       <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} marginRight={6} marginBottom={4}>
         <Button
           variant="outlined"
@@ -36,7 +38,7 @@ export default function GeneralAnalytics() {
           Add New Customer
         </Button>
       </Stack>
-      <CustomerListTable tableColumn={TABLE_HEAD} tableRows={_userList} />
+      <CustomerListTable tableColumn={TABLE_HEAD} tableRows={customers} />
     </Page>
   );
 }

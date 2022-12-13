@@ -2,6 +2,7 @@ import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import {
   Card,
   Table,
@@ -15,6 +16,9 @@ import {
   TablePagination,
   Box,
 } from '@mui/material';
+// redux
+import { dispatch } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
@@ -72,11 +76,13 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
     setPage(0);
   };
   const handleDeleteUser = (userId) => {
+    dispatch({ type: sagaActions.DELETE_CUSTOMERS, userId });
     const deleteUser = userList.filter((user) => user.id !== userId);
     setSelected([]);
     setUserList(deleteUser);
   };
   const handleDeleteMultiUser = (selected) => {
+    dispatch({ type: sagaActions.DELETE_CUSTOMERS, selected });
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
     setUserList(deleteUsers);

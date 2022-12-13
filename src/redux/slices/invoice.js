@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  vendors: null,
+  invoice: null,
 };
-const vendors = createSlice({
-  name: 'vendors',
+const invoice = createSlice({
+  name: 'invoice',
   initialState,
   reducers: {
     startLoading(state) {
@@ -16,20 +16,17 @@ const vendors = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    getVendors(state, action) {
+    getInvoice(state, action) {
       state.isLoading = false;
-      state.vendors = action.payload;
+      state.invoice = action.payload;
     },
-    addVendors(state, action) {
-      state.isLoading = false;
-      state.vendors = action.payload;
-      const card = action.payload;
-      console.log(card);
+    addInvoice(state, action) {
+      // // const { card, columnId } = action.payload;
       // state.board.cards[card.id] = card;
       // state.board.columns[columnId].cardIds.push(card.id);
     },
   },
 });
 
-export default vendors.reducer;
-export const { startLoading, hasError, getVendors, addVendors } = vendors.actions;
+export default invoice.reducer;
+export const { startLoading, hasError, getInvoice, addInvoice } = invoice.actions;

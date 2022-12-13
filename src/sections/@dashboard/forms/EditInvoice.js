@@ -9,8 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack } from '@mui/material';
+// redux
+import { dispatch } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 // utils
-
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
@@ -82,9 +84,11 @@ export default function EditInvoice() {
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
+      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
+      dispatch({ type: sagaActions.EDIT_INVOICE, data });
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.blog.posts);
     } catch (error) {
       console.error(error);
     }
