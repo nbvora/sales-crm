@@ -1,13 +1,11 @@
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
   Avatar,
-  Button,
   Checkbox,
   TableRow,
   TableBody,
@@ -17,25 +15,24 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
-import useSettings from '../../hooks/useSettings';
+import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
-import Page from '../../components/Page';
-import Label from '../../components/Label';
-import Iconify from '../../components/Iconify';
-import Scrollbar from '../../components/Scrollbar';
-import SearchNotFound from '../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../sections/@dashboard/user/list';
+import Page from '../../../components/Page';
+import Label from '../../../components/Label';
+import Scrollbar from '../../../components/Scrollbar';
+import SearchNotFound from '../../../components/SearchNotFound';
+import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
+import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
-CommonTable.propTypes = {
+ViewInvoiceDeatilTable.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
 };
-export default function CommonTable({ tableRows, tableColumn }) {
+export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
   const theme = useTheme();
   const { themeStretch } = useSettings();
 
@@ -90,12 +87,6 @@ export default function CommonTable({ tableRows, tableColumn }) {
     setPage(0);
   };
 
-  const handleDeleteUser = (userId) => {
-    const deleteUser = userList.filter((user) => user.id !== userId);
-    setSelected([]);
-    setUserList(deleteUser);
-  };
-
   const handleDeleteMultiUser = (selected) => {
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
@@ -112,22 +103,8 @@ export default function CommonTable({ tableRows, tableColumn }) {
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading="User List"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.root },
-            { name: 'User', href: PATH_DASHBOARD.user.root },
-            { name: 'List' },
-          ]}
-          action={
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to={PATH_DASHBOARD.user.newUser}
-              startIcon={<Iconify icon={'eva:plus-fill'} />}
-            >
-              New User
-            </Button>
-          }
+          heading="Invoice Detail"
+          links={[{ name: '', href: PATH_DASHBOARD.order.viewInvoiceDetail }]}
         />
 
         <Card>
@@ -183,10 +160,6 @@ export default function CommonTable({ tableRows, tableColumn }) {
                           >
                             {sentenceCase(status)}
                           </Label>
-                        </TableCell>
-
-                        <TableCell align="right">
-                          <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
                         </TableCell>
                       </TableRow>
                     );

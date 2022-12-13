@@ -65,9 +65,20 @@ export default function Router() {
         { path: 'app', element: <GeneralApp /> },
         { path: 'ecommerce', element: <GeneralEcommerce /> },
         { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'banking', element: <GeneralBanking /> },
-        { path: 'booking', element: <GeneralBooking /> },
-
+        { path: 'leads', element: <Leads /> },
+        { path: 'orders', element: <Orders /> },
+        {
+          path: 'leads',
+          children: [
+            { path: 'leadImport', element: <LeadImportForm /> },
+            { path: 'newLeads', element: <AddNewLeadForm /> },
+            { path: 'leadDetail', element: <ViewLeadDetailForm /> },
+          ],
+        },
+        {
+          path: 'orders',
+          children: [{ path: 'viewInvoiceDetail', element: <ViewInvoiceDeatilForm /> }],
+        },
         {
           path: 'e-commerce',
           children: [
@@ -130,8 +141,12 @@ const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
 const GeneralEcommerce = Loadable(lazy(() => import('../pages/dashboard/GeneralEcommerce')));
 const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralAnalytics')));
-const GeneralBanking = Loadable(lazy(() => import('../pages/dashboard/GeneralBanking')));
-const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
+const Leads = Loadable(lazy(() => import('../pages/dashboard/Leads')));
+const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImportForm')));
+const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/AddNewLeadForm')));
+const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
+const Orders = Loadable(lazy(() => import('../pages/dashboard/Orders')));
+const ViewInvoiceDeatilForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewInvoiceDeatilForm')));
 const EcommerceProductCreate = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductCreate')));
 const EcommerceCheckout = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckout')));
 const BlogPosts = Loadable(lazy(() => import('../pages/dashboard/BlogPosts')));

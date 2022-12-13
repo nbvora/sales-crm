@@ -1,8 +1,11 @@
 import { all, spawn, call } from 'redux-saga/effects';
 import { loginSaga } from './loginSaga';
+import { leadsSaga } from './leadsSaga';
+import { ordersSaga } from './ordersSaga';
+
 // eslint-disable-next-line
 export default function* rootSaga() {
-  const sagas = [loginSaga];
+  const sagas = [loginSaga, leadsSaga, ordersSaga];
   yield all(
     sagas.map((saga) =>
       // eslint-disable-next-line
