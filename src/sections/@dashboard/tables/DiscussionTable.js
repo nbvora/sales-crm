@@ -63,7 +63,7 @@ export default function DiscussionTable({ tableRows, tableColumn }) {
         <HeaderBreadcrumbs
           sx={{ marginTop: 10 }}
           heading="Discussion"
-          links={[{ name: '', href: PATH_DASHBOARD.lead.root }]}
+          links={[{ name: '', href: PATH_DASHBOARD.lead.viewLeadDetail }]}
         />
         <Card>
           <Scrollbar>

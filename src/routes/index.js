@@ -10,7 +10,6 @@ import AuthGuard from '../guards/AuthGuard';
 import { PATH_AFTER_LOGIN } from '../config';
 // components
 import LoadingScreen from '../components/LoadingScreen';
-
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
@@ -72,6 +71,7 @@ export default function Router() {
           children: [
             { path: 'leadImport', element: <LeadImportForm /> },
             { path: 'newLeads', element: <AddNewLeadForm /> },
+            { path: 'viewLeadDetail', element: <ViewLeadDetailForm /> },
           ],
         },
         {
@@ -139,6 +139,7 @@ const GeneralAnalytics = Loadable(lazy(() => import('../pages/dashboard/GeneralA
 const Leads = Loadable(lazy(() => import('../pages/dashboard/Leads')));
 const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImportForm')));
 const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/AddNewLeadForm')));
+const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
 const GeneralBooking = Loadable(lazy(() => import('../pages/dashboard/GeneralBooking')));
 const EcommerceProductCreate = Loadable(lazy(() => import('../pages/dashboard/EcommerceProductCreate')));
 const EcommerceCheckout = Loadable(lazy(() => import('../pages/dashboard/EcommerceCheckout')));

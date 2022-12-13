@@ -23,6 +23,8 @@ export default function AuthGuard({ children }) {
 
   useEffect(() => {
     dispatch({ type: sagaActions.LEADTABLE_SAGA });
+    dispatch({ type: sagaActions.ORDERTABLE_SAGA });
+    dispatch({ type: sagaActions.DISCUSSIONTABLE_SAGA });
   });
 
   if (!isInitialized) {

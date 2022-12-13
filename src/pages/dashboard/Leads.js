@@ -14,7 +14,7 @@ export default function Leads() {
     { id: 3, label: 'PhoneNumber', alignRight: false },
     { id: 4, label: 'Verified', alignRight: false },
     { id: 5, label: 'Status', alignRight: false },
-    { id: '' },
+    { id: 6, label: 'Actions' },
   ];
   return (
     <Page title="Leads">

@@ -1,4 +1,4 @@
-import { sentenceCase } from 'change-case';
+import { sentenceCase, paramCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -17,6 +17,7 @@ import {
   TableContainer,
   TablePagination,
   Box,
+  MenuItem,
 } from '@mui/material';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
@@ -29,6 +30,7 @@ import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../user/list';
+import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
 LeadTable.propTypes = {
   tableRows: PropTypes.any,
@@ -192,7 +194,20 @@ export default function LeadTable({ tableRows, tableColumn }) {
                         </TableCell>
 
                         <TableCell align="right">
-                          <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} />
+                          <Box sx={{ display: 'flex' }}>
+                            <MenuItem onClick={() => handleDeleteUser(id)} sx={{ color: 'error.main' }}>
+                              <Iconify icon={'eva:trash-2-outline'} />
+                            </MenuItem>
+
+                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.editById}`}>
+                              <Iconify icon={'eva:edit-fill'} />
+                            </MenuItem>
+
+                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
+                              <Iconify icon={'dashicons:visibility'} />
+                            </MenuItem>
+                          </Box>
+                          {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>
                       </TableRow>
                     );

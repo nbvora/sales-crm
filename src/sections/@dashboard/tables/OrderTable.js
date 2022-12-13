@@ -63,7 +63,7 @@ export default function OrderTable({ tableRows, tableColumn }) {
   return (
     <Page title="Lead: Order">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs heading="Order" links={[{ name: '', href: PATH_DASHBOARD.lead.root }]} />
+        <HeaderBreadcrumbs heading="Order" links={[{ name: '', href: PATH_DASHBOARD.lead.viewLeadDetail }]} />
         <Card>
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
