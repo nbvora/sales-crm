@@ -1,9 +1,10 @@
 import Page from '../../components/Page';
+import CommanTodo from './CommanTodo';
 
-export default function GeneralAnalytics() {
+export default function EmployeeRole() {
   return (
     <Page title="General: Analytics">
-      <h1>customers</h1>
+      <CommanTodo />
     </Page>
   );
 }

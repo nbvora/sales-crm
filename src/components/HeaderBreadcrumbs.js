@@ -26,7 +26,7 @@ export default function HeaderBreadcrumbs({ links, action, heading, moreLink = '
           <Breadcrumbs links={links} {...other} />
         </Box>
 
-        {action && <Box sx={{ flexShrink: 0 }}>{action}</Box>}
+        {action && <Box sx={{ flexShrink: 0, justifyContent: 'space-between' }}>{action}</Box>}
       </Box>
 
       <Box sx={{ mt: 2 }}>

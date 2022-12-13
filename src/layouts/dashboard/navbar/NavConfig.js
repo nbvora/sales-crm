@@ -53,7 +53,17 @@ const navConfig = [
         title: 'invoice',
         path: PATH_DASHBOARD.blog.root,
         icon: ICONS.blog,
-        children: [{ title: 'posts', path: PATH_DASHBOARD.blog.posts }],
+        children: [{ title: '2022', path: PATH_DASHBOARD.blog.posts }],
+      },
+      {
+        title: 'settings',
+        path: PATH_DASHBOARD.settings.root,
+        icon: ICONS.blog,
+        children: [
+          { title: 'employee role', path: PATH_DASHBOARD.settings.employeerole },
+          { title: 'supplychain role', path: PATH_DASHBOARD.settings.supplychain },
+          { title: 'orderqnty role', path: PATH_DASHBOARD.settings.orderqnty },
+        ],
       },
     ],
   },

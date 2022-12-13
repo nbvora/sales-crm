@@ -9,8 +9,9 @@ import { Box } from '@mui/material';
 Iconify.propTypes = {
   icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   sx: PropTypes.object,
+  onClick: PropTypes.func,
 };
 
-export default function Iconify({ icon, sx, ...other }) {
-  return <Box component={Icon} icon={icon} sx={{ ...sx }} {...other} />;
+export default function Iconify({ icon, sx, onClick, ...other }) {
+  return <Box component={Icon} icon={icon} sx={{ ...sx }} {...other} onClick={onClick} />;
 }
