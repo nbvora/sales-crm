@@ -67,7 +67,7 @@ export default function AddEmployee({ currentUser }) {
   );
 
   const methods = useForm({
-    // resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewUserSchema),
     defaultValues,
   });
 

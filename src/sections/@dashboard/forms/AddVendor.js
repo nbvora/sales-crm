@@ -42,7 +42,7 @@ export default function AddVendor({ currentUser }) {
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
     role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    // avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
@@ -66,7 +66,7 @@ export default function AddVendor({ currentUser }) {
   );
 
   const methods = useForm({
-    // resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewUserSchema),
     defaultValues,
   });
 
@@ -119,7 +119,7 @@ export default function AddVendor({ currentUser }) {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={handleSubmit((d) => console.log(d))}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>

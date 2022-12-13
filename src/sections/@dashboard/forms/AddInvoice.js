@@ -67,7 +67,7 @@ export default function AddInvoice({ currentUser }) {
   );
 
   const methods = useForm({
-    // resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewUserSchema),
     defaultValues,
   });
 

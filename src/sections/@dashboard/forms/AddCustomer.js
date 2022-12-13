@@ -43,7 +43,7 @@ export default function AddCustomer({ currentUser }) {
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
     role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    // avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
@@ -67,7 +67,7 @@ export default function AddCustomer({ currentUser }) {
   );
 
   const methods = useForm({
-    // resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewUserSchema),
     defaultValues,
   });
 
@@ -212,8 +212,8 @@ export default function AddCustomer({ currentUser }) {
               }}
             >
               <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
               <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="email" label="Email Address" />
 
               <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />
