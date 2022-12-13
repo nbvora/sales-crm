@@ -14,7 +14,8 @@ export function* deleteInvoiceRowSaga(state) {
     const response = yield axios.delete('/api/for delete employee', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +28,8 @@ export function* addInvoiceSaga(state) {
     const response = yield axios.post('/api/for add invoice', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +42,8 @@ export function* editInvoiceSaga(state) {
     const response = yield axios.put('/api/for update invoice', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }

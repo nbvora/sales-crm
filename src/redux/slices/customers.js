@@ -27,7 +27,7 @@ const customers = createSlice({
       // state.board.columns[columnId].cardIds.push(card.id);
     },
     deleteCustomers(state, action) {
-      const { cardId, columnId } = action.payload;
+      const { cardId } = action.payload;
       console.log(cardId, 'cardId');
       // state.board.columns[columnId].cardIds = state.board.columns[columnId].cardIds.filter((id) => id !== cardId);
       // state.board.cards = omit(state.board.cards, [cardId]);

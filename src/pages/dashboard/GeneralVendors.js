@@ -4,7 +4,6 @@ import VendorsList from '../../sections/@dashboard/tables/VendorsListTable';
 import { PATH_DASHBOARD } from '../../routes/paths';
 import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
-import { _userList } from '../../_mock';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [

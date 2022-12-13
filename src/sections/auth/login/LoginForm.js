@@ -24,8 +24,6 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 export default function LoginForm() {
   const isMountedRef = useIsMountedRef();
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setemail] = useState('demo@minimals.cc');
-  const [password, setpassword] = useState('demo1234');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -33,8 +31,8 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email,
-    password,
+    email: '',
+    password: '',
     remember: true,
   };
 
@@ -61,22 +59,14 @@ export default function LoginForm() {
     }
   };
 
-  const handleemail = (e) => {
-    setemail(e.target.value);
-  };
-  const handlepassword = (e) => {
-    setpassword(e.target.value);
-  };
-
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
 
-        <RHFTextField name="email" label="Email address" handlechange={handleemail} />
+        <RHFTextField name="email" label="Email address" />
 
         <RHFTextField
-          handlechange={handlepassword}
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}

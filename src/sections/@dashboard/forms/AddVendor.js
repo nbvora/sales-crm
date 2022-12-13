@@ -119,7 +119,7 @@ export default function AddVendor({ currentUser }) {
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit((d) => console.log(d))}>
+    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>

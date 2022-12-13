@@ -1,12 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
 import sagaActions from '../../actions/index';
-import {
-  employeeListSaga,
-  addEmployeeSaga,
-  deleteEmployeeRowSaga,
-  editEmployeeTargetSaga,
-  editEmployeeListSaga,
-} from './employeeListSaga';
+import { employeeListSaga, addEmployeeSaga, deleteEmployeeRowSaga, editEmployeeTargetSaga } from './employeeListSaga';
 
 export function* employeeSaga() {
   yield takeLatest(sagaActions.GET_EMPLOYEE, employeeListSaga);

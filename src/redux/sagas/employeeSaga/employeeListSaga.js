@@ -14,7 +14,8 @@ export function* deleteEmployeeRowSaga(state) {
     const response = yield axios.delete('/api/for delete employee', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +28,8 @@ export function* addEmployeeSaga(state) {
     const response = yield axios.post('/api/for add EMPLOYEE', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +42,8 @@ export function* editEmployeeTargetSaga(state) {
     const response = yield axios.put('/api/for add EMPLOYEE', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -53,7 +56,8 @@ export function* editEmployeeListSaga(state) {
     const response = yield axios.put('/api/for add EMPLOYEE', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }

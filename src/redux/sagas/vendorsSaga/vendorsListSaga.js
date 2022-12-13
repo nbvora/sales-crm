@@ -14,7 +14,8 @@ export function* DeleteVendorRowSaga(state) {
     const response = yield axios.delete('/api/for delete customer', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -27,7 +28,8 @@ export function* addVendorSaga(state) {
     const response = yield axios.post('/api/for add VENDORS', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +42,8 @@ export function* editVendorSaga(state) {
     const response = yield axios.put('/api/for update VENDORS', {
       state,
     });
-    const data = response.data;
+    const { data } = response;
+    console.log(data);
   } catch (error) {
     console.log(error);
   }

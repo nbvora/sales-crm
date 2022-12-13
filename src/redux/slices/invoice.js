@@ -21,6 +21,8 @@ const invoice = createSlice({
       state.invoice = action.payload;
     },
     addInvoice(state, action) {
+      state.isLoading = true;
+      state.invoice = action.payload;
       // // const { card, columnId } = action.payload;
       // state.board.cards[card.id] = card;
       // state.board.columns[columnId].cardIds.push(card.id);
