@@ -18,11 +18,11 @@ export default function ViewInvoiceDeatilForm() {
     <>
       <HeaderBreadcrumbs heading="" links={[{ name: '', href: PATH_DASHBOARD.order.viewInvoiceDetail }]} />
       <Box sx={{ position: 'relative', top: 10 }}>
-        <ViewInvoiceDeatilTable tableColumn={ORDER_VIEW_INVOICE_DETAIL_HEAD} tableRows={_userList} />
+        <ViewInvoiceDeatilTable
+          tableColumn={ORDER_VIEW_INVOICE_DETAIL_HEAD}
+          tableRows={_userList.filter((user) => _userList.includes(user.id))}
+        />
       </Box>
-      {/* <Box sx={{ position: 'relative', top: 50 }}>
-        <DiscussionTable tableColumn={TABLE_HEAD_D} tableRows={discussionTable} />
-      </Box> */}
     </>
   );
 }
