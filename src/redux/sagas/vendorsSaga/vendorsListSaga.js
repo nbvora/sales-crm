@@ -1,50 +1,48 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getVendors } from '../../slices/vendors';
+import {
+  startLoading,
+  hasError,
+  getVendors,
+  updateVendorSuccess,
+  createVendorSuccess,
+  deleteVendorSuccess,
+} from '../../slices/vendors';
 import { _userList } from '../../../_mock';
+import { dispatch } from '../../store';
 
 export function* vendorsListSaga() {
   yield put(getVendors(_userList));
 }
 
-export function* DeleteVendorRowSaga(state) {
-  console.log(state, 'DeleteVendorRowSaga');
-
+export function* DeleteVendorRowSaga(userId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.delete('/api/for delete customer', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/delete', { userId });
+    dispatch(deleteVendorSuccess({ response }));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* addVendorSaga(state) {
-  console.log(state, 'addVendorSaga');
-
+export function* addVendorSaga(newEvent) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.post('/api/for add VENDORS', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/new', newEvent);
+    dispatch(createVendorSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* editVendorSaga(state) {
-  console.log(state, 'editVendorSaga');
-
+export function* editVendorSaga(eventId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.put('/api/for update VENDORS', {
-      state,
+    const response = yield axios.post('/api/calendar/events/update', {
+      eventId,
     });
-    const { data } = response;
-    console.log(data);
+    dispatch(updateVendorSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }

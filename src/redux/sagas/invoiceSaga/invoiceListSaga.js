@@ -1,50 +1,48 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getInvoice } from '../../slices/invoice';
+import {
+  startLoading,
+  hasError,
+  getInvoice,
+  createInvoiceSuccess,
+  updateInvoiceSuccess,
+  deleteInvoiceSuccess,
+} from '../../slices/invoice';
 import { _userList } from '../../../_mock';
+import { dispatch } from '../../store';
 
 export function* invoiceListSaga() {
   yield put(getInvoice(_userList));
 }
 
-export function* deleteInvoiceRowSaga(state) {
-  console.log(state, 'DeleteEmployeeRowSaga');
-
+export function* deleteInvoiceRowSaga(userId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.delete('/api/for delete employee', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/delete', { userId });
+    dispatch(deleteInvoiceSuccess({ response }));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* addInvoiceSaga(state) {
-  console.log(state, 'dsdsdsd');
-
+export function* addInvoiceSaga(newEvent) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.post('/api/for add invoice', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/new', newEvent);
+    dispatch(createInvoiceSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* editInvoiceSaga(state) {
-  console.log(state, 'editInvoiceSaga');
-
+export function* editInvoiceSaga(eventId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.put('/api/for update invoice', {
-      state,
+    const response = yield axios.post('/api/calendar/events/update', {
+      eventId,
     });
-    const { data } = response;
-    console.log(data);
+    dispatch(updateInvoiceSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }

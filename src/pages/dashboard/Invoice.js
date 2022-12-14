@@ -7,11 +7,10 @@ import Page from '../../components/Page';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Product Name', alignRight: false },
-  { id: 'company', label: 'Product Price', alignRight: false },
-  { id: 'role', label: 'Product Category', alignRight: false },
-  { id: 'isVerified', label: 'Product HSN Code', alignRight: false },
-  { id: 'status', label: 'Available Stock', alignRight: false },
+  { id: 'companyName', label: 'Company Name', alignRight: false },
+  { id: 'invoiceNumber', label: 'Invoice Number', alignRight: false },
+  { id: 'invoiceDate', label: 'Invoice Date', alignRight: false },
+  { id: 'subTotalAmmount', label: 'Sub Total Ammount', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 

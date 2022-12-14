@@ -7,11 +7,12 @@ import Iconify from '../../components/Iconify';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Product Name', alignRight: false },
-  { id: 'company', label: 'Product Price', alignRight: false },
-  { id: 'role', label: 'Product Category', alignRight: false },
-  { id: 'isVerified', label: 'Product HSN Code', alignRight: false },
-  { id: 'status', label: 'Available Stock', alignRight: false },
+  { id: 'productName', label: 'Product Name', alignRight: false },
+  { id: 'employeeCode', label: 'Employee Code', alignRight: false },
+  { id: 'designation', label: 'Designation', alignRight: false },
+  { id: 'location', label: 'Location', alignRight: false },
+  { id: 'state', label: 'State', alignRight: false },
+  { id: 'mobile', label: 'Mobile', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 

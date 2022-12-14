@@ -20,14 +20,37 @@ const employee = createSlice({
       state.isLoading = false;
       state.employee = action.payload;
     },
-    addEmployee(state, action) {
-      const { card, columnId } = action.payload;
+    updateEmployeeSuccess(state, action) {
+      const event = action.payload;
+      const updateEvent = state.events.map((_event) => {
+        if (_event.id === event.id) {
+          return event;
+        }
+        return _event;
+      });
 
-      state.board.cards[card.id] = card;
-      state.board.columns[columnId].cardIds.push(card.id);
+      state.isLoading = false;
+      state.events = updateEvent;
+    },
+    deleteEmployeeSuccess(state, action) {
+      const { userId } = action.payload;
+      const deleteEvent = state.events.filter((event) => event.id !== userId);
+      state.events = deleteEvent;
+    },
+    createEmployeeSuccess(state, action) {
+      const newEvent = action.payload;
+      state.isLoading = false;
+      state.events = [...state.events, newEvent];
     },
   },
 });
 
 export default employee.reducer;
-export const { startLoading, hasError, getEmployee, addEmployee } = employee.actions;
+export const {
+  startLoading,
+  hasError,
+  getEmployee,
+  createEmployeeSuccess,
+  updateEmployeeSuccess,
+  deleteEmployeeSuccess,
+} = employee.actions;

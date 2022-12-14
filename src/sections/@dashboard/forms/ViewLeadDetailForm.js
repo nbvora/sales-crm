@@ -6,7 +6,6 @@ import OrderTable from '../tables/OrderTable';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import ColorToggleButton from '../../../components/buttons/ToggleButton';
-import { _userList } from '../../../_mock';
 
 const TABLE_HEAD = [
   { id: 1, label: 'Date', alignRight: false },

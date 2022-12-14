@@ -1,50 +1,48 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getCustomers } from '../../slices/customers';
+import {
+  startLoading,
+  hasError,
+  getCustomers,
+  createCustomerSuccess,
+  updateCustomerSuccess,
+  deleteCustomerSuccess,
+} from '../../slices/customers';
 import { _userList } from '../../../_mock';
+import { dispatch } from '../../store';
 
 export function* customerListSaga() {
   yield put(getCustomers(_userList));
 }
 
-export function* DeleteCustomerRowSaga(state) {
-  console.log(state, 'DeleteCustomerRowSaga');
-
+export function* DeleteCustomerRowSaga(userId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.delete('/api/for delete customer', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/delete', { userId });
+    dispatch(deleteCustomerSuccess({ response }));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* addCustomerSaga(state) {
-  console.log(state, 'addCustomerSaga');
-
+export function* addCustomerSaga(newEvent) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.post('/api/for add customer', {
-      state,
-    });
-    const { data } = response;
-    console.log(data);
+    const response = yield axios.post('/api/calendar/events/new', newEvent);
+    dispatch(createCustomerSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }
 
-export function* EditCustomerSaga(state) {
-  console.log(state, 'EditCustomerSaga');
-
+export function* EditCustomerSaga(eventId) {
+  dispatch(startLoading());
   try {
-    const response = yield axios.put('/api/for update customer', {
-      state,
+    const response = yield axios.post('/api/calendar/events/update', {
+      eventId,
     });
-    const { data } = response;
-    console.log(data);
+    dispatch(updateCustomerSuccess(response.data.event));
   } catch (error) {
-    console.log(error);
+    dispatch(hasError(error));
   }
 }

@@ -155,6 +155,9 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                         <TableCell align="center" sx={{ padding: '5px' }}>
                           0
                         </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          123
+                        </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Iconify
                             icon={'eva:trash-2-outline'}

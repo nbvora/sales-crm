@@ -4,7 +4,6 @@ import { Navigate, useLocation } from 'react-router-dom';
 // hooks
 import sagaActions from '../redux/actions';
 import { dispatch, useSelector } from '../redux/store';
-import { _userList } from '../_mock';
 // pages
 import Login from '../pages/auth/Login';
 

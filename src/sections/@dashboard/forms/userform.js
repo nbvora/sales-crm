@@ -1,33 +1,32 @@
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { paramCase } from 'change-case';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
-// redux
-import { dispatch } from '../../../redux/store';
-import sagaActions from '../../../redux/actions';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries, _userList } from '../../../_mock';
+import { countries } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
 import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function EditEmployeeTarget() {
-  const { name = '' } = useParams();
+UserNewForm.propTypes = {
+  isEdit: PropTypes.bool,
+  currentUser: PropTypes.object,
+};
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+export default function UserNewForm({ isEdit, currentUser }) {
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -82,21 +81,21 @@ export default function EditEmployeeTarget() {
   const values = watch();
 
   useEffect(() => {
-    if (currentUser) {
+    if (isEdit && currentUser) {
       reset(defaultValues);
     }
-
+    if (!isEdit) {
+      reset(defaultValues);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [isEdit, currentUser]);
 
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
-      dispatch({ type: sagaActions.EDIT_EMPLOYEE_TARGET, data });
       reset();
-      enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.eCommerce.editById);
+      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      navigate(PATH_DASHBOARD.user.list);
     } catch (error) {
       console.error(error);
     }
@@ -123,12 +122,14 @@ export default function EditEmployeeTarget() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>
-            <Label
-              color={values.status !== 'active' ? 'error' : 'success'}
-              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-            >
-              {values.status}
-            </Label>
+            {isEdit && (
+              <Label
+                color={values.status !== 'active' ? 'error' : 'success'}
+                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
+              >
+                {values.status}
+              </Label>
+            )}
 
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
@@ -154,33 +155,35 @@ export default function EditEmployeeTarget() {
               />
             </Box>
 
-            <FormControlLabel
-              labelPlacement="start"
-              control={
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value !== 'active'}
-                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                    />
-                  )}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Banned
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Apply disable account
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-            />
+            {isEdit && (
+              <FormControlLabel
+                labelPlacement="start"
+                control={
+                  <Controller
+                    name="status"
+                    control={control}
+                    render={({ field }) => (
+                      <Switch
+                        {...field}
+                        checked={field.value !== 'active'}
+                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
+                      />
+                    )}
+                  />
+                }
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                      Banned
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                      Apply disable account
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
+              />
+            )}
 
             <RHFSwitch
               name="isVerified"
@@ -210,11 +213,11 @@ export default function EditEmployeeTarget() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Product Name" />
-              <RHFTextField name="email" label="Dealer/Distributor Price" />
-              <RHFTextField name="phoneNumber" label="MRP" />
+              <RHFTextField name="name" label="Full Name" />
+              <RHFTextField name="email" label="Email Address" />
+              <RHFTextField name="phoneNumber" label="Phone Number" />
 
-              <RHFSelect name="country" label="Product Category" placeholder="Country">
+              <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -223,21 +226,17 @@ export default function EditEmployeeTarget() {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="Product Cartoon Size" />
-              <RHFTextField name="city" label="Product Stock " />
+              <RHFTextField name="state" label="State/Region" />
+              <RHFTextField name="city" label="City" />
+              <RHFTextField name="address" label="Address" />
+              <RHFTextField name="zipCode" label="Zip/Code" />
+              <RHFTextField name="company" label="Company" />
+              <RHFTextField name="role" label="Role" />
             </Box>
 
-            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
-              <LoadingButton
-                type="submit"
-                variant="contained"
-                component={RouterLink}
-                to={`${PATH_DASHBOARD.eCommerce.editById}`}
-              >
-                cancle
-              </LoadingButton>
+            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Add
+                {!isEdit ? 'Create User' : 'Save Changes'}
               </LoadingButton>
             </Stack>
           </Card>

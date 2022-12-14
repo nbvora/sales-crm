@@ -20,16 +20,31 @@ const vendors = createSlice({
       state.isLoading = false;
       state.vendors = action.payload;
     },
-    addVendors(state, action) {
+    updateVendorSuccess(state, action) {
+      const event = action.payload;
+      const updateEvent = state.events.map((_event) => {
+        if (_event.id === event.id) {
+          return event;
+        }
+        return _event;
+      });
+
       state.isLoading = false;
-      state.vendors = action.payload;
-      const card = action.payload;
-      console.log(card);
-      // state.board.cards[card.id] = card;
-      // state.board.columns[columnId].cardIds.push(card.id);
+      state.events = updateEvent;
+    },
+    deleteVendorSuccess(state, action) {
+      const { userId } = action.payload;
+      const deleteEvent = state.events.filter((event) => event.id !== userId);
+      state.events = deleteEvent;
+    },
+    createVendorSuccess(state, action) {
+      const newEvent = action.payload;
+      state.isLoading = false;
+      state.events = [...state.events, newEvent];
     },
   },
 });
 
 export default vendors.reducer;
-export const { startLoading, hasError, getVendors, addVendors } = vendors.actions;
+export const { startLoading, hasError, getVendors, updateVendorSuccess, createVendorSuccess, deleteVendorSuccess } =
+  vendors.actions;

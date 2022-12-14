@@ -29,7 +29,7 @@ import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../user/list';
+import { UserListHead, UserListToolbar } from '../user/list';
 import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
 LeadTable.propTypes = {

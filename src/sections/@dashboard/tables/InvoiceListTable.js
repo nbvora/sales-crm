@@ -152,9 +152,6 @@ export default function InvoiceListTable({ tableRows, tableColumn }) {
                         <TableCell align="center" sx={{ padding: '5px' }}>
                           {isVerified ? 'Yes' : 'No'}
                         </TableCell>
-                        <TableCell align="center" sx={{ padding: '5px' }}>
-                          0
-                        </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Iconify
                             icon={'eva:trash-2-outline'}

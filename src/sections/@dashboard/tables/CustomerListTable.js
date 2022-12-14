@@ -126,7 +126,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, company, avatarUrl, isVerified } = row;
+                    const { id, name, role, company, avatarUrl } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -149,12 +149,6 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           {role}
-                        </TableCell>
-                        <TableCell align="center" sx={{ padding: '5px' }}>
-                          {isVerified ? 'Yes' : 'No'}
-                        </TableCell>
-                        <TableCell align="center" sx={{ padding: '5px' }}>
-                          0
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Iconify

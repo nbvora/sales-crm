@@ -94,7 +94,7 @@
     "react-lazy-load-image-component": "^1.5.1",
     "react-map-gl": "^6.1.18",
     "react-markdown": "^7.1.1",
-    "react-material-file-upload": "^0.0.4",
+    "react-material-file-upload": "0.0.4",
     "react-quill": "^2.0.0-beta.4",
     "react-redux": "^7.2.6",
     "react-router": "^6.2.1",

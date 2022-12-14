@@ -204,18 +204,20 @@ const ProductImport = Loadable(lazy(() => import('../sections/@dashboard/forms/P
 const EditProduct = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProduct')));
 const AddStock = Loadable(lazy(() => import('../sections/@dashboard/forms/AddStock')));
 const AddCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/AddCategory')));
-const AddEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/AddEmployeeTarget')));
-const Addproduct = Loadable(lazy(() => import('../sections/@dashboard/forms/AddProduct')));
-const EditCustomerDetail = Loadable(lazy(() => import('../sections/@dashboard/forms/EditCustomerDetail')));
-const EditVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/EditVendors')));
-const EditEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/EditEmployeeTarget')));
-const EditEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/EditEmployee')));
 const EditProductCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProductcatagory')));
-const AddCustomer = Loadable(lazy(() => import('../sections/@dashboard/forms/AddCustomer')));
-const AddVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/AddVendor')));
-const AddEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/AddEmployee')));
-const AddInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/AddInvoice')));
-const EditInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/EditInvoice')));
+const Addproduct = Loadable(lazy(() => import('../sections/@dashboard/forms/AddProduct')));
+
+const EditCustomerDetail = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerForm')));
+const AddCustomer = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerForm')));
+const EditVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/VendorForm')));
+const AddVendor = Loadable(lazy(() => import('../sections/@dashboard/forms/VendorForm')));
+const EditEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeTargetForm')));
+const AddEmployeeTarget = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeTargetForm')));
+const EditEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeListForm')));
+const AddEmployee = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeListForm')));
+const AddInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/InvoiceForm')));
+const EditInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/InvoiceForm')));
+
 const CustomerImport = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerImport')));
 const VendorImport = Loadable(lazy(() => import('../sections/@dashboard/forms/VendorImport')));
 const EmployeeImport = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeImport')));

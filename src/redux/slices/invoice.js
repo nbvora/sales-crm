@@ -20,15 +20,31 @@ const invoice = createSlice({
       state.isLoading = false;
       state.invoice = action.payload;
     },
-    addInvoice(state, action) {
-      state.isLoading = true;
-      state.invoice = action.payload;
-      // // const { card, columnId } = action.payload;
-      // state.board.cards[card.id] = card;
-      // state.board.columns[columnId].cardIds.push(card.id);
+    updateInvoiceSuccess(state, action) {
+      const event = action.payload;
+      const updateEvent = state.events.map((_event) => {
+        if (_event.id === event.id) {
+          return event;
+        }
+        return _event;
+      });
+
+      state.isLoading = false;
+      state.events = updateEvent;
+    },
+    deleteInvoiceSuccess(state, action) {
+      const { userId } = action.payload;
+      const deleteEvent = state.events.filter((event) => event.id !== userId);
+      state.events = deleteEvent;
+    },
+    createInvoiceSuccess(state, action) {
+      const newEvent = action.payload;
+      state.isLoading = false;
+      state.events = [...state.events, newEvent];
     },
   },
 });
 
 export default invoice.reducer;
-export const { startLoading, hasError, getInvoice, addInvoice } = invoice.actions;
+export const { startLoading, hasError, getInvoice, createInvoiceSuccess, updateInvoiceSuccess, deleteInvoiceSuccess } =
+  invoice.actions;

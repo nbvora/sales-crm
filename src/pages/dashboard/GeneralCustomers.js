@@ -7,11 +7,9 @@ import Page from '../../components/Page';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Product Name', alignRight: false },
-  { id: 'company', label: 'Product Price', alignRight: false },
-  { id: 'role', label: 'Product Category', alignRight: false },
-  { id: 'isVerified', label: 'Product HSN Code', alignRight: false },
-  { id: 'status', label: 'Available Stock', alignRight: false },
+  { id: 'name', label: 'Name', alignRight: false },
+  { id: 'company', label: 'Mobile', alignRight: false },
+  { id: 'role', label: 'Employee Name', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 
