@@ -201,11 +201,11 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const EditLeads = Loadable(lazy(() => import('../sections/@dashboard/forms/EditLeads')));
 const StockImport = Loadable(lazy(() => import('../sections/@dashboard/forms/StockImport')));
 const ProductImport = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductImprt')));
-const EditProduct = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProduct')));
-const AddStock = Loadable(lazy(() => import('../sections/@dashboard/forms/AddStock')));
-const AddCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/AddCategory')));
-const EditProductCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/EditProductcatagory')));
-const Addproduct = Loadable(lazy(() => import('../sections/@dashboard/forms/AddProduct')));
+const EditProduct = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductForm')));
+const AddStock = Loadable(lazy(() => import('../sections/@dashboard/forms/StockForm')));
+const AddCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/CategoryForm')));
+const EditProductCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/CategoryForm')));
+const Addproduct = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductForm')));
 
 const EditCustomerDetail = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerForm')));
 const AddCustomer = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerForm')));

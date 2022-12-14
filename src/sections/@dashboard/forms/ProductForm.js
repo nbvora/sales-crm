@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
+import { paramCase } from 'change-case';
 import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,25 +10,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
 // utils
-import { dispatch } from '../../../redux/store';
-
-import sagaActions from '../../../redux/actions';
 import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import { countries } from '../../../_mock';
+import { countries, _userList } from '../../../_mock';
 // components
 import Label from '../../../components/Label';
 import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-AddInvoice.propTypes = {
-  currentUser: PropTypes.object,
-};
+export default function EditProduct() {
+  const { name = '' } = useParams();
 
-export default function AddInvoice({ currentUser }) {
+  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const isEdit = currentUser && true;
+
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -83,21 +81,21 @@ export default function AddInvoice({ currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (currentUser) {
+    if (isEdit && currentUser) {
       reset(defaultValues);
     }
-
+    if (!isEdit) {
+      reset(defaultValues);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [isEdit, currentUser]);
 
   const onSubmit = async () => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const data = { email: 'demo@minimals.cc', password: 'demo1234', remember: true };
-      dispatch({ type: sagaActions.ADD_INVOICE, data });
       reset();
-      enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.blog.posts);
+      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      navigate(PATH_DASHBOARD.user.list);
     } catch (error) {
       console.error(error);
     }
@@ -211,11 +209,11 @@ export default function AddInvoice({ currentUser }) {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="name" label="Product Name" />
+              <RHFTextField name="email" label="Dealer/Distributor Price" />
+              <RHFTextField name="phoneNumber" label="MRP" />
 
-              <RHFSelect name="country" label="Country" placeholder="Country">
+              <RHFSelect name="country" label="Product Category" placeholder="Country">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -224,12 +222,8 @@ export default function AddInvoice({ currentUser }) {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
+              <RHFTextField name="state" label="Product Cartoon Size" />
+              <RHFTextField name="city" label="Product Stock " />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
@@ -237,12 +231,12 @@ export default function AddInvoice({ currentUser }) {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.blog.posts}`}
+                to={`${PATH_DASHBOARD.user.cards}`}
               >
                 cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Add
+                {!isEdit ? 'ADD' : 'Edit'}
               </LoadingButton>
             </Stack>
           </Card>
