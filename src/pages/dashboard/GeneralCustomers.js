@@ -22,7 +22,7 @@ export default function GeneralCustomers() {
         <Button
           variant="outlined"
           component={RouterLink}
-          to={`${PATH_DASHBOARD.analytics.customerimport}`}
+          to={`/dashboard${PATH_DASHBOARD.analytics.customerimport}`}
           startIcon={<Iconify icon={'eva:plus-fill'} />}
         >
           Customer Import

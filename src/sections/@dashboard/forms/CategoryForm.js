@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { paramCase } from 'change-case';
 import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -10,6 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // utils
+import { _userList } from '../../../_mock';
 
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -19,12 +20,12 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-AddCategory.propTypes = {
-  isEdit: PropTypes.bool,
-  currentUser: PropTypes.object,
-};
+export default function AddCategory() {
+  const { name = '' } = useParams();
 
-export default function AddCategory({ isEdit, currentUser }) {
+  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const isEdit = currentUser && true;
+
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -104,7 +105,7 @@ export default function AddCategory({ isEdit, currentUser }) {
                 cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Add
+                {!isEdit ? 'ADD' : 'Edit'}
               </LoadingButton>
             </Stack>
           </Card>
