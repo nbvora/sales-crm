@@ -41,10 +41,10 @@ export default function ViewLeadDetailForm() {
       />
       {/* In table rows data is not going through redux-saga flow because of initial push for merge */}
       <Box sx={{ position: 'relative', top: 10 }}>
-        <OrderTable tableColumn={TABLE_HEAD} tableRows={_userList} />
+        <OrderTable tableColumn={TABLE_HEAD} tableRows={orderTable} />
       </Box>
       <Box sx={{ position: 'relative', top: 50 }}>
-        <DiscussionTable tableColumn={TABLE_HEAD_D} tableRows={_userList} />
+        <DiscussionTable tableColumn={TABLE_HEAD_D} tableRows={discussionTable} />
       </Box>
     </>
   );

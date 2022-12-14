@@ -31,6 +31,8 @@ export default function AuthGuard({ children }) {
     dispatch({ type: sagaActions.GET_EMPLOYEE });
     dispatch({ type: sagaActions.GET_INVOICE });
     dispatch({ type: sagaActions.LEADTABLE_SAGA });
+    dispatch({ type: sagaActions.ORDERTABLE_SAGA });
+    dispatch({ type: sagaActions.DISCUSSIONTABLE_SAGA });
     dispatch({ type: sagaActions.ORDERDETAIL_SAGA });
     dispatch({ type: sagaActions.VIEWINVOICEDETAIL_SAGA });
   }, []);
