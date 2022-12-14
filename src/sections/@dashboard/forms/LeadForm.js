@@ -1,8 +1,9 @@
-import { paramCase } from 'change-case';
+import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { paramCase } from 'change-case';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,9 +25,16 @@ import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 
 // ----------------------------------------------------------------------
 
-export default function EditLeads() {
+UserNewForm.propTypes = {
+  isEdit: PropTypes.bool,
+  currentUser: PropTypes.object,
+};
+
+export default function UserNewForm() {
   const { name = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const isEdit = currentUser && true;
+
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -81,19 +89,25 @@ export default function EditLeads() {
   const values = watch();
 
   useEffect(() => {
-    if (currentUser) {
+    if (isEdit && currentUser) {
       reset(defaultValues);
     }
-
+    if (!isEdit) {
+      reset(defaultValues);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [isEdit, currentUser]);
 
   const onSubmit = async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      dispatch({ type: sagaActions.EDIT_LEAD, data });
+      if (isEdit) {
+        dispatch({ type: sagaActions.EDIT_LEAD, data });
+      } else {
+        dispatch({ type: sagaActions.ADD_LEAD, data });
+      }
       reset();
-      enqueueSnackbar('Create success!');
+      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
       navigate(PATH_DASHBOARD.lead.root);
     } catch (error) {
       console.error(error);
@@ -121,12 +135,14 @@ export default function EditLeads() {
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card sx={{ py: 10, px: 3 }}>
-            <Label
-              color={values.status !== 'active' ? 'error' : 'success'}
-              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-            >
-              {values.status}
-            </Label>
+            {isEdit && (
+              <Label
+                color={values.status !== 'active' ? 'error' : 'success'}
+                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
+              >
+                {values.status}
+              </Label>
+            )}
 
             <Box sx={{ mb: 5 }}>
               <RHFUploadAvatar
@@ -152,33 +168,35 @@ export default function EditLeads() {
               />
             </Box>
 
-            <FormControlLabel
-              labelPlacement="start"
-              control={
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value !== 'active'}
-                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                    />
-                  )}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Banned
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Apply disable account
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-            />
+            {isEdit && (
+              <FormControlLabel
+                labelPlacement="start"
+                control={
+                  <Controller
+                    name="status"
+                    control={control}
+                    render={({ field }) => (
+                      <Switch
+                        {...field}
+                        checked={field.value !== 'active'}
+                        onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
+                      />
+                    )}
+                  />
+                }
+                label={
+                  <>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                      Banned
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                      Apply disable account
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
+              />
+            )}
 
             <RHFSwitch
               name="isVerified"
@@ -208,11 +226,11 @@ export default function EditLeads() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Product Name" />
-              <RHFTextField name="email" label="Dealer/Distributor Price" />
-              <RHFTextField name="phoneNumber" label="MRP" />
+              <RHFTextField name="name" label="Full Name" />
+              <RHFTextField name="email" label="Email Address" />
+              <RHFTextField name="phoneNumber" label="Phone Number" />
 
-              <RHFSelect name="country" label="Product Category" placeholder="Country">
+              <RHFSelect name="country" label="Country" placeholder="Country">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -221,8 +239,12 @@ export default function EditLeads() {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="Product Cartoon Size" />
-              <RHFTextField name="city" label="Product Stock " />
+              <RHFTextField name="state" label="State/Region" />
+              <RHFTextField name="city" label="City" />
+              <RHFTextField name="address" label="Address" />
+              <RHFTextField name="zipCode" label="Zip/Code" />
+              <RHFTextField name="company" label="Company" />
+              <RHFTextField name="role" label="Role" />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
@@ -235,7 +257,7 @@ export default function EditLeads() {
                 Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Save Changes
+                {!isEdit ? 'Create User' : 'Save Changes'}
               </LoadingButton>
             </Stack>
           </Card>

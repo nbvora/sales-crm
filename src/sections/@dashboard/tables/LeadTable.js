@@ -19,13 +19,16 @@ import {
   Box,
   MenuItem,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../../routes/paths';
+// redux
+import { dispatch } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
 import Label from '../../../components/Label';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
@@ -92,12 +95,14 @@ export default function LeadTable({ tableRows, tableColumn }) {
   };
 
   const handleDeleteUser = (userId) => {
+    dispatch({ type: sagaActions.DELETE_LEAD, userId });
     const deleteUser = userList.filter((user) => user.id !== userId);
     setSelected([]);
     setUserList(deleteUser);
   };
 
   const handleDeleteMultiUser = (selected) => {
+    dispatch({ type: sagaActions.DELETE_LEAD, selected });
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
     setUserList(deleteUsers);
