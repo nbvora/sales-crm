@@ -3,8 +3,8 @@ import CommanTodo from './CommanTodo';
 
 export default function SupplyChain() {
   return (
-    <Page title="General: Analytics">
-      <CommanTodo />
+    <Page title="Supply Chain">
+      <CommanTodo title={'Employee Supply Chain'} />
     </Page>
   );
 }

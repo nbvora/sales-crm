@@ -186,7 +186,7 @@ const ProductCategory = Loadable(lazy(() => import('../pages/dashboard/ProductCa
 const ProductList = Loadable(lazy(() => import('../pages/dashboard/ProductList')));
 const StockManagement = Loadable(lazy(() => import('../pages/dashboard/StockManagement')));
 const Leads = Loadable(lazy(() => import('../pages/dashboard/Leads')));
-const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImportForm')));
+const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadImport')));
 const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
 const Orders = Loadable(lazy(() => import('../pages/dashboard/Orders')));
 const ViewInvoiceDeatilForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewInvoiceDeatilForm')));
@@ -204,7 +204,7 @@ const ChangePassword = Loadable(lazy(() => import('../sections/@dashboard/forms/
 const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const EditLeads = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const StockImport = Loadable(lazy(() => import('../sections/@dashboard/forms/StockImport')));
-const ProductImport = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductImprt')));
+const ProductImport = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductImport')));
 const EditProduct = Loadable(lazy(() => import('../sections/@dashboard/forms/ProductForm')));
 const AddStock = Loadable(lazy(() => import('../sections/@dashboard/forms/StockForm')));
 const AddCategory = Loadable(lazy(() => import('../sections/@dashboard/forms/CategoryForm')));

@@ -61,8 +61,8 @@ const navConfig = [
         icon: ICONS.blog,
         children: [
           { title: 'employee role', path: PATH_DASHBOARD.settings.employeerole },
-          { title: 'supplychain role', path: PATH_DASHBOARD.settings.supplychain },
-          { title: 'orderqnty role', path: PATH_DASHBOARD.settings.orderqnty },
+          { title: 'Supply Chain User types', path: PATH_DASHBOARD.settings.supplychain },
+          { title: 'Order Qnty type', path: PATH_DASHBOARD.settings.orderqnty },
         ],
       },
     ],
