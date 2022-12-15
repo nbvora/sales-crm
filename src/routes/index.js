@@ -65,6 +65,7 @@ export default function Router() {
         { path: 'customer', element: <GeneralCustomers /> },
         { path: 'leads', element: <Leads /> },
         { path: 'orders', element: <Orders /> },
+        { path: 'profile', element: <ProfileForm /> },
         {
           path: 'leads',
           children: [
@@ -115,7 +116,6 @@ export default function Router() {
             { path: 'productlist', element: <ProductList /> },
             { path: 'stockmanagement', element: <StockManagement /> },
             { path: 'addstock', element: <AddStock /> },
-            { path: 'account', element: <UserAccount /> },
             { path: ':name/editproductcategory', element: <EditProductCategory /> },
             { path: ':name/editproduct', element: <EditProduct /> },
             { path: 'addcategory', element: <AddCategory /> },
@@ -188,7 +188,7 @@ const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/
 const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
 const Orders = Loadable(lazy(() => import('../pages/dashboard/Orders')));
 const ViewInvoiceDeatilForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewInvoiceDeatilForm')));
-const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
+
 const EmployeeRole = Loadable(lazy(() => import('../pages/dashboard/EmployeeRole')));
 const SupplyChain = Loadable(lazy(() => import('../pages/dashboard/SupplyChain')));
 const OrderQnty = Loadable(lazy(() => import('../pages/dashboard/OrderQntyType')));
@@ -197,6 +197,7 @@ const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 
 // form section
+const ProfileForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ProfileForm')));
 const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const EditLeads = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const StockImport = Loadable(lazy(() => import('../sections/@dashboard/forms/StockImport')));
