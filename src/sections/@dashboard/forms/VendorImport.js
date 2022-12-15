@@ -2,9 +2,20 @@ import { useState } from 'react';
 import FileUpload from 'react-material-file-upload';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
+// redux
+import { dispatch } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
 
 export default function VendorImport() {
   const [files, setFiles] = useState([]);
+
+  const handleUplodFile = () => {
+    if (files !== []) {
+      console.log(files);
+    } else {
+      console.log('file is emty');
+    }
+  };
 
   return (
     <>
@@ -16,7 +27,11 @@ export default function VendorImport() {
           onChange={setFiles}
           accept=".xlsx"
         />
-        <Button sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }} variant="contained">
+        <Button
+          onClick={handleUplodFile}
+          sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }}
+          variant="contained"
+        >
           Save
         </Button>
       </Box>
