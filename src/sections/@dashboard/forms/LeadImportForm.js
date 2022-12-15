@@ -10,10 +10,7 @@ export default function LeadImportForm() {
 
   return (
     <>
-      <HeaderBreadcrumbs
-        heading="Lead Import"
-        links={[{ name: 'Leads', href: PATH_DASHBOARD.lead.root }, { name: 'Lead Import' }]}
-      />
+      <HeaderBreadcrumbs heading="Import File" links={[{ href: PATH_DASHBOARD.lead.root }]} />
       <Box>
         <h1>Import File</h1>
         <FileUpload

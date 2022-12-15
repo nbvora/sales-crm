@@ -6,12 +6,12 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { _userList } from '../../../_mock';
 
 const ORDER_VIEW_INVOICE_DETAIL_HEAD = [
-  { id: 1, label: 'Name', alignRight: false },
-  { id: 2, label: 'Role', alignRight: false },
-  { id: 3, label: 'PhoneNumber', alignRight: false },
-  { id: 4, label: 'Verified', alignRight: false },
-  { id: 5, label: 'Status', alignRight: false },
-  { id: '' },
+  { id: 'Name', label: 'Name', alignRight: false },
+  { id: 'Role', label: 'Role', alignRight: false },
+  { id: 'PhoneNumber', label: 'PhoneNumber', alignRight: false },
+  { id: 'Verified', label: 'Verified', alignRight: false },
+  { id: 'Status', label: 'Status', alignRight: false },
+  { id: 'Actions', label: 'Actions', alignRight: false },
 ];
 export default function ViewInvoiceDeatilForm() {
   return (

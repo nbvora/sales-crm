@@ -1,8 +1,20 @@
 import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import { Card, Table, TableRow, TableBody, TableCell, Container, TableContainer, TablePagination } from '@mui/material';
-
+import {
+  Card,
+  Table,
+  Avatar,
+  Checkbox,
+  TableRow,
+  TableBody,
+  TableCell,
+  Container,
+  Typography,
+  TableContainer,
+  TablePagination,
+  Box,
+} from '@mui/material';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useSettings from '../../../hooks/useSettings';
@@ -11,15 +23,15 @@ import useSettings from '../../../hooks/useSettings';
 import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
-import { UserListHead } from '../user/list';
+import { UserListHead, UserListToolbar } from '../user/list';
+import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
 OrderTable.propTypes = {
   tableRows: PropTypes.any,
   tableColumn: PropTypes.any,
 };
 export default function OrderTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
+  const tableName = 'Order';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -48,10 +60,41 @@ export default function OrderTable({ tableRows, tableColumn }) {
 
     setSelected([]);
   };
+  const handleClick = (name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+    setSelected(newSelected);
+  };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const handleFilterByName = (filterName) => {
+    setFilterName(filterName);
+    setPage(0);
+  };
+
+  const handleDeleteUser = (userId) => {
+    const deleteUser = userList.filter((user) => user.id !== userId);
+    setSelected([]);
+    setUserList(deleteUser);
+  };
+
+  const handleDeleteMultiUser = (selected) => {
+    const deleteUsers = userList.filter((user) => !selected.includes(user.name));
+    setSelected([]);
+    setUserList(deleteUsers);
   };
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
@@ -60,16 +103,29 @@ export default function OrderTable({ tableRows, tableColumn }) {
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
+  const ICON = {
+    mr: 2,
+    width: 20,
+    height: 20,
+  };
   return (
-    <Page title="Lead: Order">
+    <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs heading="Order" links={[{ name: '', href: PATH_DASHBOARD.lead.root }]} />
         <Card>
+          <UserListToolbar
+            tableName={tableName}
+            numSelected={selected.length}
+            filterName={filterName}
+            onFilterName={handleFilterByName}
+            onDeleteUsers={() => handleDeleteMultiUser(selected)}
+          />
+
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
                 <UserListHead
                   order={order}
+                  checkbox
                   orderBy={orderBy}
                   headLabel={tableColumn}
                   rowCount={userList.length}
@@ -79,9 +135,8 @@ export default function OrderTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, Date, OrderStatus, OrderId, EmployeeName, ProductName, ProductQuantity, TotalPrice } =
-                      row;
-                    const isItemSelected = selected.indexOf() !== -1;
+                    const { id, name, role, company, avatarUrl, isVerified } = row;
+                    const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
@@ -89,16 +144,43 @@ export default function OrderTable({ tableRows, tableColumn }) {
                         key={id}
                         tabIndex={-1}
                         role="checkbox"
-                        // selected={isItemSelected}
-                        // aria-checked={isItemSelected}
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
                       >
-                        <TableCell align="left">{Date}</TableCell>
-                        <TableCell align="left">{OrderStatus}</TableCell>
-                        <TableCell align="left">{OrderId}</TableCell>
-                        <TableCell align="left">{EmployeeName}</TableCell>
-                        <TableCell align="left">{ProductName}</TableCell>
-                        <TableCell align="left">{ProductQuantity}</TableCell>
-                        <TableCell align="left">{TotalPrice}</TableCell>
+                        <TableCell padding="checkbox" sx={{ padding: '5px' }}>
+                          <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
+                        </TableCell>
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          <Typography variant="subtitle2" noWrap>
+                            {name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          0
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          <Iconify
+                            icon={'eva:trash-2-outline'}
+                            sx={{ ...ICON, color: 'error.main' }}
+                            onClick={() => handleDeleteUser(id)}
+                          />
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.editlead}`}>
+                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
+                          </Box>
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
+                            <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
+                          </Box>
+                        </TableCell>
                       </TableRow>
                     );
                   })}

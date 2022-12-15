@@ -9,12 +9,12 @@ export default function Orders() {
   const { orderDetail } = useSelector((state) => state.orders);
 
   const ORDER_DETAIL_HEAD = [
-    { id: 1, label: 'Name', alignRight: false },
-    { id: 2, label: 'Role', alignRight: false },
-    { id: 3, label: 'PhoneNumber', alignRight: false },
-    { id: 4, label: 'Verified', alignRight: false },
-    { id: 5, label: 'Status', alignRight: false },
-    { id: '' },
+    { id: 'name', label: 'Name', alignRight: false },
+    { id: 'company', label: 'Mobile', alignRight: false },
+    { id: 'role', label: 'Employee Name', alignRight: false },
+    { id: 'verified', label: 'Verified', alignRight: false },
+    { id: 'status', label: 'Status', alignRight: false },
+    { id: 'Action', label: 'Action', alignRight: false },
   ];
   return (
     <Page title="Order Detail">

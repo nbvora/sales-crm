@@ -1,13 +1,10 @@
-import { sentenceCase, paramCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
   Avatar,
-  Button,
   Checkbox,
   TableRow,
   TableBody,
@@ -17,7 +14,6 @@ import {
   TableContainer,
   TablePagination,
   Box,
-  MenuItem,
 } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
@@ -27,11 +23,9 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
-import { PATH_DASHBOARD } from '../../../routes/paths';
 import Scrollbar from '../../../components/Scrollbar';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { UserListHead, UserListToolbar } from '../user/list';
 import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
@@ -40,7 +34,7 @@ LeadTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function LeadTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
+  const tableName = 'Leads';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -114,37 +108,17 @@ export default function LeadTable({ tableRows, tableColumn }) {
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
+  const ICON = {
+    mr: 2,
+    width: 20,
+    height: 20,
+  };
   return (
-    <Page title="User: List">
+    <Page title="User: Lead">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="Leads"
-          links={[
-            { name: 'Leads', href: PATH_DASHBOARD.lead.root },
-            { name: 'Lead Import', href: PATH_DASHBOARD.lead.leadImport },
-            { name: 'New Lead', href: PATH_DASHBOARD.lead.newLeads },
-
-            // { name: 'User', href: PATH_DASHBOARD.user.root },
-            // { name: 'List' },
-          ]}
-          action={
-            <Box sx={{ display: 'flex', justifyContent: 'end', position: 'relative', right: 20 }}>
-              <Button variant="contained" component={RouterLink} to={PATH_DASHBOARD.lead.leadImport}>
-                Lead Import
-              </Button>
-              <Button
-                sx={{ position: 'relative', borderRadius: 1, left: 10 }}
-                variant="contained"
-                component={RouterLink}
-                to={PATH_DASHBOARD.lead.newLeads}
-              >
-                Add New Lead
-              </Button>
-            </Box>
-          }
-        />
         <Card>
           <UserListToolbar
+            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -156,6 +130,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
               <Table>
                 <UserListHead
                   order={order}
+                  checkbox
                   orderBy={orderBy}
                   headLabel={tableColumn}
                   rowCount={userList.length}
@@ -165,7 +140,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    const { id, name, role, company, avatarUrl } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -177,45 +152,33 @@ export default function LeadTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
+                        <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                           <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
                         </TableCell>
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
                         </TableCell>
-
-                        <TableCell align="right">
-                          <Box sx={{ display: 'flex' }}>
-                            <MenuItem onClick={() => handleDeleteUser(id)} sx={{ color: 'error.main' }}>
-                              <Iconify icon={'eva:trash-2-outline'} />
-                            </MenuItem>
-
-                            <MenuItem
-                              component={RouterLink}
-                              to={`${PATH_DASHBOARD.lead.root}/${paramCase(name)}/editlead`}
-                            >
-                              <Iconify icon={'eva:edit-fill'} />
-                            </MenuItem>
-
-                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
-                              <Iconify icon={'dashicons:visibility'} />
-                            </MenuItem>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          <Iconify
+                            icon={'eva:trash-2-outline'}
+                            sx={{ ...ICON, color: 'error.main' }}
+                            onClick={() => handleDeleteUser(id)}
+                          />
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.editlead}`}>
+                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
-                          {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
+                            <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
+                          </Box>
                         </TableCell>
                       </TableRow>
                     );
@@ -272,7 +235,6 @@ function getComparator(order, orderBy) {
 
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
-
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
