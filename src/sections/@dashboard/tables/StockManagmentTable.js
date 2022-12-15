@@ -84,7 +84,7 @@ export default function StockManagementList({ tableRows, tableColumn }) {
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
   return (
-    <Page title="User: List">
+    <Page title="Stock Management">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

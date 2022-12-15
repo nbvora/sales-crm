@@ -100,7 +100,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
   };
 
   return (
-    <Page title="User: List">
+    <Page title="Customers">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

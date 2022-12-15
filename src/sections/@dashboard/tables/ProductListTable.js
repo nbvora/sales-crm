@@ -94,7 +94,7 @@ export default function ProductListTable({ tableRows, tableColumn }) {
   };
 
   return (
-    <Page title="User: List">
+    <Page title="Product">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
