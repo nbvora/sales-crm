@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Typography, OutlinedInput, MenuItem } from '@mui/material';
 import { useState } from 'react';
 import Iconify from '../../components/Iconify';
 
-export default function CommanTodo() {
+CommanTodo.propTypes = {
+  title: PropTypes.string,
+};
+
+export default function CommanTodo({ title }) {
   const [value, setValue] = useState('');
   const [todos, setTodos] = useState([]);
   const [edit, setedit] = useState('');
@@ -34,12 +39,15 @@ export default function CommanTodo() {
     setedit(todos[id]);
     setValue(todos[id]);
   };
-
+  const handleDeleteUser = (id) => {
+    const filteItem = todos.filter((todos, index) => index !== id);
+    setTodos(filteItem);
+  };
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={8}>
         <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
-          Employee Role Chain
+          {title}
         </Typography>
         <Card sx={{ p: 3, height: '400px' }}>
           <Box
@@ -65,7 +73,7 @@ export default function CommanTodo() {
               variant="contained"
               onClick={handleSubmit}
             >
-              Add
+              {!edit ? 'add' : 'edit'}
             </LoadingButton>
           </Box>
 
@@ -82,7 +90,14 @@ export default function CommanTodo() {
               <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
                 {item}
               </Typography>
-              <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} onClick={() => handleedit(index)} />
+              <Box>
+                <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} onClick={() => handleedit(index)} />
+                <Iconify
+                  icon={'eva:trash-2-outline'}
+                  sx={{ ...ICON, color: 'error.main' }}
+                  onClick={() => handleDeleteUser(index)}
+                />
+              </Box>
             </MenuItem>
           ))}
         </Card>

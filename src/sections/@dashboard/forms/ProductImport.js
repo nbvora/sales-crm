@@ -3,7 +3,7 @@ import CommanImport from './CommanImport';
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
 
-export default function StockImport() {
+export default function ProductImport() {
   const [files, setFiles] = useState([]);
 
   const handleUplodFile = () => {
