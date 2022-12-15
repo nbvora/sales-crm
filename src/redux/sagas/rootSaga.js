@@ -7,10 +7,21 @@ import { vendorsSaga } from './vendorsSaga';
 import { invoiceSaga } from './invoiceSaga';
 import { ordersSaga } from './ordersSaga';
 import { customerSaga } from './customerSaga';
+import { changePasswordSaga } from './changePasswordSaga';
 
 // eslint-disable-next-line
 export default function* rootSaga() {
-  const sagas = [loginSaga, dashboardSaga, vendorsSaga, customerSaga, employeeSaga, invoiceSaga, leadsSaga, ordersSaga];
+  const sagas = [
+    loginSaga,
+    dashboardSaga,
+    vendorsSaga,
+    customerSaga,
+    employeeSaga,
+    invoiceSaga,
+    leadsSaga,
+    ordersSaga,
+    changePasswordSaga,
+  ];
   yield all(
     sagas.map((saga) =>
       // eslint-disable-next-line

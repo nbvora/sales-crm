@@ -16,6 +16,8 @@ import invoiceReducer from './slices/invoice';
 
 import leadsReducer from './slices/leadslice';
 import ordersReducer from './slices/orderDetail';
+import passwordReducer from './slices/changepassword';
+
 // ----------------------------------------------------------------------
 
 const rootPersistConfig = {
@@ -46,6 +48,7 @@ const rootReducer = combineReducers({
   invoice: invoiceReducer,
   leads: leadsReducer,
   orders: ordersReducer,
+  password: passwordReducer,
 });
 
 export { rootPersistConfig, rootReducer };

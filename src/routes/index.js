@@ -65,6 +65,7 @@ export default function Router() {
         { path: 'customer', element: <GeneralCustomers /> },
         { path: 'leads', element: <Leads /> },
         { path: 'orders', element: <Orders /> },
+        { path: 'changepassword', element: <ChangePassword /> },
         {
           path: 'leads',
           children: [
@@ -115,7 +116,7 @@ export default function Router() {
             { path: 'productlist', element: <ProductList /> },
             { path: 'stockmanagement', element: <StockManagement /> },
             { path: 'addstock', element: <AddStock /> },
-            { path: 'account', element: <UserAccount /> },
+            // { path: 'account', element: <ChangePassword /> },
             { path: ':name/editproductcategory', element: <EditProductCategory /> },
             { path: ':name/editproduct', element: <EditProduct /> },
             { path: 'addcategory', element: <AddCategory /> },
@@ -188,7 +189,9 @@ const LeadImportForm = Loadable(lazy(() => import('../sections/@dashboard/forms/
 const ViewLeadDetailForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewLeadDetailForm')));
 const Orders = Loadable(lazy(() => import('../pages/dashboard/Orders')));
 const ViewInvoiceDeatilForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewInvoiceDeatilForm')));
-const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
+// const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
+const ChangePassword = Loadable(lazy(() => import('../sections/@dashboard/user/account/AccountChangePassword')));
+
 const EmployeeRole = Loadable(lazy(() => import('../pages/dashboard/EmployeeRole')));
 const SupplyChain = Loadable(lazy(() => import('../pages/dashboard/SupplyChain')));
 const OrderQnty = Loadable(lazy(() => import('../pages/dashboard/OrderQntyType')));
