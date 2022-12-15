@@ -90,7 +90,7 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
   const tableName = 'Order Detail';
 
   return (
-    <Page title="User: List">
+    <Page title="Order Detail">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

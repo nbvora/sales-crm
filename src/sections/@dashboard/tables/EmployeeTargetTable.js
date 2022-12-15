@@ -99,7 +99,7 @@ export default function EmployeeTargetTable({ tableRows, tableColumn }) {
   };
 
   return (
-    <Page title="User: List">
+    <Page title="Employee Target">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

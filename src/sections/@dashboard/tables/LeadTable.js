@@ -114,7 +114,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
     height: 20,
   };
   return (
-    <Page title="User: Lead">
+    <Page title="Leads">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

@@ -30,7 +30,7 @@ function ThemeMode() {
             <Grid key={mode} item xs={6}>
               <BoxStyle
                 sx={{
-                  bgcolor: mode === 'light' ? 'common.white' : 'grey.800',
+                  bgcolor: mode === 'light' ? 'common.white' : 'grey.200',
                   ...(isSelected && {
                     color: 'primary.main',
                     boxShadow: (theme) => theme.customShadows.z20,

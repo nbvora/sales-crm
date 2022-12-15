@@ -94,7 +94,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
   };
 
   return (
-    <Page title="User: List">
+    <Page title="Product Category">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar

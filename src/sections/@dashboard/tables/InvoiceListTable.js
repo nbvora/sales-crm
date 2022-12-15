@@ -99,7 +99,7 @@ export default function InvoiceListTable({ tableRows, tableColumn }) {
   };
 
   return (
-    <Page title="User: List">
+    <Page title="Invoice">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
