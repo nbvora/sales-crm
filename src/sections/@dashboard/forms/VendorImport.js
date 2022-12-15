@@ -10,9 +10,11 @@ export default function VendorImport() {
   const [files, setFiles] = useState([]);
 
   const handleUplodFile = () => {
-    if (files !== []) {
+    if (files.length !== 0) {
       console.log(files);
+      dispatch({ type: sagaActions.UPLOAD_FILE, files });
     } else {
+      console.log(files.length);
       console.log('file is emty');
     }
   };

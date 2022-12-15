@@ -9,10 +9,10 @@ import { TextField } from '@mui/material';
 RHFTextField.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
-  handlechange: PropTypes.func,
+  type: PropTypes.string,
 };
 
-export default function RHFTextField({ name, label }) {
+export default function RHFTextField({ name, label, type }) {
   const { control } = useFormContext();
 
   return (
@@ -20,7 +20,7 @@ export default function RHFTextField({ name, label }) {
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <TextField {...field} fullWidth error={!!error} helperText={error?.message} label={label} />
+        <TextField {...field} type={type} fullWidth error={!!error} helperText={error?.message} label={label} />
       )}
     />
   );

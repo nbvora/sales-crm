@@ -66,6 +66,8 @@ export default function Router() {
         { path: 'leads', element: <Leads /> },
         { path: 'orders', element: <Orders /> },
         { path: 'profile', element: <ProfileForm /> },
+        { path: 'changepassword', element: <ChangePassword /> },
+
         {
           path: 'leads',
           children: [
@@ -198,6 +200,7 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 
 // form section
 const ProfileForm = Loadable(lazy(() => import('../sections/@dashboard/forms/ProfileForm')));
+const ChangePassword = Loadable(lazy(() => import('../sections/@dashboard/forms/ChangePasswordForm')));
 const AddNewLeadForm = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const EditLeads = Loadable(lazy(() => import('../sections/@dashboard/forms/LeadForm')));
 const StockImport = Loadable(lazy(() => import('../sections/@dashboard/forms/StockImport')));

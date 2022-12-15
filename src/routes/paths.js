@@ -41,6 +41,7 @@ export const PATH_DASHBOARD = {
     banking: path(ROOTS_DASHBOARD, '/leads'),
     booking: path(ROOTS_DASHBOARD, '/orders'),
     profile: path(ROOTS_DASHBOARD, '/profile'),
+    changepassword: path(ROOTS_DASHBOARD, '/changepassword'),
   },
   mail: {
     root: path(ROOTS_DASHBOARD, '/mail'),
