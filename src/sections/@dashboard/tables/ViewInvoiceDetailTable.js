@@ -1,7 +1,5 @@
-import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
@@ -21,7 +19,6 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
@@ -33,7 +30,6 @@ ViewInvoiceDeatilTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -129,7 +125,7 @@ export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    const { id, name, role, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -141,25 +137,26 @@ export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
+                        <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                           <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
                         </TableCell>
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          0
                         </TableCell>
                       </TableRow>
                     );

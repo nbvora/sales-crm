@@ -1,13 +1,10 @@
-import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   Table,
   Avatar,
-  Checkbox,
   TableRow,
   TableBody,
   TableCell,
@@ -23,10 +20,8 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { UserListHead, UserListToolbar } from '../user/list';
 import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
@@ -35,7 +30,6 @@ OrderDeatilTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function OrderDeatilTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -63,20 +57,6 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
     }
 
     setSelected([]);
-  };
-  const handleClick = (name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
-    setSelected(newSelected);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -107,12 +87,14 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
     height: 20,
   };
 
+  const tableName = 'Order Detail';
+
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs heading="Order Detail" links={[{ name: 'Order Detail', href: PATH_DASHBOARD.order.root }]} />
         <Card>
           <UserListToolbar
+            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -133,7 +115,7 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    const { id, name, role, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -145,28 +127,25 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
-                        </TableCell>
-                        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
-                        <TableCell align="left">{role}</TableCell>
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {company}
                         </TableCell>
-
-                        <TableCell align="right">
+                        <TableCell align="left" sx={{ padding: '5px' }}>
+                          {role}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          {isVerified ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="center" sx={{ padding: '5px' }}>
+                          0
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.order.viewInvoiceDetail}`}>
                             <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
                           </MenuItem>
