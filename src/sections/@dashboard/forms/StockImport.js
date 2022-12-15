@@ -10,7 +10,12 @@ export default function StockImport() {
     <>
       <Box>
         <h1>Import File</h1>
-        <FileUpload sx={{ width: 500, position: 'relative', left: 300, top: 60 }} value={files} onChange={setFiles} />
+        <FileUpload
+          sx={{ width: 500, position: 'relative', left: 300, top: 60 }}
+          value={files}
+          onChange={setFiles}
+          accept=".xlsx"
+        />
         <Button sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }} variant="contained">
           Save
         </Button>

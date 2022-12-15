@@ -6,22 +6,25 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Box, Grid, Card, Stack, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { LoadingButton } from '@mui/lab';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
-import useAuth from '../../../../hooks/useAuth';
+// import useAuth from '../../../../hooks/useAuth';
+import { useSelector } from '../../../redux/store';
 // utils
-import { fData } from '../../../../utils/formatNumber';
+import { fData } from '../../../utils/formatNumber';
 // _mock
-import { countries } from '../../../../_mock';
+import { countries } from '../../../_mock';
 // components
-import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from '../../../../components/hook-form';
+import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function AccountGeneral() {
+export default function ProfileForm() {
   const { enqueueSnackbar } = useSnackbar();
-
-  const { user } = useAuth();
+  const { user } = useSelector((state) => state.login);
 
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),
@@ -141,10 +144,19 @@ export default function AccountGeneral() {
 
             <Stack spacing={3} alignItems="flex-end" sx={{ mt: 3 }}>
               <RHFTextField name="about" multiline rows={4} label="About" />
-
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                Save Changes
-              </LoadingButton>
+              <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+                <LoadingButton
+                  type="submit"
+                  variant="contained"
+                  component={RouterLink}
+                  to={`${PATH_DASHBOARD.general.app}`}
+                >
+                  cancle
+                </LoadingButton>
+                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                  Save Changes
+                </LoadingButton>
+              </Stack>
             </Stack>
           </Card>
         </Grid>

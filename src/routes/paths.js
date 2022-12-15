@@ -40,6 +40,7 @@ export const PATH_DASHBOARD = {
     analytics: path(ROOTS_DASHBOARD, '/customer'),
     banking: path(ROOTS_DASHBOARD, '/leads'),
     booking: path(ROOTS_DASHBOARD, '/orders'),
+    profile: path(ROOTS_DASHBOARD, '/profile'),
   },
   mail: {
     root: path(ROOTS_DASHBOARD, '/mail'),
