@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import FileUpload from 'react-material-file-upload';
 import { Box } from '@mui/system';
 import { Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 // redux
 
@@ -12,6 +13,8 @@ CommanImport.propTypes = {
 };
 
 export default function CommanImport({ handleUplodFile, files, setFiles }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <Box>
@@ -25,6 +28,13 @@ export default function CommanImport({ handleUplodFile, files, setFiles }) {
           accept=".xlsx"
         />
 
+        <Button
+          onClick={() => navigate(-1)}
+          sx={{ position: 'relative', mx: 2, borderRadius: 1, left: 100, top: 100 }}
+          variant="contained"
+        >
+          Cancle
+        </Button>
         <Button
           onClick={handleUplodFile}
           sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }}

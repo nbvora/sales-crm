@@ -36,7 +36,7 @@ export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   general: {
     app: path(ROOTS_DASHBOARD, '/app'),
-    ecommerce: path(ROOTS_DASHBOARD, '/vendors'),
+    ecommerce: path(ROOTS_DASHBOARD, '/vendor'),
     analytics: path(ROOTS_DASHBOARD, '/customer'),
     banking: path(ROOTS_DASHBOARD, '/leads'),
     booking: path(ROOTS_DASHBOARD, '/orders'),
@@ -99,7 +99,7 @@ export const PATH_DASHBOARD = {
   },
   blog: {
     root: path(ROOTS_DASHBOARD, '/invoice'),
-    posts: path(ROOTS_DASHBOARD, '/invoice/posts'),
+    posts: path(ROOTS_DASHBOARD, '/invoice'),
     post: path(ROOTS_DASHBOARD, '/invoice/post/:title'),
     postById: path(ROOTS_DASHBOARD, '/invoice/post/apply-these-7-secret-techniques-to-improve-event'),
     newPost: path(ROOTS_DASHBOARD, '/invoice/new-post'),

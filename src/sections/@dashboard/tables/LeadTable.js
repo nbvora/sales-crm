@@ -1,3 +1,4 @@
+import { paramCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -173,7 +174,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
                             sx={{ ...ICON, color: 'error.main' }}
                             onClick={() => handleDeleteUser(id)}
                           />
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.editlead}`}>
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.root}/${paramCase(name)}/editlead`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
                           <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>

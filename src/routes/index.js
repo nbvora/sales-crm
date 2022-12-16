@@ -61,11 +61,12 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'app', element: <GeneralDashboard /> },
-        { path: 'vendors', element: <GeneralVendors /> },
+        { path: 'vendor', element: <GeneralVendors /> },
         { path: 'customer', element: <GeneralCustomers /> },
         { path: 'leads', element: <Leads /> },
         { path: 'orders', element: <Orders /> },
         { path: 'profile', element: <ProfileForm /> },
+        { path: 'invoice', element: <Invoice /> },
         { path: 'changepassword', element: <ChangePassword /> },
 
         {
@@ -137,7 +138,7 @@ export default function Router() {
         {
           path: 'invoice',
           children: [
-            { element: <Navigate to="/dashboard/invoice/posts" replace />, index: true },
+            // { element: <Navigate to="/dashboard/invoice/posts" replace />, index: true },
             { path: 'posts', element: <Invoice /> },
             { path: 'addinvoice', element: <AddInvoice /> },
             { path: ':name/editinvoice', element: <EditInvoice /> },

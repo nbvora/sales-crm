@@ -1,11 +1,14 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 // @mui
 import { Stack, Card, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { PATH_DASHBOARD } from '../../../routes/paths';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
@@ -16,6 +19,8 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 export default function AccountChangePassword() {
   const { enqueueSnackbar } = useSnackbar();
+
+  const navigate = useNavigate();
 
   const ChangePassWordSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required'),
@@ -61,9 +66,19 @@ export default function AccountChangePassword() {
           <RHFTextField name="oldPassword" type="password" label="Old Password" />
           <RHFTextField name="newPassword" type="password" label="New Password" />
           <RHFTextField name="confirmNewPassword" type="password" label="Confirm New Password" />
-          <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-            Save Changes
-          </LoadingButton>
+          <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+            <LoadingButton
+              type="submit"
+              variant="contained"
+              component={RouterLink}
+              to={`${PATH_DASHBOARD.general.app}`}
+            >
+              Cancle
+            </LoadingButton>
+            <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+              Save Changes
+            </LoadingButton>
+          </Stack>
         </Stack>
       </FormProvider>
     </Card>
