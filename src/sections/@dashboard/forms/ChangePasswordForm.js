@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,8 +19,6 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 export default function AccountChangePassword() {
   const { enqueueSnackbar } = useSnackbar();
-
-  const navigate = useNavigate();
 
   const ChangePassWordSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required'),
