@@ -7,13 +7,13 @@ import Iconify from '../../components/Iconify';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
-  { id: 'productName', label: 'Product Name', alignRight: false },
-  { id: 'employeeCode', label: 'Employee Code', alignRight: false },
-  { id: 'designation', label: 'Designation', alignRight: false },
-  { id: 'location', label: 'Location', alignRight: false },
-  { id: 'state', label: 'State', alignRight: false },
-  { id: 'mobile', label: 'Mobile', alignRight: false },
-  { id: 'Action', label: 'Action', alignRight: false },
+  { id: 'name', label: 'Product Name', alignRight: false },
+  { id: 'company', label: 'Employee Code', alignRight: false },
+  { id: 'role', label: 'Designation', alignRight: false },
+  { id: 'status', label: 'Location', alignRight: false },
+  { id: 'id', label: 'State', alignRight: false },
+  { id: 'country', label: 'Mobile', alignRight: false },
+  { id: 'email', label: 'Action', alignRight: false },
 ];
 
 export default function EmployeeList() {

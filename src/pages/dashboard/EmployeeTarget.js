@@ -7,12 +7,12 @@ import Iconify from '../../components/Iconify';
 import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
-  { id: 'assignBy', label: 'Assign By', alignRight: false },
-  { id: 'assignTo', label: 'Assign To', alignRight: false },
-  { id: 'designation', label: 'Designation', alignRight: false },
-  { id: 'month', label: 'Month', alignRight: false },
-  { id: 'targetAmmount', label: 'Target Ammount', alignRight: false },
-  { id: 'Action', label: 'Action', alignRight: false },
+  { id: 'name', label: 'Assign By', alignRight: false },
+  { id: 'company', label: 'Assign To', alignRight: false },
+  { id: 'role', label: 'Designation', alignRight: false },
+  { id: 'status', label: 'Month', alignRight: false },
+  { id: 'id', label: 'Target Ammount', alignRight: false },
+  { id: 'country', label: 'Action', alignRight: false },
 ];
 export default function EmployeeTarget() {
   const { employee } = useSelector((state) => state.employee);
