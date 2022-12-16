@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: false,
   isInitialized: false,
   user: null,
+  invalidCredential: null,
 };
 
 const login = createSlice({
@@ -30,6 +31,14 @@ const login = createSlice({
         user,
       };
     },
+    isError(state, action) {
+      const invalidCredential = action.payload;
+
+      return {
+        ...state,
+        invalidCredential,
+      };
+    },
     isLogout(state) {
       return {
         ...state,
@@ -42,4 +51,4 @@ const login = createSlice({
 });
 
 export default login.reducer;
-export const { isLogin, isLogout, isLoding, isInitialized } = login.actions;
+export const { isLogin, isLogout, isLoding, isInitialized, isError } = login.actions;

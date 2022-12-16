@@ -9,10 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
-import { dispatch } from 'src/redux/store';
+import { dispatch, useSelector } from 'src/redux/store';
 import { PATH_AUTH } from '../../../routes/paths';
-// hooks
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
 import sagaActions from '../../../redux/actions';
 // components
@@ -22,7 +20,7 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const isMountedRef = useIsMountedRef();
+  const { invalidCredential } = useSelector((state) => state.login);
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -42,27 +40,17 @@ export default function LoginForm() {
   });
 
   const {
-    reset,
-    setError,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = methods;
   const onSubmit = (data) => {
-    try {
-      dispatch({ type: sagaActions.SIGNUP_SAGA, data });
-    } catch (error) {
-      console.error(error);
-      reset();
-      if (isMountedRef.current) {
-        setError('afterSubmit', error);
-      }
-    }
+    dispatch({ type: sagaActions.SIGNUP_SAGA, data });
   };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-        {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+        {!!invalidCredential && <Alert severity="error">{invalidCredential.message}</Alert>}
 
         <RHFTextField name="email" label="Email address" />
 

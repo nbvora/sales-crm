@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
-import { isLogin, isLogout, isInitialized } from '../../slices/login';
+import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
 
 export function* logOut() {
   yield put(isLogout());
@@ -25,7 +25,7 @@ export function* signupSaga(state) {
       yield put(isLogin(user));
     }
   } catch (error) {
-    console.log(error);
+    yield put(isError(error));
   }
 }
 
