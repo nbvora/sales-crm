@@ -4,7 +4,7 @@ import CommanTodo from './CommanTodo';
 export default function SupplyChain() {
   return (
     <Page title="Supply Chain">
-      <CommanTodo title={'Employee Supply Chain'} />
+      <CommanTodo title={'Supply Chain User '} />
     </Page>
   );
 }

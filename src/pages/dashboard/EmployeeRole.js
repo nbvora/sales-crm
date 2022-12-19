@@ -3,8 +3,10 @@ import CommanTodo from './CommanTodo';
 
 export default function EmployeeRole() {
   return (
-    <Page title="Employee Role">
-      <CommanTodo title={'Employee Role Chain'} />
-    </Page>
+    <>
+      <Page title="User: settings">
+        <CommanTodo title={'Employee Role Chain'} />
+      </Page>
+    </>
   );
 }
