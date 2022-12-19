@@ -25,6 +25,7 @@ UserListHead.propTypes = {
   onRequestSort: PropTypes.func,
   onSelectAllClick: PropTypes.func,
   checkbox: PropTypes.bool,
+  hideSortIcon: PropTypes.bool,
 };
 
 export default function UserListHead({
@@ -36,6 +37,7 @@ export default function UserListHead({
   onRequestSort,
   onSelectAllClick,
   checkbox,
+  hideSortIcon,
 }) {
   return (
     <TableHead>
@@ -55,17 +57,21 @@ export default function UserListHead({
             align={headCell.alignRight ? 'right' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
-              hideSortIcon
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={() => onRequestSort(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
-              ) : null}
-            </TableSortLabel>
+            {hideSortIcon ? (
+              <> {headCell.label} </>
+            ) : (
+              <TableSortLabel
+                hideSortIcon={false}
+                active={false}
+                direction={orderBy === headCell.id ? order : 'asc'}
+                onClick={() => onRequestSort(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
+                ) : null}
+              </TableSortLabel>
+            )}
           </TableCell>
         ))}
       </TableRow>
