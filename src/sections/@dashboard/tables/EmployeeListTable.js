@@ -170,6 +170,9 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.eCommerce.viewemployeedetail}`}>
+                            <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
+                          </Box>
                         </TableCell>
                       </TableRow>
                     );
