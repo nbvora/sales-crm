@@ -78,6 +78,7 @@ export const PATH_DASHBOARD = {
     // newProduct: path(ROOTS_DASHBOARD, '/e-commerce/product/new'),
     editById: path(ROOTS_DASHBOARD, '/employee/employeetarget'),
     checkout: path(ROOTS_DASHBOARD, '/employee/employeelist'),
+    viewemployeedetail: path(ROOTS_DASHBOARD, '/employee/viewemployeedetail'),
     addemployeetarget: path(ROOTS_DASHBOARD, '/employee/addemployeetarget'),
     editemployeetarget: path(ROOTS_DASHBOARD, '/employee/reece-chung/editemployeetarget'),
     editemployee: path(ROOTS_DASHBOARD, '/employee/reece-chung/editemployee'),

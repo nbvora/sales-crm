@@ -109,6 +109,7 @@ export default function Router() {
             { path: 'addemployee', element: <AddEmployee /> },
             { path: ':name/editemployee', element: <EditEmployee /> },
             { path: 'employeeimport', element: <EmployeeImport /> },
+            { path: 'viewemployeedetail', element: <ViewEmployeeActivity /> },
           ],
         },
         {
@@ -226,3 +227,4 @@ const EditInvoice = Loadable(lazy(() => import('../sections/@dashboard/forms/Inv
 const CustomerImport = Loadable(lazy(() => import('../sections/@dashboard/forms/CustomerImport')));
 const VendorImport = Loadable(lazy(() => import('../sections/@dashboard/forms/VendorImport')));
 const EmployeeImport = Loadable(lazy(() => import('../sections/@dashboard/forms/EmployeeImport')));
+const ViewEmployeeActivity = Loadable(lazy(() => import('../sections/@dashboard/forms/ViewEmployeeActivity')));
