@@ -11,6 +11,8 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
+import { dispatch } from '../../../redux/store';
+import { getHeaderDetail } from '../../../redux/slices/breadcrumbs';
 // _mock
 import { countries, _userList } from '../../../_mock';
 // components
@@ -20,6 +22,14 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 
 export default function EditProduct() {
   const { id = '' } = useParams();
+  const HedareDetail = [
+    { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },
+    { title: 'Add', path: null },
+  ];
+
+  useEffect(() => {
+    dispatch(getHeaderDetail(HedareDetail));
+  });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;

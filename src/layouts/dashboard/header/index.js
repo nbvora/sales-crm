@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, Typography, Breadcrumbs, Link } from '@mui/material';
+
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
 import useResponsive from '../../../hooks/useResponsive';
@@ -11,12 +12,11 @@ import cssStyles from '../../../utils/cssStyles';
 import { HEADER, NAVBAR } from '../../../config';
 // components
 import Logo from '../../../components/Logo';
+import { useSelector } from '../../../redux/store';
 import Iconify from '../../../components/Iconify';
 import { IconButtonAnimate } from '../../../components/animate';
 //
 import AccountPopover from './AccountPopover';
-import LanguagePopover from './LanguagePopover';
-import ModeSwitch from '../../../components/settings/ModeSwitch';
 
 // ----------------------------------------------------------------------
 
@@ -56,8 +56,9 @@ DashboardHeader.propTypes = {
 };
 
 export default function DashboardHeader({ onOpenSidebar, isCollapse = false, verticalLayout = false }) {
+  const { hedare } = useSelector((state) => state.breadcrumbs);
   const isOffset = useOffSetTop(HEADER.DASHBOARD_DESKTOP_HEIGHT) && !verticalLayout;
-
+  const tableName = 'Dashboard';
   const isDesktop = useResponsive('up', 'lg');
 
   return (
@@ -68,6 +69,18 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
           px: { lg: 5 },
         }}
       >
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography variant="h4" sx={{ margin: 0, color: 'black' }} gutterBottom>
+            {tableName}
+          </Typography>
+          <Breadcrumbs aria-label="breadcrumb">
+            {hedare.map((item, index) => (
+              <Link key={index} underline="hover" color="inherit" href={item.path}>
+                {item.title}
+              </Link>
+            ))}
+          </Breadcrumbs>
+        </Box>
         {isDesktop && verticalLayout && <Logo sx={{ mr: 2.5 }} />}
 
         {!isDesktop && (
@@ -79,8 +92,6 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <ModeSwitch />
-          <LanguagePopover />
           <AccountPopover />
         </Stack>
       </Toolbar>

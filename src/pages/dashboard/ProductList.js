@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import ProductListTable from '../../sections/@dashboard/tables/ProductListTable';
 import Page from '../../components/Page';
+import { dispatch } from '../../redux/store';
 import { _userList } from '../../_mock';
+import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Product Name', alignRight: false },
@@ -12,6 +15,11 @@ const TABLE_HEAD = [
 ];
 
 export default function ProductList() {
+  const HedareDetail = [{ title: 'ProductList', path: null }];
+
+  useEffect(() => {
+    dispatch(getHeaderDetail(HedareDetail));
+  });
   return (
     <Page title="User: Cards">
       <ProductListTable tableColumn={TABLE_HEAD} tableRows={_userList} />

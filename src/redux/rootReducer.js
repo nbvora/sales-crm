@@ -18,6 +18,7 @@ import leadsReducer from './slices/leadslice';
 import ordersReducer from './slices/orderDetail';
 import changepasswordReducer from './slices/changepassword';
 import uploadFileReducer from './slices/uploadFile';
+import breadcrumbsReducer from './slices/breadcrumbs';
 // ----------------------------------------------------------------------
 
 const rootPersistConfig = {
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
   changepassword: changepasswordReducer,
   uploadFile: uploadFileReducer,
+  breadcrumbs: breadcrumbsReducer,
 });
 
 export { rootPersistConfig, rootReducer };
