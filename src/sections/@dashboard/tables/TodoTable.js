@@ -10,6 +10,8 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Box,
+  MenuItem,
 } from '@mui/material';
 // hooks
 import useSettings from '../../../hooks/useSettings';
@@ -126,12 +128,18 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
                       </Typography>
                     </TableCell>
                     <TableCell align="left" sx={{ padding: '5px' }}>
-                      <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} onClick={() => handleedit(index)} />
-                      <Iconify
-                        icon={'eva:trash-2-outline'}
-                        sx={{ ...ICON, color: 'error.main' }}
-                        onClick={() => handleDeleteUser(index)}
-                      />
+                      <Box sx={{ display: 'flex' }}>
+                        <MenuItem>
+                          <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} onClick={() => handleedit(index)} />
+                        </MenuItem>
+                        <MenuItem>
+                          <Iconify
+                            icon={'eva:trash-2-outline'}
+                            sx={{ ...ICON }}
+                            onClick={() => handleDeleteUser(index)}
+                          />
+                        </MenuItem>
+                      </Box>
                     </TableCell>
                   </TableRow>
                 ))}
