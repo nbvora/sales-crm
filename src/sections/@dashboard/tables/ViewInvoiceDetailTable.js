@@ -13,7 +13,6 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
@@ -21,7 +20,6 @@ import useSettings from '../../../hooks/useSettings';
 import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
-import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
@@ -98,11 +96,6 @@ export default function ViewInvoiceDeatilTable({ tableRows, tableColumn }) {
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <HeaderBreadcrumbs
-          heading="Invoice Detail"
-          links={[{ name: '', href: PATH_DASHBOARD.order.viewInvoiceDetail }]}
-        />
-
         <Card>
           <UserListToolbar
             numSelected={selected.length}

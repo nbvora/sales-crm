@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@mui/system';
 import { _userList } from '../../../_mock';
 import ViewEmployeeActivityTable from '../tables/ViewEmployeeActivityTable';
 
@@ -14,12 +13,10 @@ const VIEW_EMP_DETAIL_HEAD = [
 export default function ViewInvoiceDeatilForm() {
   return (
     <>
-      <Box sx={{ position: 'relative', top: 10 }}>
-        <ViewEmployeeActivityTable
-          tableColumn={VIEW_EMP_DETAIL_HEAD}
-          tableRows={_userList.filter((user) => _userList.includes(user.id))}
-        />
-      </Box>
+      <ViewEmployeeActivityTable
+        tableColumn={VIEW_EMP_DETAIL_HEAD}
+        tableRows={_userList.filter((user) => _userList.includes(user.id))}
+      />
     </>
   );
 }

@@ -1,8 +1,4 @@
-import { Button, Stack } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
 import VendorsList from '../../sections/@dashboard/tables/VendorsListTable';
-import { PATH_DASHBOARD } from '../../routes/paths';
-import Iconify from '../../components/Iconify';
 import Page from '../../components/Page';
 import { useSelector } from '../../redux/store';
 
@@ -19,24 +15,6 @@ export default function GeneralVendors() {
 
   return (
     <Page title="General: Vendors">
-      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} marginRight={6} marginBottom={4}>
-        <Button
-          variant="outlined"
-          component={RouterLink}
-          to={`/dashboard${PATH_DASHBOARD.vendor.vendorimport}`}
-          startIcon={<Iconify icon={'eva:plus-fill'} />}
-        >
-          Vendor Import
-        </Button>
-        <Button
-          variant="outlined"
-          component={RouterLink}
-          to={`/dashboard${PATH_DASHBOARD.vendor.addvendor}`}
-          startIcon={<Iconify icon={'eva:plus-fill'} />}
-        >
-          Add New Vendor
-        </Button>
-      </Stack>
       <VendorsList tableColumn={TABLE_HEAD} tableRows={vendors} />
     </Page>
   );

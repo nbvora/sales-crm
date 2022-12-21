@@ -35,7 +35,8 @@ LeadTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function LeadTable({ tableRows, tableColumn }) {
-  const tableName = 'Leads';
+  const importBuutonName = 'Lead Import';
+  const addButtonName = 'Add New Lead';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -119,7 +120,12 @@ export default function LeadTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            importButtonName={importBuutonName}
+            importButtonLink="import"
+            withImportButton={importBuutonName}
+            addButtonName={addButtonName}
+            addButtonLink="add"
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

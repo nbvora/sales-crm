@@ -31,7 +31,6 @@ OrderTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function OrderTable({ tableRows, tableColumn }) {
-  const tableName = 'Order';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -113,7 +112,6 @@ export default function OrderTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

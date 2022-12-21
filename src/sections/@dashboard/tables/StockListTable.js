@@ -31,7 +31,6 @@ StockList.propTypes = {
 };
 export default function StockList({ tableRows, tableColumn }) {
   const theme = useTheme();
-  const tableName = 'Stock List';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -88,7 +87,6 @@ export default function StockList({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

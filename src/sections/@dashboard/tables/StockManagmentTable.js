@@ -31,7 +31,9 @@ StockManagementList.propTypes = {
 };
 export default function StockManagementList({ tableRows, tableColumn }) {
   const theme = useTheme();
-  const tableName = 'Stock Management';
+  const importButtonName = 'Import Product Stock';
+  const addButtonName = 'Add New Stock Detail';
+
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -88,7 +90,12 @@ export default function StockManagementList({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            importButtonLink="import"
+            importButtonName={importButtonName}
+            withImportButton={importButtonName}
+            addButtonLink="add"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

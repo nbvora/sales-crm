@@ -31,7 +31,6 @@ DistributorList.propTypes = {
 };
 export default function DistributorList({ tableRows, tableColumn }) {
   const theme = useTheme();
-  const tableName = 'DistributorList';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -88,7 +87,6 @@ export default function DistributorList({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

@@ -35,7 +35,8 @@ InvoiceListTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function InvoiceListTable({ tableRows, tableColumn }) {
-  const tableName = 'Invoice';
+  const addButtonName = 'Add New Invoice';
+
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -103,7 +104,9 @@ export default function InvoiceListTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            addButtonLink="add"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

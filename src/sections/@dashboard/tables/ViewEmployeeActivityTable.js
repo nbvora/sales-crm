@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Table, Container, Typography, TablePagination, Stack } from '@mui/material';
+import { Card, Table, Container, Typography, TablePagination } from '@mui/material';
 import { dispatch } from '../../../redux/store';
 
 import sagaActions from '../../../redux/actions';
@@ -9,7 +9,6 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import { PATH_DASHBOARD } from '../../../routes/paths';
 import { UserListHead, UserListToolbar } from '../user/list';
 
 // ----------------------------------------------------------------------
@@ -18,7 +17,6 @@ ViewEmployeeActivityTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ViewEmployeeActivityTable({ tableRows, tableColumn }) {
-  const tableName = 'Activity';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -68,10 +66,8 @@ export default function ViewEmployeeActivityTable({ tableRows, tableColumn }) {
   return (
     <Page title="Employee List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <Stack links={[{ name: '', href: PATH_DASHBOARD.eCommerce.viewemployeedetail }]} />
         <Card>
           <UserListToolbar
-            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

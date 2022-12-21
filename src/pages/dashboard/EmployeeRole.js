@@ -5,7 +5,7 @@ export default function EmployeeRole() {
   return (
     <>
       <Page title="User: settings">
-        <CommanTodo title={'Employee Role Chain'} />
+        <CommanTodo />
       </Page>
     </>
   );

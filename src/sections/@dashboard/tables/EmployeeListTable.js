@@ -35,7 +35,9 @@ EmployeeListTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function EmployeeListTable({ tableRows, tableColumn }) {
-  const tableName = 'Employee List';
+  const importButtonName = 'Employee Import';
+  const addButtonName = 'Add New Employee';
+
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -103,7 +105,12 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            importButtonLink="import"
+            importButtonName={importButtonName}
+            withImportButton={importButtonName}
+            addButtonLink="add"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
