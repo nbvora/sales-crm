@@ -10,7 +10,6 @@ const TABLE_HEAD = [
   { id: 'mobile', label: 'Mobile', alignRight: false },
   { id: 'verified', label: 'Verified', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
-  { id: 'Action', label: 'Action', alignRight: false },
 ];
 const TABLE_HEAD_D = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -18,7 +17,6 @@ const TABLE_HEAD_D = [
   { id: 'mobile', label: 'Mobile', alignRight: false },
   { id: 'verified', label: 'Verified', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
-  { id: 'Action', label: 'Action', alignRight: false },
 ];
 
 export default function ViewLeadDetailForm() {

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -13,9 +12,7 @@ import {
   Typography,
   TableContainer,
   TablePagination,
-  Box,
 } from '@mui/material';
-import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 import useSettings from '../../../hooks/useSettings';
 // _mock_
@@ -24,7 +21,6 @@ import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import { UserListHead, UserListToolbar } from '../user/list';
-import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
 DiscussionTable.propTypes = {
   tableRows: PropTypes.any,
@@ -84,12 +80,6 @@ export default function DiscussionTable({ tableRows, tableColumn }) {
     setPage(0);
   };
 
-  const handleDeleteUser = (userId) => {
-    const deleteUser = userList.filter((user) => user.id !== userId);
-    setSelected([]);
-    setUserList(deleteUser);
-  };
-
   const handleDeleteMultiUser = (selected) => {
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
@@ -102,11 +92,6 @@ export default function DiscussionTable({ tableRows, tableColumn }) {
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
-  const ICON = {
-    mr: 2,
-    width: 20,
-    height: 20,
-  };
   return (
     <Page title="User: List">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -165,19 +150,6 @@ export default function DiscussionTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="center" sx={{ padding: '5px' }}>
                           0
-                        </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          <Iconify
-                            icon={'eva:trash-2-outline'}
-                            sx={{ ...ICON, color: 'error.main' }}
-                            onClick={() => handleDeleteUser(id)}
-                          />
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.editlead}`}>
-                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
-                          </Box>
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
-                            <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
-                          </Box>
                         </TableCell>
                       </TableRow>
                     );

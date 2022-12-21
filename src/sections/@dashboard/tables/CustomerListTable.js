@@ -15,6 +15,7 @@ import {
   TableContainer,
   TablePagination,
   Box,
+  MenuItem,
 } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
@@ -157,13 +158,20 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                           {role}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          <Iconify
-                            icon={'eva:trash-2-outline'}
-                            sx={{ ...ICON, color: 'error.main' }}
-                            onClick={() => handleDeleteUser(id)}
-                          />
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.analytics.root}/${paramCase(id)}/edit`}>
-                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
+                          <Box sx={{ display: 'flex' }}>
+                            <MenuItem>
+                              <Iconify
+                                icon={'eva:trash-2-outline'}
+                                sx={{ ...ICON }}
+                                onClick={() => handleDeleteUser(id)}
+                              />
+                            </MenuItem>
+                            <MenuItem
+                              component={RouterLink}
+                              to={`${PATH_DASHBOARD.analytics.root}/${paramCase(id)}/edit`}
+                            >
+                              <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
+                            </MenuItem>
                           </Box>
                         </TableCell>
                       </TableRow>
