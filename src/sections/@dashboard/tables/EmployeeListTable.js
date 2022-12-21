@@ -164,10 +164,7 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                             sx={{ ...ICON, color: 'error.main' }}
                             onClick={() => handleDeleteUser(id)}
                           />
-                          <Box
-                            component={RouterLink}
-                            to={`${PATH_DASHBOARD.eCommerce.root}/${paramCase(name)}/editemployee`}
-                          >
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.eCommerce.checkout}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
                           <Box component={RouterLink} to={`${PATH_DASHBOARD.eCommerce.viewemployeedetail}`}>

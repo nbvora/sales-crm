@@ -18,7 +18,7 @@ export default function ProductCategory() {
         sx={{ marginLeft: '78%', width: '181px' }}
         variant="outlined"
         component={RouterLink}
-        to={`${PATH_DASHBOARD.user.root}/addcategory`}
+        to={`${PATH_DASHBOARD.user.profile}/add`}
         startIcon={<Iconify icon={'eva:plus-fill'} />}
       >
         Add New Category

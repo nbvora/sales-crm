@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { paramCase } from 'change-case';
 import { useEffect, useMemo } from 'react';
@@ -13,27 +12,18 @@ import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
-// utils
-// import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 import { _userList } from '../../../_mock';
 // components
-// import Label from '../../../components/Label';
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-// UserNewForm.propTypes = {
-//   isEdit: PropTypes.bool,
-//   currentUser: PropTypes.object,
-// };
-
 export default function UserNewForm() {
-  const { name = '' } = useParams();
-
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const { id = '' } = useParams();
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -73,8 +63,6 @@ export default function UserNewForm() {
     formState: { isSubmitting },
   } = methods;
 
-  // const values = watch();
-
   useEffect(() => {
     if (isEdit && currentUser) {
       reset(defaultValues);
@@ -100,22 +88,6 @@ export default function UserNewForm() {
       console.error(error);
     }
   };
-
-  // const handleDrop = useCallback(
-  //   (acceptedFiles) => {
-  //     const file = acceptedFiles[0];
-
-  //     if (file) {
-  //       setValue(
-  //         'avatarUrl',
-  //         Object.assign(file, {
-  //           preview: URL.createObjectURL(file),
-  //         })
-  //       );
-  //     }
-  //   },
-  //   [setValue]
-  // );
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

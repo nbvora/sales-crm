@@ -151,10 +151,7 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                           0
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          <MenuItem
-                            component={RouterLink}
-                            to={`${PATH_DASHBOARD.user.root}/${paramCase(name)}/editproduct`}
-                          >
+                          <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.cards}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}

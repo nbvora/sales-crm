@@ -139,10 +139,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          <MenuItem
-                            component={RouterLink}
-                            to={`${PATH_DASHBOARD.user.root}/${paramCase(name)}/editproductcategory`}
-                          >
+                          <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}

@@ -23,7 +23,7 @@ export default function ProductList() {
         <Button
           variant="outlined"
           component={RouterLink}
-          to={`${PATH_DASHBOARD.user.root}/productimport`}
+          to={`${PATH_DASHBOARD.user.productimport}`}
           startIcon={<Iconify icon={'eva:plus-fill'} />}
         >
           Product import
@@ -31,7 +31,7 @@ export default function ProductList() {
         <Button
           variant="outlined"
           component={RouterLink}
-          to={`${PATH_DASHBOARD.user.root}/addnewproduct`}
+          to={`${PATH_DASHBOARD.user.addnewproduct}`}
           startIcon={<Iconify icon={'eva:plus-fill'} />}
         >
           Add New Product

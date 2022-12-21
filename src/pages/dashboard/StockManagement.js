@@ -28,7 +28,7 @@ export default function StockManagement() {
         <Button
           variant="outlined"
           component={RouterLink}
-          to={`${PATH_DASHBOARD.user.root}/stockimport`}
+          to={`${PATH_DASHBOARD.user.stockimport}`}
           startIcon={<Iconify icon={'eva:plus-fill'} />}
         >
           import Product Stock

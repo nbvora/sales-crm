@@ -110,7 +110,7 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
                 onSelectAllClick={handleSelectAllClick}
               />
               <TableBody>
-                {userList.map((row, index) => (
+                {filteredUsers.map((row, index) => (
                   <TableRow
                     hover
                     key={index}

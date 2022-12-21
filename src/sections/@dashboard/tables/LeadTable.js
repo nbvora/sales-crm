@@ -174,7 +174,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
                             sx={{ ...ICON, color: 'error.main' }}
                             onClick={() => handleDeleteUser(id)}
                           />
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.root}/${paramCase(name)}/editlead`}>
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.root}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
                           <Box component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>

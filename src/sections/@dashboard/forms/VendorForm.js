@@ -23,9 +23,9 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 // ----------------------------------------------------------------------
 
 export default function UserNewForm() {
-  const { name = '' } = useParams();
+  const { id = '' } = useParams();
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -46,6 +46,8 @@ export default function UserNewForm() {
       company: currentUser?.company || '',
       role: currentUser?.role || '',
       avatarUrl: currentUser?.avatarUrl || '',
+      file: '',
+      date: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -121,7 +123,14 @@ export default function UserNewForm() {
               <RHFTextField name="name" label="Last Name" />
               <RHFTextField name="phoneNumber" label="Mobile Number" />
               <RHFTextField name="company" label="Primary Email" />
-              <RHFTextField type="date" name="role" label="Birth date" />
+              <RHFTextField
+                type="date"
+                name="date"
+                label="Birth date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </Box>
             <br />
 
@@ -142,7 +151,7 @@ export default function UserNewForm() {
               <RHFTextField name="phoneNumber" label="GSTIN" />
               <RHFTextField name="name" label="Landline/Office Number" />
               <RHFTextField name="phoneNumber" label="Address" />
-              <RHFSelect name="country" label="State" placeholder="Role">
+              <RHFSelect name="country" label="State" placeholder="State">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -186,7 +195,7 @@ export default function UserNewForm() {
               <RHFTextField name="name" label="UserName" />
               <RHFTextField name="phoneNumber" label="Password" />
               <RHFTextField name="name" label="Confirm Password" />
-              <RHFTextField type="file" name="phoneNumber" />
+              <RHFTextField type="file" name="file" />
             </Box>
             <br />
 

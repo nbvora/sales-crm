@@ -22,9 +22,9 @@ import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } fro
 // ----------------------------------------------------------------------
 
 export default function EditProduct() {
-  const { name = '' } = useParams();
+  const { id = '' } = useParams();
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -120,98 +120,21 @@ export default function EditProduct() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ py: 10, px: 3 }}>
-            <Label
-              color={values.status !== 'active' ? 'error' : 'success'}
-              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-            >
-              {values.status}
-            </Label>
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="avatarUrl"
-                accept="image/*"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-
-            <FormControlLabel
-              labelPlacement="start"
-              control={
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value !== 'active'}
-                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                    />
-                  )}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Banned
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Apply disable account
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-            />
-
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
               sx={{
                 display: 'grid',
                 columnGap: 2,
                 rowGap: 3,
-                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
               }}
             >
               <RHFTextField name="name" label="Product Name" />
-              <RHFTextField name="email" label="Dealer/Distributor Price" />
               <RHFTextField name="phoneNumber" label="MRP" />
+              <RHFTextField name="email" label="Dealer/Distributor Price" />
+              <RHFTextField name="state" label="SuperStockist Price" />
+              <RHFTextField name="city" label="Product HSN Code " />
 
               <RHFSelect name="country" label="Product Category" placeholder="Country">
                 <option value="" />

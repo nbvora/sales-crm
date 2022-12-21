@@ -12,23 +12,20 @@ import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
-// utils
-// import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 import { countries, _userList } from '../../../_mock';
 
 // components
-// import Label from '../../../components/Label';
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function UserNewForm() {
-  const { name = '' } = useParams();
+  const { id = '' } = useParams();
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -36,7 +33,7 @@ export default function UserNewForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    companyName: Yup.string().required('COmpany Name is required'),
+    companyName: Yup.string().required('Company Name is required'),
     invoiceNumber: Yup.string().required('Invoice Number is required'),
     invoiceDate: Yup.string().required('Invoice Date is required'),
     subTotalAmmount: Yup.string().required('Sub Total Ammount is required'),

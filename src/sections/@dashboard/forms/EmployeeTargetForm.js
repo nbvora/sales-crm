@@ -23,9 +23,9 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 // ----------------------------------------------------------------------
 
 export default function UserNewForm() {
-  const { name = '' } = useParams();
+  const { id = '' } = useParams();
 
-  const currentUser = _userList.find((user) => paramCase(user.name) === name);
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();

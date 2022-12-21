@@ -1,32 +1,31 @@
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
-// utils
-import { fData } from '../../../utils/formatNumber';
+import { Box, Card, Grid, Stack, Typography, TextField } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveIcon from '@mui/icons-material/Remove';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 import { countries } from '../../../_mock';
 // components
-import Label from '../../../components/Label';
-import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-AddStock.propTypes = {
-  currentUser: PropTypes.object,
-};
-
-export default function AddStock({ currentUser }) {
+export default function AddStock() {
   const navigate = useNavigate();
+  const [list, setList] = useState([{ stock: '', productName: '' }]);
+
+  const addRows = () => {
+    setList([...list, { stock: '', productName: '' }]);
+  };
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -45,47 +44,35 @@ export default function AddStock({ currentUser }) {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || '',
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
-      company: currentUser?.company || '',
-      role: currentUser?.role || '',
+      name: '',
+      email: '',
+      phoneNumber: '',
+      address: '',
+      country: '',
+      state: '',
+      city: '',
+      zipCode: '',
+      avatarUrl: '',
+      isVerified: true,
+      status: '',
+      company: '',
+      role: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentUser]
+    []
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
-    defaultValues,
+    // resolver: yupResolver(NewUserSchema),
+    // defaultValues,
   });
 
   const {
     reset,
-    watch,
-    control,
-    setValue,
+    register,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const values = watch();
-
-  useEffect(() => {
-    if (currentUser) {
-      reset(defaultValues);
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
 
   const onSubmit = async () => {
     try {
@@ -98,119 +85,35 @@ export default function AddStock({ currentUser }) {
     }
   };
 
-  const handleDrop = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0];
+  const handleChange = (index, event) => {
+    const values = [...list];
+    values[index][event.target.name] = event.target.value;
+    setList(values);
+  };
 
-      if (file) {
-        setValue(
-          'avatarUrl',
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        );
-      }
-    },
-    [setValue]
-  );
+  const handleDeleteRow = (id) => {
+    const filteItem = list.filter((item, index) => index !== id);
+    setList(filteItem);
+    console.log(filteItem);
+  };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ py: 10, px: 3 }}>
-            <Label
-              color={values.status !== 'active' ? 'error' : 'success'}
-              sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-            >
-              {values.status}
-            </Label>
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="avatarUrl"
-                accept="image/*"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-
-            <FormControlLabel
-              labelPlacement="start"
-              control={
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <Switch
-                      {...field}
-                      checked={field.value !== 'active'}
-                      onChange={(event) => field.onChange(event.target.checked ? 'banned' : 'active')}
-                    />
-                  )}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Banned
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Apply disable account
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-            />
-
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={8}>
+        <Typography variant="h4" gutterBottom mx={4}>
+          Add New Stocks
+        </Typography>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
               sx={{
                 display: 'grid',
                 columnGap: 2,
                 rowGap: 3,
-                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
-
-              <RHFSelect name="country" label="Country" placeholder="Country">
+              <RHFSelect name="country" label="Country" placeholder="Product Name">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -218,14 +121,42 @@ export default function AddStock({ currentUser }) {
                   </option>
                 ))}
               </RHFSelect>
+              <RHFTextField name="state" label="Product Stock" />
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
+              <Box style={{ marginTop: '15px' }}>
+                <AddCircleIcon onClick={addRows} />
+              </Box>
             </Box>
+
+            {list?.map((item, index) => (
+              <Box key={index}>
+                <Box
+                  sx={{
+                    my: 3,
+                    display: 'grid',
+                    columnGap: 2,
+                    rowGap: 3,
+                    gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(3, 1fr)' },
+                  }}
+                >
+                  <RHFSelect name="country" label="Country" placeholder="Product Name">
+                    <option value="" />
+                    {countries.map((option) => (
+                      <option key={option.code} value={option.label}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </RHFSelect>
+                  <TextField
+                    name="stock"
+                    value={item.stock}
+                    label="Product Stock"
+                    onChange={(event) => handleChange(index, event)}
+                  />
+                  <RemoveIcon style={{ marginTop: '15px' }} onClick={() => handleDeleteRow(index)} />
+                </Box>
+              </Box>
+            ))}
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
               <LoadingButton

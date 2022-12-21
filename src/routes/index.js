@@ -72,10 +72,10 @@ export default function Router() {
         {
           path: 'leads',
           children: [
-            { path: 'leadImport', element: <LeadImportForm /> },
-            { path: 'newLeads', element: <AddNewLeadForm /> },
+            { path: 'import', element: <LeadImportForm /> },
+            { path: 'add', element: <AddNewLeadForm /> },
             { path: 'viewLeadDetail', element: <ViewLeadDetailForm /> },
-            { path: ':name/editlead', element: <EditLeads /> },
+            { path: ':id/edit', element: <EditLeads /> },
             { path: 'leadDetail', element: <ViewLeadDetailForm /> },
           ],
         },
@@ -86,17 +86,17 @@ export default function Router() {
         {
           path: 'customer',
           children: [
-            { path: ':name/editcustomer', element: <EditCustomerDetail /> },
-            { path: 'addcustomer', element: <AddCustomer /> },
-            { path: 'customerimport', element: <CustomerImport /> },
+            { path: ':id/edit', element: <EditCustomerDetail /> },
+            { path: 'add', element: <AddCustomer /> },
+            { path: 'import', element: <CustomerImport /> },
           ],
         },
         {
           path: 'vendor',
           children: [
-            { path: ':name/editvendor', element: <EditVendor /> },
-            { path: 'addvendor', element: <AddVendor /> },
-            { path: 'vendorimport', element: <VendorImport /> },
+            { path: ':id/edit', element: <EditVendor /> },
+            { path: 'add', element: <AddVendor /> },
+            { path: 'import', element: <VendorImport /> },
           ],
         },
         {
@@ -104,12 +104,23 @@ export default function Router() {
           children: [
             { path: 'employeetarget', element: <EmployeeTarget /> },
             { path: 'employeelist', element: <EmployeeList /> },
-            { path: 'addemployeetarget', element: <AddEmployeeTarget /> },
-            { path: ':name/editemployeetarget', element: <EditEmployeeTarget /> },
-            { path: 'addemployee', element: <AddEmployee /> },
-            { path: ':name/editemployee', element: <EditEmployee /> },
-            { path: 'employeeimport', element: <EmployeeImport /> },
-            { path: 'detail', element: <ViewEmployeeActivity /> },
+
+            {
+              path: 'employeetarget',
+              children: [
+                { path: 'add', element: <AddEmployeeTarget /> },
+                { path: ':id/edit', element: <EditEmployeeTarget /> },
+              ],
+            },
+
+            {
+              path: 'employeelist',
+              children: [
+                { path: 'add', element: <AddEmployee /> },
+                { path: ':id/edit', element: <EditEmployee /> },
+                { path: 'import', element: <EmployeeImport /> },
+              ],
+            },
           ],
         },
         {
@@ -119,13 +130,29 @@ export default function Router() {
             { path: 'productcategory', element: <ProductCategory /> },
             { path: 'productlist', element: <ProductList /> },
             { path: 'stockmanagement', element: <StockManagement /> },
-            { path: 'addstock', element: <AddStock /> },
-            { path: ':name/editproductcategory', element: <EditProductCategory /> },
-            { path: ':name/editproduct', element: <EditProduct /> },
-            { path: 'addcategory', element: <AddCategory /> },
-            { path: 'productimport', element: <ProductImport /> },
-            { path: 'addnewproduct', element: <Addproduct /> },
-            { path: 'stockimport', element: <StockImport /> },
+
+            {
+              path: 'productcategory',
+              children: [
+                { path: 'add', element: <AddCategory /> },
+                { path: ':id/edit', element: <EditProductCategory /> },
+              ],
+            },
+            {
+              path: 'productlist',
+              children: [
+                { path: ':id/edit', element: <EditProduct /> },
+                { path: 'import', element: <ProductImport /> },
+                { path: 'add', element: <Addproduct /> },
+              ],
+            },
+            {
+              path: 'stockmanagement',
+              children: [
+                { path: 'add', element: <AddStock /> },
+                { path: 'import', element: <StockImport /> },
+              ],
+            },
           ],
         },
         {
@@ -141,8 +168,8 @@ export default function Router() {
           children: [
             // { element: <Navigate to="/dashboard/invoice/posts" replace />, index: true },
             { path: 'posts', element: <Invoice /> },
-            { path: 'addinvoice', element: <AddInvoice /> },
-            { path: ':name/editinvoice', element: <EditInvoice /> },
+            { path: 'add', element: <AddInvoice /> },
+            { path: ':id/edit', element: <EditInvoice /> },
           ],
         },
       ],

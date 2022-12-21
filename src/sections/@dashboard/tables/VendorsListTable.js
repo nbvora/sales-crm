@@ -53,6 +53,8 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
     setOrderBy(property);
   };
 
+  console.log(filterName, 'filterName');
+
   const handleSelectAllClick = () => {
     setchecked(!checked);
 
@@ -158,10 +160,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                             sx={{ ...ICON, color: 'error.main' }}
                             onClick={() => handleDeleteUser(id)}
                           />
-                          <Box
-                            component={RouterLink}
-                            to={`${PATH_DASHBOARD.vendor.root}/${paramCase(name)}/editvendor`}
-                          >
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.vendor.root}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
                         </TableCell>

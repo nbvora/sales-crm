@@ -158,7 +158,7 @@ export default function InvoiceListTable({ tableRows, tableColumn }) {
                             sx={{ ...ICON, color: 'error.main' }}
                             onClick={() => handleDeleteUser(id)}
                           />
-                          <Box component={RouterLink} to={`${PATH_DASHBOARD.blog.root}/${paramCase(name)}/editinvoice`}>
+                          <Box component={RouterLink} to={`${PATH_DASHBOARD.blog.root}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON, color: 'blue' }} />
                           </Box>
                         </TableCell>
