@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 // _mock_
 import { _userList } from '../../_mock';
 // components
 import Page from '../../components/Page';
+import { dispatch } from '../../redux/store';
 import StockManagementList from '../../sections/@dashboard/tables/StockManagmentTable';
+import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +21,11 @@ const TABLE_HEAD = [
 // ----------------------------------------------------------------------
 
 export default function StockManagement() {
+  const HedareDetail = [{ title: 'StockList', path: null }];
+
+  useEffect(() => {
+    dispatch(getHeaderDetail(HedareDetail));
+  });
   return (
     <Page title="User: List">
       <StockManagementList tableColumn={TABLE_HEAD} tableRows={_userList} />
