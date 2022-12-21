@@ -35,8 +35,10 @@ ProductListTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ProductListTable({ tableRows, tableColumn }) {
+  const importButtonName = 'Product Import';
+  const addButtonName = 'Add New Product';
+
   const theme = useTheme();
-  const tableName = 'Product';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -98,7 +100,12 @@ export default function ProductListTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            importButtonLink="import"
+            importButtonName={importButtonName}
+            withImportButton={importButtonName}
+            addButtonLink="add"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

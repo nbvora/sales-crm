@@ -87,14 +87,11 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
     height: 20,
   };
 
-  const tableName = 'Order Detail';
-
   return (
     <Page title="Order Detail">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

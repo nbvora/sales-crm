@@ -35,7 +35,7 @@ EmployeeTargetTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function EmployeeTargetTable({ tableRows, tableColumn }) {
-  const tableName = 'Employee Target';
+  const addButtonName = 'Add New Target';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -103,7 +103,9 @@ export default function EmployeeTargetTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            addButtonLink="add"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

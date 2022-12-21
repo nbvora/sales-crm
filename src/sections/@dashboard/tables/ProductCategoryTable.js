@@ -36,7 +36,7 @@ ProductCategoryTable.propTypes = {
 };
 export default function ProductCategoryTable({ tableRows, tableColumn }) {
   const theme = useTheme();
-  const tableName = 'Product Category';
+  const addButtonName = 'Add New Category';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -98,7 +98,9 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            addButtonName={addButtonName}
+            addButtonLink={'add'}
+            withAddButton={addButtonName}
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}

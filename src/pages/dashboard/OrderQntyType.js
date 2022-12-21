@@ -4,7 +4,7 @@ import CommanTodo from './CommanTodo';
 export default function OrderQnty() {
   return (
     <Page title="OrderQnty Type">
-      <CommanTodo title={'OrderQnty Type'} />
+      <CommanTodo />
     </Page>
   );
 }

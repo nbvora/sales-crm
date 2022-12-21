@@ -36,7 +36,8 @@ CustomerListTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function CustomerListTable({ tableRows, tableColumn }) {
-  const tableName = 'Customer List';
+  const importButtonName = 'Customer Import';
+  const addButtonName = 'Add New Customer';
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -104,7 +105,12 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <Card>
           <UserListToolbar
-            tableName={tableName}
+            importButtonName={importButtonName}
+            withImportButton={importButtonName}
+            importButtonLink="import"
+            addButtonName={addButtonName}
+            withAddButton={addButtonName}
+            addButtonLink="add"
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
