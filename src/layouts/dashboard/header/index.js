@@ -71,25 +71,26 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
           px: { lg: 5 },
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant="h4" sx={{ color: themeMode === 'drak' ? 'white' : 'black' }} gutterBottom>
-            {title}
-          </Typography>
-          <Breadcrumbs aria-label="breadcrumb">
-            {headerDetail.map((item, index) => (
-              <Link key={index} underline="hover" color="inherit" href={item.path}>
-                {item.title}
-              </Link>
-            ))}
-          </Breadcrumbs>
+        <Box sx={{ display: 'flex', flexDirection: 'rows' }}>
+          {!isDesktop && (
+            <IconButtonAnimate onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
+              <Iconify icon="eva:menu-2-fill" />
+            </IconButtonAnimate>
+          )}
+          {isDesktop && verticalLayout && <Logo sx={{ mr: 2.5 }} />}
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography variant="h4" sx={{ color: themeMode === 'dark' ? 'white' : 'black' }} gutterBottom>
+              {title}
+            </Typography>
+            <Breadcrumbs aria-label="breadcrumb">
+              {headerDetail.map((item, index) => (
+                <Link key={index} underline="hover" color="inherit" href={item.path}>
+                  {item.title}
+                </Link>
+              ))}
+            </Breadcrumbs>
+          </Box>
         </Box>
-        {isDesktop && verticalLayout && <Logo sx={{ mr: 2.5 }} />}
-
-        {!isDesktop && (
-          <IconButtonAnimate onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
-            <Iconify icon="eva:menu-2-fill" />
-          </IconButtonAnimate>
-        )}
 
         <Box sx={{ flexGrow: 1 }} />
 
