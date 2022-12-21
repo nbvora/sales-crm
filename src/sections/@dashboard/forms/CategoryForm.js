@@ -12,7 +12,7 @@ import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // utils
 import { _userList } from '../../../_mock';
 import { dispatch } from '../../../redux/store';
-import { getHeaderDetail } from '../../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -24,13 +24,14 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 export default function CategoryForm() {
   const { id = '' } = useParams();
-  const HedareDetail = [
+  const headerDetail = [
     { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },
-    { title: 'Add', path: null },
+    { title: !id ? 'Add' : 'Edit', path: null },
   ];
-
+  const title = 'Inventory-Mangment';
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
@@ -112,7 +113,7 @@ export default function CategoryForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.user.profile}`}
               >
-                cancle
+                Cancel
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'ADD' : 'Edit'}
