@@ -119,6 +119,7 @@ export default function Router() {
                 { path: 'add', element: <AddEmployee /> },
                 { path: ':id/edit', element: <EditEmployee /> },
                 { path: 'import', element: <EmployeeImport /> },
+                { path: 'detail', element: <ViewEmployeeActivity /> },
               ],
             },
           ],

@@ -1,10 +1,9 @@
-import * as Yup from 'yup';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Typography, TextField } from '@mui/material';
@@ -29,39 +28,6 @@ export default function AddStock() {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
-  });
-
-  const defaultValues = useMemo(
-    () => ({
-      name: '',
-      email: '',
-      phoneNumber: '',
-      address: '',
-      country: '',
-      state: '',
-      city: '',
-      zipCode: '',
-      avatarUrl: '',
-      isVerified: true,
-      status: '',
-      company: '',
-      role: '',
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
   const methods = useForm({
     // resolver: yupResolver(NewUserSchema),
     // defaultValues,
@@ -69,7 +35,6 @@ export default function AddStock() {
 
   const {
     reset,
-    register,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
@@ -101,7 +66,7 @@ export default function AddStock() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Typography variant="h4" gutterBottom mx={4}>
-          Add New Stocks
+          Add New Product
         </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
@@ -165,7 +130,7 @@ export default function AddStock() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.user.list}`}
               >
-                cancle
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 Add

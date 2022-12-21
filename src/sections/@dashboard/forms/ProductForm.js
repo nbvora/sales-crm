@@ -1,23 +1,20 @@
 import { paramCase } from 'change-case';
 import * as Yup from 'yup';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom';
 // form
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
-// utils
-import { fData } from '../../../utils/formatNumber';
+import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 import { countries, _userList } from '../../../_mock';
 // components
-import Label from '../../../components/Label';
-import { FormProvider, RHFSelect, RHFSwitch, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
+import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -71,14 +68,9 @@ export default function EditProduct() {
 
   const {
     reset,
-    watch,
-    control,
-    setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  const values = watch();
 
   useEffect(() => {
     if (isEdit && currentUser) {
@@ -101,25 +93,12 @@ export default function EditProduct() {
     }
   };
 
-  const handleDrop = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0];
-
-      if (file) {
-        setValue(
-          'avatarUrl',
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        );
-      }
-    },
-    [setValue]
-  );
-
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
+        <Typography variant="h4" gutterBottom mx={4}>
+          {!isEdit ? 'Add New Product' : 'Edit Product'}
+        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -156,7 +135,7 @@ export default function EditProduct() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.user.cards}`}
               >
-                cancle
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'ADD' : 'Edit'}
