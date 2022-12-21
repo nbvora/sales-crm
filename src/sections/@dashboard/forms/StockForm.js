@@ -18,7 +18,7 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 
 // ----------------------------------------------------------------------
 
-export default function AddStock() {
+export default function StockForm() {
   const navigate = useNavigate();
   const [list, setList] = useState([{ stock: '', productName: '' }]);
 

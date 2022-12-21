@@ -22,7 +22,7 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function UserNewForm() {
+export default function EmployeeTargetForm() {
   const { id = '' } = useParams();
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);

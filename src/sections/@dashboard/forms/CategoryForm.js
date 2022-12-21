@@ -22,7 +22,7 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-export default function AddCategory() {
+export default function CategoryForm() {
   const { id = '' } = useParams();
   const HedareDetail = [
     { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },

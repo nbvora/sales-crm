@@ -20,7 +20,7 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 
 // ----------------------------------------------------------------------
 
-export default function EditProduct() {
+export default function ProductForm() {
   const { id = '' } = useParams();
   const HedareDetail = [
     { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },

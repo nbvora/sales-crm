@@ -125,10 +125,10 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
                     </TableCell>
                     <TableCell align="left" sx={{ padding: '5px' }}>
                       <Box sx={{ display: 'flex' }}>
-                        <MenuItem>
+                        <MenuItem style={{ padding: '0px' }}>
                           <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} onClick={() => handleedit(index)} />
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem style={{ padding: '0px' }}>
                           <Iconify
                             icon={'eva:trash-2-outline'}
                             sx={{ ...ICON }}
