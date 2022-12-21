@@ -8,11 +8,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography } from '@mui/material';
+import { Box, Card, Grid, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import { dispatch } from '../../../redux/store';
-import { getHeaderDetail } from '../../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // _mock
 import { countries, _userList } from '../../../_mock';
 // components
@@ -22,13 +22,14 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 
 export default function ProductForm() {
   const { id = '' } = useParams();
-  const HedareDetail = [
-    { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },
-    { title: 'Add', path: null },
+  const headerDetail = [
+    { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
+    { title: !id ? 'Add' : 'Edit', path: null },
   ];
-
+  const title = 'Inventody-Managment';
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
@@ -106,9 +107,6 @@ export default function ProductForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Typography variant="h4" gutterBottom mx={4}>
-          {!isEdit ? 'Add New Product' : 'Edit Product'}
-        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -145,7 +143,7 @@ export default function ProductForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.user.cards}`}
               >
-                Cancle
+                Cancel
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'ADD' : 'Edit'}

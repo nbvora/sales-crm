@@ -5,7 +5,7 @@ import { _userList } from '../../_mock';
 import Page from '../../components/Page';
 import { dispatch } from '../../redux/store';
 import StockManagementList from '../../sections/@dashboard/tables/StockManagmentTable';
-import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
@@ -21,13 +21,14 @@ const TABLE_HEAD = [
 // ----------------------------------------------------------------------
 
 export default function StockManagement() {
-  const HedareDetail = [{ title: 'StockList', path: null }];
-
+  const headerDetail = [{ title: 'StockList', path: null }];
+  const title = 'Inventory-Managment';
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
   return (
-    <Page title="User: List">
+    <Page title="User: StockList">
       <StockManagementList tableColumn={TABLE_HEAD} tableRows={_userList} />
     </Page>
   );

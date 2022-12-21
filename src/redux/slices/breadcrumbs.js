@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  hedare: [],
+  headerDetail: [],
+  title: null,
 };
 
 const breadcrumbs = createSlice({
@@ -9,10 +10,13 @@ const breadcrumbs = createSlice({
   initialState,
   reducers: {
     getHeaderDetail(state, action) {
-      state.hedare = action.payload;
+      state.headerDetail = action.payload;
+    },
+    getTitle(state, action) {
+      state.title = action.payload;
     },
   },
 });
 
 export default breadcrumbs.reducer;
-export const { getHeaderDetail } = breadcrumbs.actions;
+export const { getHeaderDetail, getTitle } = breadcrumbs.actions;

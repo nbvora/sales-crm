@@ -5,7 +5,7 @@ import Page from '../../components/Page';
 
 import StockList from '../../sections/@dashboard/tables/StockListTable';
 import DistributorList from '../../sections/@dashboard/tables/DistributorListTable';
-import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +27,12 @@ const STOCKE_HEAD = [
 export default function GeneralDashboard() {
   const edit = false;
   const { stoks, ditributor } = useSelector((state) => state.dashboard);
-  const HedareDetail = [{ title: 'DistributorList & StockList', path: null }];
+  const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
+  const title = 'Dashboard';
 
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
   return (
     <Page title="General: App">

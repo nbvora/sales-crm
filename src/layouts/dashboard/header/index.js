@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, Typography, Breadcrumbs, Link } from '@mui/material';
+import useSettings from '../../../hooks/useSettings';
 
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
@@ -56,9 +57,10 @@ DashboardHeader.propTypes = {
 };
 
 export default function DashboardHeader({ onOpenSidebar, isCollapse = false, verticalLayout = false }) {
-  const { hedare } = useSelector((state) => state.breadcrumbs);
+  const { themeMode } = useSettings();
+  const { headerDetail, title } = useSelector((state) => state.breadcrumbs);
   const isOffset = useOffSetTop(HEADER.DASHBOARD_DESKTOP_HEIGHT) && !verticalLayout;
-  const tableName = 'Dashboard';
+
   const isDesktop = useResponsive('up', 'lg');
 
   return (
@@ -70,11 +72,11 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
         }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography variant="h4" sx={{ margin: 0, color: 'black' }} gutterBottom>
-            {tableName}
+          <Typography variant="h4" sx={{ color: themeMode === 'drak' ? 'white' : 'black' }} gutterBottom>
+            {title}
           </Typography>
           <Breadcrumbs aria-label="breadcrumb">
-            {hedare.map((item, index) => (
+            {headerDetail.map((item, index) => (
               <Link key={index} underline="hover" color="inherit" href={item.path}>
                 {item.title}
               </Link>

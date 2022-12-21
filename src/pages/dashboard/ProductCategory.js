@@ -3,7 +3,7 @@ import ProductCategoryTable from '../../sections/@dashboard/tables/ProductCatego
 import Page from '../../components/Page';
 import { _userList } from '../../_mock';
 import { dispatch } from '../../redux/store';
-import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Distributor', alignRight: false },
@@ -11,10 +11,12 @@ const TABLE_HEAD = [
 ];
 
 export default function ProductCategory() {
-  const HedareDetail = [{ title: 'ProductCategory', path: null }];
+  const headerDetail = [{ title: 'ProductCategory', path: null }];
+  const title = 'Inventory-Managment';
 
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
   return (
     <Page title="User: Profile">

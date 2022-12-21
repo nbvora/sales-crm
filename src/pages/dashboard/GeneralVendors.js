@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import VendorsList from '../../sections/@dashboard/tables/VendorsListTable';
 import Page from '../../components/Page';
 import { useSelector, dispatch } from '../../redux/store';
-import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -15,10 +15,12 @@ const TABLE_HEAD = [
 export default function GeneralVendors() {
   const { vendors } = useSelector((state) => state.vendors);
 
-  const HedareDetail = [{ title: 'StockList', path: null }];
+  const headerDetail = [{ title: 'VendorList', path: null }];
+  const title = 'Vendors';
 
   useEffect(() => {
-    dispatch(getHeaderDetail(HedareDetail));
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
   });
   return (
     <Page title="General: Vendors">

@@ -1,6 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
 import ViewInvoiceDeatilTable from '../tables/ViewInvoiceDetailTable';
 import { _userList } from '../../../_mock';
+import { dispatch } from '../../../redux/store';
+import { PATH_DASHBOARD } from '../../../routes/paths';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 const ORDER_VIEW_INVOICE_DETAIL_HEAD = [
   { id: 'Name', label: 'Name', alignRight: false },
@@ -11,6 +14,15 @@ const ORDER_VIEW_INVOICE_DETAIL_HEAD = [
   { id: 'Actions', label: 'Actions', alignRight: false },
 ];
 export default function ViewInvoiceDeatilForm() {
+  const headerDetail = [
+    { title: 'OrderList', path: PATH_DASHBOARD.order.root },
+    { title: 'View', path: null },
+  ];
+  const title = 'Orders';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
   return (
     <>
       <ViewInvoiceDeatilTable
