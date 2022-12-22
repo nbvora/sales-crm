@@ -1,8 +1,11 @@
 import { Box } from '@mui/material';
-import { useSelector } from '../../redux/store';
+import { useEffect } from 'react';
+import { useSelector, dispatch } from '../../redux/store';
 import Page from '../../components/Page';
+
 import StockList from '../../sections/@dashboard/tables/StockListTable';
 import DistributorList from '../../sections/@dashboard/tables/DistributorListTable';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +27,13 @@ const STOCKE_HEAD = [
 export default function GeneralDashboard() {
   const edit = false;
   const { stoks, ditributor } = useSelector((state) => state.dashboard);
+  const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
+  const title = 'Dashboard';
 
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
   return (
     <Page title="General: App">
       <Box>

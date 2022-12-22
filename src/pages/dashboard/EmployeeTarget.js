@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import EmployeeTargetTable from '../../sections/@dashboard/tables/EmployeeTargetTable';
 import Page from '../../components/Page';
-import { useSelector } from '../../redux/store';
+import { useSelector, dispatch } from '../../redux/store';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Assign By', alignRight: false },
@@ -12,7 +14,12 @@ const TABLE_HEAD = [
 ];
 export default function EmployeeTarget() {
   const { employee } = useSelector((state) => state.employee);
-
+  const headerDetail = [{ title: 'EmployeeTarget', path: null }];
+  const title = 'Employee';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
   return (
     <>
       <Page title="Employee: Employeetarget">

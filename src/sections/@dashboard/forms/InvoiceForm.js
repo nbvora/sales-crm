@@ -19,11 +19,21 @@ import { countries, _userList } from '../../../_mock';
 
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function UserNewForm() {
+export default function InvoiceForm() {
   const { id = '' } = useParams();
+  const headerDetail = [
+    { title: '2022', path: PATH_DASHBOARD.blog.root },
+    { title: !id ? 'Add' : 'Edit', path: null },
+  ];
+  const title = 'invoice';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
@@ -160,7 +170,7 @@ export default function UserNewForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.blog.root}`}
               >
-                Cancle
+                Cancel
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create User' : 'Save Changes'}

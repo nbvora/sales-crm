@@ -168,7 +168,7 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Box sx={{ display: 'flex' }}>
-                            <MenuItem>
+                            <MenuItem style={{ padding: '0px' }}>
                               <Iconify
                                 icon={'eva:trash-2-outline'}
                                 sx={{ ...ICON }}
@@ -176,12 +176,17 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                               />
                             </MenuItem>
                             <MenuItem
+                              style={{ padding: '0px' }}
                               component={RouterLink}
                               to={`${PATH_DASHBOARD.eCommerce.checkout}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>
-                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.eCommerce.viewemployeedetail}`}>
+                            <MenuItem
+                              style={{ padding: '0px' }}
+                              component={RouterLink}
+                              to={`${PATH_DASHBOARD.eCommerce.viewemployeedetail}`}
+                            >
                               <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
                             </MenuItem>
                           </Box>
