@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import InvoiceListTable from '../../sections/@dashboard/tables/InvoiceListTable';
 import Page from '../../components/Page';
-import { useSelector } from '../../redux/store';
+import { useSelector, dispatch } from '../../redux/store';
+import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Company Name', alignRight: false },
@@ -12,7 +14,13 @@ const TABLE_HEAD = [
 
 export default function Invoice() {
   const { invoice } = useSelector((state) => state.invoice);
+  const headerDetail = [{ title: '2022', path: null }];
+  const title = 'invoice';
 
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
   return (
     <Page title="General: Invoice">
       <InvoiceListTable tableColumn={TABLE_HEAD} tableRows={invoice} />
