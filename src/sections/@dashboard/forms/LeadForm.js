@@ -19,12 +19,22 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { countries, _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // ----------------------------------------------------------------------
 
-export default function UserNewForm() {
+export default function LeadForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
+  const headerDetail = [
+    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+    { title: !id ? 'Add' : 'Edit', path: null },
+  ];
+  const title = 'Leads';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
 
   const navigate = useNavigate();
 
@@ -103,9 +113,6 @@ export default function UserNewForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Typography variant="h4" gutterBottom mx={4}>
-          {!isEdit ? 'Add New Leads' : 'Edit Leads'}
-        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Typography variant="h7" gutterBottom>
@@ -203,7 +210,7 @@ export default function UserNewForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.lead.root}`}
               >
-                Cancle
+                Cancel
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create User' : 'Save Changes'}
