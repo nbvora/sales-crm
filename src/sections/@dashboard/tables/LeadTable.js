@@ -177,25 +177,17 @@ export default function LeadTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Box sx={{ display: 'flex' }}>
-                            <MenuItem style={{ padding: '0px' }}>
+                            <MenuItem>
                               <Iconify
                                 icon={'eva:trash-2-outline'}
                                 sx={{ ...ICON }}
                                 onClick={() => handleDeleteUser(id)}
                               />
                             </MenuItem>
-                            <MenuItem
-                              style={{ padding: '0px' }}
-                              component={RouterLink}
-                              to={`${PATH_DASHBOARD.lead.root}/${paramCase(id)}/edit`}
-                            >
+                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.lead.root}/${paramCase(id)}/edit`}>
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>
-                            <MenuItem
-                              style={{ padding: '0px' }}
-                              component={RouterLink}
-                              to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}
-                            >
+                            <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.lead.viewLeadDetail}`}>
                               <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
                             </MenuItem>
                           </Box>

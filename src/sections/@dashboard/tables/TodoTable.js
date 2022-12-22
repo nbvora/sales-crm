@@ -80,9 +80,12 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
     width: 20,
     height: 20,
   };
+  console.log('tableRows', tableRows);
+  console.log('userList', userList);
 
   useEffect(() => {
     setUserList(tableRows);
+    console.log('userList.................', userList);
   }, [tableRows, userList]);
   return (
     <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -119,16 +122,17 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
                     // aria-checked={isItemSelected}
                   >
                     <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                      {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                       <Typography variant="subtitle2" noWrap>
                         {row}
                       </Typography>
                     </TableCell>
                     <TableCell align="left" sx={{ padding: '5px' }}>
                       <Box sx={{ display: 'flex' }}>
-                        <MenuItem style={{ padding: '0px' }}>
+                        <MenuItem>
                           <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} onClick={() => handleedit(index)} />
                         </MenuItem>
-                        <MenuItem style={{ padding: '0px' }}>
+                        <MenuItem>
                           <Iconify
                             icon={'eva:trash-2-outline'}
                             sx={{ ...ICON }}

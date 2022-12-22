@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import CustomerListTable from '../../sections/@dashboard/tables/CustomerListTable';
 import Page from '../../components/Page';
-import { useSelector, dispatch } from '../../redux/store';
-import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
+import { useSelector } from '../../redux/store';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -13,13 +11,7 @@ const TABLE_HEAD = [
 
 export default function GeneralCustomers() {
   const { customers } = useSelector((state) => state.customers);
-  const headerDetail = [{ title: 'CustomerList', path: null }];
-  const title = 'Customers';
 
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
   return (
     <Page title="General: Customers">
       <CustomerListTable tableColumn={TABLE_HEAD} tableRows={customers} />

@@ -19,21 +19,11 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { countries, _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function VendorForm() {
+export default function UserNewForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'VendorList', path: PATH_DASHBOARD.vendor.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Vendors';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
@@ -104,6 +94,9 @@ export default function VendorForm() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
+          <Typography variant="h4" gutterBottom mx={4}>
+            {!isEdit ? 'Add New Vendor' : 'Edit Vendor'}
+          </Typography>
           <Card sx={{ p: 3 }}>
             <Typography variant="h7" gutterBottom>
               Personal Information
@@ -231,7 +224,7 @@ export default function VendorForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.general.ecommerce}`}
               >
-                Cancel
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create User' : 'Save Changes'}

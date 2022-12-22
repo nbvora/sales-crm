@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack } from '@mui/material';
+import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
@@ -19,22 +19,11 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function EmployeeTargetForm() {
+export default function UserNewForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'EmployeeTarget', path: PATH_DASHBOARD.eCommerce.editById },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-
-  const title = 'Employee';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
@@ -104,6 +93,9 @@ export default function EmployeeTargetForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
+        <Typography variant="h4" gutterBottom mx={4}>
+          {!isEdit ? 'Add New Product' : 'Edit Employee Target'}
+        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -127,7 +119,7 @@ export default function EmployeeTargetForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.eCommerce.editById}`}
               >
-                Cancel
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create User' : 'Save Changes'}

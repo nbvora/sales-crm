@@ -159,7 +159,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Box sx={{ display: 'flex' }}>
-                            <MenuItem style={{ padding: '0px' }}>
+                            <MenuItem>
                               <Iconify
                                 icon={'eva:trash-2-outline'}
                                 sx={{ ...ICON }}
@@ -167,7 +167,6 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                               />
                             </MenuItem>
                             <MenuItem
-                              style={{ padding: '0px' }}
                               component={RouterLink}
                               to={`${PATH_DASHBOARD.analytics.root}/${paramCase(id)}/edit`}
                             >

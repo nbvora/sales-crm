@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack } from '@mui/material';
+import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
@@ -18,22 +18,12 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function CustomerForm() {
+export default function UserNewForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
-  const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.analytics.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Customers';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -102,6 +92,9 @@ export default function CustomerForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
+        <Typography variant="h4" gutterBottom mx={4}>
+          {!isEdit ? 'Add New Customers' : 'Edit Customers'}
+        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -127,7 +120,7 @@ export default function CustomerForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.general.analytics}`}
               >
-                Cancel
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create User' : 'Save Changes'}

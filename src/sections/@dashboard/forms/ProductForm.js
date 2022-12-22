@@ -8,11 +8,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack } from '@mui/material';
+import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-import { dispatch } from '../../../redux/store';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // _mock
 import { countries, _userList } from '../../../_mock';
 // components
@@ -20,17 +18,8 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 
 // ----------------------------------------------------------------------
 
-export default function ProductForm() {
+export default function EditProduct() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Inventody-Managment';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
@@ -107,6 +96,9 @@ export default function ProductForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
+        <Typography variant="h4" gutterBottom mx={4}>
+          {!isEdit ? 'Add New Product' : 'Edit Product'}
+        </Typography>
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -143,7 +135,7 @@ export default function ProductForm() {
                 component={RouterLink}
                 to={`${PATH_DASHBOARD.user.cards}`}
               >
-                Cancel
+                Cancle
               </LoadingButton>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'ADD' : 'Edit'}

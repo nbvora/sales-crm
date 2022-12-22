@@ -42,7 +42,7 @@ function SettingsProvider({ children }) {
   const onChangeMode = (event) => {
     setSettings({
       ...settings,
-      themeMode: event.target.value === 'light' ? 'dark' : 'light',
+      themeMode: event.target.value,
     });
   };
 

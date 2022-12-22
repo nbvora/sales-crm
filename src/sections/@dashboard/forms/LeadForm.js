@@ -8,8 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography } from '@mui/material';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { Box, Card, Grid, Stack, Typography, TextField } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
@@ -141,12 +140,16 @@ export default function LeadForm() {
               <RHFTextField name="phoneNumber" label="Mobile Number" />
               <RHFTextField name="company" label="Company Name" />
             </Box>
-            <TextareaAutosize
-              aria-label="minimum height"
-              minRows={10}
-              placeholder="Minimum 3 rows"
-              style={{ width: '100%', marginTop: '15px' }}
-            />
+            <Box sx={{ marginTop: 3 }}>
+              <TextField
+                id="outlined-textarea"
+                label="Address"
+                placeholder="Address"
+                multiline
+                rows={4}
+                style={{ width: '100%' }}
+              />
+            </Box>
           </Card>
 
           <Card sx={{ p: 3, my: 3 }}>

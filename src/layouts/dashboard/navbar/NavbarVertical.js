@@ -17,6 +17,7 @@ import Scrollbar from '../../../components/Scrollbar';
 import { NavSectionVertical } from '../../../components/nav-section';
 //
 import navConfig from './NavConfig';
+import NavbarAccount from './NavbarAccount';
 import CollapseButton from './CollapseButton';
 
 // ----------------------------------------------------------------------
@@ -78,6 +79,8 @@ export default function NavbarVertical({ isOpenSidebar, onCloseSidebar }) {
             <CollapseButton onToggleCollapse={onToggleCollapse} collapseClick={collapseClick} />
           )}
         </Stack>
+
+        <NavbarAccount isCollapse={isCollapse} />
       </Stack>
 
       <NavSectionVertical navConfig={navConfig} isCollapse={isCollapse} />

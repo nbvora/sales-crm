@@ -6,7 +6,6 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
 import { dispatch, useSelector } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
-import LanguagePopover from './LanguagePopover';
 
 // routes
 import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
@@ -16,7 +15,6 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import MyAvatar from '../../../components/MyAvatar';
 import MenuPopover from '../../../components/MenuPopover';
 import { IconButtonAnimate } from '../../../components/animate';
-import SettingMode from '../../../components/settings/SettingMode';
 
 // ----------------------------------------------------------------------
 
@@ -118,13 +116,6 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Stack sx={{ p: 1 }}>
-          <Box>
-            <LanguagePopover />
-          </Box>
-          <Box>
-            <SettingMode />
-          </Box>
-
           {MENU_OPTIONS.map((option) => (
             <MenuItem key={option.label} to={option.linkTo} component={RouterLink} onClick={handleClose}>
               {option.label}

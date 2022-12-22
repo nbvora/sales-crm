@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,27 +12,19 @@ import { LoadingButton } from '@mui/lab';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 // import useAuth from '../../../../hooks/useAuth';
-import { useSelector, dispatch } from '../../../redux/store';
+import { useSelector } from '../../../redux/store';
 // utils
 import { fData } from '../../../utils/formatNumber';
 // _mock
 import { countries } from '../../../_mock';
 // components
 import { FormProvider, RHFSwitch, RHFSelect, RHFTextField, RHFUploadAvatar } from '../../../components/hook-form';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
 export default function ProfileForm() {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useSelector((state) => state.login);
-
-  const headerDetail = [{ title: 'Profile', path: null }];
-  const title = 'Dashboard';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
 
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),
@@ -159,7 +151,7 @@ export default function ProfileForm() {
                   component={RouterLink}
                   to={`${PATH_DASHBOARD.general.app}`}
                 >
-                  Cancel
+                  cancle
                 </LoadingButton>
                 <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                   Save Changes

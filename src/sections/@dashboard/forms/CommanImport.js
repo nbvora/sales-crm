@@ -33,7 +33,7 @@ export default function CommanImport({ handleUplodFile, files, setFiles }) {
           sx={{ position: 'relative', mx: 2, borderRadius: 1, left: 100, top: 100 }}
           variant="contained"
         >
-          Cancel
+          Cancle
         </Button>
         <Button
           onClick={handleUplodFile}

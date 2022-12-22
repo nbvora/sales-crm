@@ -1,9 +1,6 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { _userList } from '../../../_mock';
 import ViewEmployeeActivityTable from '../tables/ViewEmployeeActivityTable';
-import { PATH_DASHBOARD } from '../../../routes/paths';
-import { dispatch } from '../../../redux/store';
-import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 const VIEW_EMP_DETAIL_HEAD = [
   { id: 'Name', label: 'Name', alignRight: false },
@@ -14,15 +11,6 @@ const VIEW_EMP_DETAIL_HEAD = [
   { id: 'Actions', label: 'Actions', alignRight: false },
 ];
 export default function ViewInvoiceDeatilForm() {
-  const headerDetail = [
-    { title: 'EmployeeList', path: PATH_DASHBOARD.eCommerce.checkout },
-    { title: 'View', path: null },
-  ];
-  const title = 'Employee';
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-    dispatch(getTitle(title));
-  });
   return (
     <>
       <ViewEmployeeActivityTable

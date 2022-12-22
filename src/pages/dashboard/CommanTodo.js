@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import { LoadingButton } from '@mui/lab';
 import { Box, Grid, OutlinedInput, Container } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import TodoTable from '../../sections/@dashboard/tables/TodoTable';
 import useSettings from '../../hooks/useSettings';
-import { dispatch } from '../../redux/store';
-import { getHeaderDetail } from '../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Employee', alignRight: false },
@@ -22,12 +20,6 @@ export default function CommanTodo({ title }) {
   const [todos, setTodos] = useState([]);
   const [edit, setedit] = useState('');
   const [index, setIndex] = useState();
-  const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
-
-  useEffect(() => {
-    dispatch(getHeaderDetail(headerDetail));
-  });
-
   const handlechange = (e) => {
     setValue(e.target.value);
   };
