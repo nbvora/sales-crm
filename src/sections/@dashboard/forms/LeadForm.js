@@ -8,8 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography } from '@mui/material';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { Box, Card, Grid, Stack, Typography, TextField } from '@mui/material';
 // redux
 import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
@@ -20,7 +19,6 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 import { countries, _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
-
 // ----------------------------------------------------------------------
 
 export default function UserNewForm() {
@@ -135,12 +133,16 @@ export default function UserNewForm() {
               <RHFTextField name="phoneNumber" label="Mobile Number" />
               <RHFTextField name="company" label="Company Name" />
             </Box>
-            <TextareaAutosize
-              aria-label="minimum height"
-              minRows={10}
-              placeholder="Minimum 3 rows"
-              style={{ width: '100%', marginTop: '15px' }}
-            />
+            <Box sx={{ marginTop: 3 }}>
+              <TextField
+                id="outlined-textarea"
+                label="Address"
+                placeholder="Address"
+                multiline
+                rows={4}
+                style={{ width: '100%' }}
+              />
+            </Box>
           </Card>
 
           <Card sx={{ p: 3, my: 3 }}>
