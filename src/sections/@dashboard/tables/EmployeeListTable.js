@@ -178,14 +178,14 @@ export default function EmployeeListTable({ tableRows, tableColumn }) {
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.eCommerce.checkout}/${paramCase(id)}/edit`}
+                              to={`${PATH_DASHBOARD.employee.employeelist}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.eCommerce.viewemployeedetail}`}
+                              to={`${PATH_DASHBOARD.employee.viewemployeedetail}`}
                             >
                               <Iconify icon={'dashicons:visibility'} sx={{ ...ICON }} />
                             </MenuItem>

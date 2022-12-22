@@ -170,7 +170,7 @@ export default function EmployeeTargetTable({ tableRows, tableColumn }) {
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.eCommerce.editById}/${paramCase(id)}/edit`}
+                              to={`${PATH_DASHBOARD.employee.employeetarget}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>

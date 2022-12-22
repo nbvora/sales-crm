@@ -94,7 +94,7 @@ export default function VendorForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.general.ecommerce);
+      navigate(PATH_DASHBOARD.general.employee);
     } catch (error) {
       console.error(error);
     }
@@ -229,7 +229,7 @@ export default function VendorForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.general.ecommerce}`}
+                to={`${PATH_DASHBOARD.general.employee}`}
               >
                 Cancel
               </LoadingButton>

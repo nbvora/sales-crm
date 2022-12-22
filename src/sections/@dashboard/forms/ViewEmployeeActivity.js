@@ -15,7 +15,7 @@ const VIEW_EMP_DETAIL_HEAD = [
 ];
 export default function ViewInvoiceDeatilForm() {
   const headerDetail = [
-    { title: 'EmployeeList', path: PATH_DASHBOARD.eCommerce.checkout },
+    { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
     { title: 'View', path: null },
   ];
   const title = 'Employee';

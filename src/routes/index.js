@@ -168,7 +168,7 @@ export default function Router() {
           path: 'invoice',
           children: [
             // { element: <Navigate to="/dashboard/invoice/posts" replace />, index: true },
-            { path: 'posts', element: <Invoice /> },
+            { path: 'root', element: <Invoice /> },
             { path: 'add', element: <AddInvoice /> },
             { path: ':id/edit', element: <EditInvoice /> },
           ],

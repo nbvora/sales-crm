@@ -8,7 +8,7 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function CustomerImport() {
   const [files, setFiles] = useState([]);
   const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.analytics.root },
+    { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
     { title: 'Import', path: null },
   ];
   const title = 'Customers';

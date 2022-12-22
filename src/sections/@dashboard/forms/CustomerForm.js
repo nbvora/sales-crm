@@ -26,7 +26,7 @@ export default function CustomerForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.analytics.root },
+    { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
   const title = 'Customers';
@@ -93,7 +93,7 @@ export default function CustomerForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.general.analytics);
+      navigate(PATH_DASHBOARD.general.customer);
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +125,7 @@ export default function CustomerForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.general.analytics}`}
+                to={`${PATH_DASHBOARD.general.customer}`}
               >
                 Cancel
               </LoadingButton>

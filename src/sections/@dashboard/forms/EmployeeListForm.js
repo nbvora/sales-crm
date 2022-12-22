@@ -26,7 +26,7 @@ export default function EmployeeListForm() {
   const { id = '' } = useParams();
 
   const headerDetail = [
-    { title: 'EmployeeList', path: PATH_DASHBOARD.eCommerce.checkout },
+    { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
   const title = 'Employee';
@@ -95,7 +95,7 @@ export default function EmployeeListForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.eCommerce.checkout);
+      navigate(PATH_DASHBOARD.employee.employeelist);
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +139,7 @@ export default function EmployeeListForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.eCommerce.checkout}`}
+                to={`${PATH_DASHBOARD.employee.employeelist}`}
               >
                 Cancel
               </LoadingButton>

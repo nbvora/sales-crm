@@ -26,7 +26,7 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function EmployeeTargetForm() {
   const { id = '' } = useParams();
   const headerDetail = [
-    { title: 'EmployeeTarget', path: PATH_DASHBOARD.eCommerce.editById },
+    { title: 'EmployeeTarget', path: PATH_DASHBOARD.employee.employeetarget },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
 
@@ -95,7 +95,7 @@ export default function EmployeeTargetForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.eCommerce.editById);
+      navigate(PATH_DASHBOARD.employee.employeetarget);
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +125,7 @@ export default function EmployeeTargetForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.eCommerce.editById}`}
+                to={`${PATH_DASHBOARD.employee.employeetarget}`}
               >
                 Cancel
               </LoadingButton>
