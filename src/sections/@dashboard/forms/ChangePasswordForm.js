@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -14,12 +15,18 @@ import { dispatch } from '../../../redux/store';
 import sagaActions from '../../../redux/actions';
 // components
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-export default function AccountChangePassword() {
+export default function ChangePasswordForm() {
   const { enqueueSnackbar } = useSnackbar();
-
+  const headerDetail = [{ title: 'Change Password', path: null }];
+  const title = 'Dashboard';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
   const ChangePassWordSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required'),
     newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New Password is required'),
@@ -71,7 +78,7 @@ export default function AccountChangePassword() {
               component={RouterLink}
               to={`${PATH_DASHBOARD.general.app}`}
             >
-              Cancle
+              Cancel
             </LoadingButton>
             <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
               Save Changes

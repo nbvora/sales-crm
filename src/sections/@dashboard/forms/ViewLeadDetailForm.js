@@ -1,8 +1,10 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Box } from '@mui/system';
-import { useSelector } from 'react-redux';
+import { useSelector, dispatch } from '../../../redux/store';
 import DiscussionTable from '../tables/DiscussionTable';
 import OrderTable from '../tables/OrderTable';
+import { PATH_DASHBOARD } from '../../../routes/paths';
+import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -21,6 +23,16 @@ const TABLE_HEAD_D = [
 
 export default function ViewLeadDetailForm() {
   const { orderTable, discussionTable } = useSelector((state) => state.leads);
+  const headerDetail = [
+    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+    { title: 'View', path: null },
+  ];
+  const title = 'Leads';
+  useEffect(() => {
+    dispatch(getHeaderDetail(headerDetail));
+    dispatch(getTitle(title));
+  });
+
   return (
     <>
       <Box sx={{ position: 'relative', top: 10 }}>
