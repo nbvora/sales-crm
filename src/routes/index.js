@@ -26,7 +26,7 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
     {
-      path: 'auth',
+      path: '',
       children: [
         {
           path: '',
@@ -52,7 +52,7 @@ export default function Router() {
     },
     // Dashboard Routes
     {
-      path: 'dashboard',
+      path: '',
       element: (
         <AuthGuard>
           <DashboardLayout />
@@ -60,7 +60,7 @@ export default function Router() {
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
-        { path: 'app', element: <GeneralDashboard /> },
+        { path: 'dashboard', element: <GeneralDashboard /> },
         { path: 'vendor', element: <GeneralVendors /> },
         { path: 'customer', element: <GeneralCustomers /> },
         { path: 'leads', element: <Leads /> },

@@ -2,9 +2,11 @@ import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
 import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
+import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* logOut() {
   yield put(isLogout());
+  window.localStorage.removeItem('user');
   window.localStorage.removeItem('token');
   setSession(null);
 }
@@ -12,17 +14,23 @@ export function* logOut() {
 export function* signupSaga(state) {
   try {
     const { email, password } = state.data;
-    const response = yield axios.post('/api/account/login', {
+    // const response = yield axios.post('/api/account/login', {
+    //   email,
+    //   password
+    const response = yield axios.post(`${BASEURL}login`, {
       email,
+      mobile_no: null,
       password,
+      device_type: '3',
+      device_token: 'fghdfikjvgnsjbghj',
     });
-    const { accessToken, user } = response.data;
-
-    const Token = window.localStorage.setItem('token', accessToken);
+    const { token, data } = response.data;
+    localStorage.setItem('user', JSON.stringify(data));
+    const Token = window.localStorage.setItem('token', token);
 
     setSession(Token);
     if (Token !== null) {
-      yield put(isLogin(user));
+      yield put(isLogin(data));
     }
   } catch (error) {
     yield put(isError(error));
@@ -31,13 +39,8 @@ export function* signupSaga(state) {
 
 export function* initialize() {
   try {
-    const Token = window.localStorage.getItem('token');
-    const response = yield axios.get('/api/account/my-account', {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    });
-    const { user } = response.data;
+    const data = window.localStorage.getItem('user');
+    const user = JSON.parse(data);
     yield put(isInitialized(user));
   } catch (error) {
     console.log(error);

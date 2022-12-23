@@ -4,8 +4,8 @@ function path(root, sublink) {
   return `${root}${sublink}`;
 }
 
-const ROOTS_AUTH = '/auth';
-const ROOTS_DASHBOARD = '/dashboard';
+const ROOTS_AUTH = '';
+const ROOTS_DASHBOARD = '';
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export const PATH_PAGE = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   general: {
-    app: path(ROOTS_DASHBOARD, '/app'),
+    app: path(ROOTS_DASHBOARD, '/dashboard'),
     employee: path(ROOTS_DASHBOARD, '/vendor'),
     customer: path(ROOTS_DASHBOARD, '/customer'),
     banking: path(ROOTS_DASHBOARD, '/leads'),
