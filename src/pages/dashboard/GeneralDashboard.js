@@ -6,6 +6,7 @@ import Page from '../../components/Page';
 import StockList from '../../sections/@dashboard/tables/StockListTable';
 import DistributorList from '../../sections/@dashboard/tables/DistributorListTable';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
+import LoadingScreen from '../../components/LoadingScreen';
 
 // ----------------------------------------------------------------------
 
@@ -36,12 +37,18 @@ export default function GeneralDashboard() {
   });
   return (
     <Page title="General: App">
-      <Box>
-        <StockList tableColumn={STOCKE_HEAD} tableRows={stoks} edit={edit} />
-      </Box>
-      <Box sx={{ marginTop: 4 }}>
-        <DistributorList tableColumn={TABLE_HEAD} tableRows={ditributor} />
-      </Box>
+      {!stoks ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <Box>
+            <StockList tableColumn={STOCKE_HEAD} tableRows={stoks} edit={edit} />
+          </Box>
+          <Box sx={{ marginTop: 4 }}>
+            <DistributorList tableColumn={TABLE_HEAD} tableRows={ditributor} />
+          </Box>
+        </>
+      )}
     </Page>
   );
 }

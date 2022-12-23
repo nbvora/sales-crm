@@ -65,7 +65,6 @@ export default function TodoTable({ tableRows, tableColumn, handleedit, handleDe
   };
 
   const handleFilterByName = (filterName) => {
-    console.log('fileter', filterName);
     setFilterName(filterName);
     setPage(0);
   };
