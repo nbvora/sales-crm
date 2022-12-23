@@ -39,7 +39,7 @@ export default function ProfileForm() {
   });
 
   const defaultValues = {
-    displayName: user?.displayName || '',
+    displayName: user?.name || '',
     email: user?.email || '',
     photoURL: user?.photoURL || '',
     phoneNumber: user?.phoneNumber || '',

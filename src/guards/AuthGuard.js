@@ -7,9 +7,6 @@ import { dispatch, useSelector } from '../redux/store';
 // pages
 import Login from '../pages/auth/Login';
 
-// components
-import LoadingScreen from '../components/LoadingScreen';
-
 // ----------------------------------------------------------------------
 
 AuthGuard.propTypes = {
@@ -37,7 +34,7 @@ export default function AuthGuard({ children }) {
   }, []);
 
   if (!user) {
-    return <LoadingScreen />;
+    return <Login />;
   }
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
