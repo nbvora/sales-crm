@@ -2,6 +2,7 @@ import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
 import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
+import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* logOut() {
   yield put(isLogout());
@@ -12,13 +13,22 @@ export function* logOut() {
 export function* signupSaga(state) {
   try {
     const { email, password } = state.data;
-    const response = yield axios.post('/api/account/login', {
-      email,
-      password,
+    // const response = yield axios.post('/api/account/login', {
+    //   email,
+    //   password
+    const response = yield axios.post(`${BASEURL}login`, {
+      email: 'admin@swarasbeverages.com',
+      mobile_no: null,
+      password: 'Admin@123',
+      device_type: '3',
+      device_token: 'fghdfikjvgnsjbghj',
     });
-    const { accessToken, user } = response.data;
+    const { token, user } = response.data;
+    console.log(response.data);
 
-    const Token = window.localStorage.setItem('token', accessToken);
+    console.log(response);
+
+    const Token = window.localStorage.setItem('token', token);
 
     setSession(Token);
     if (Token !== null) {
@@ -38,6 +48,8 @@ export function* initialize() {
       },
     });
     const { user } = response.data;
+
+    console.log(user);
     yield put(isInitialized(user));
   } catch (error) {
     console.log(error);
