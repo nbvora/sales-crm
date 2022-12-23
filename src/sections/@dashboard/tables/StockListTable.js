@@ -1,11 +1,8 @@
-import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
-  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -19,7 +16,6 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 import { UserListHead, UserListToolbar } from '../user/list';
@@ -30,7 +26,6 @@ StockList.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function StockList({ tableRows, tableColumn }) {
-  const theme = useTheme();
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -52,7 +47,7 @@ export default function StockList({ tableRows, tableColumn }) {
     setchecked(!checked);
 
     if (checked) {
-      const newSelecteds = userList.map((n) => n.name);
+      const newSelecteds = userList.map((n) => n.role);
       setSelected(newSelecteds);
       return;
     }
@@ -71,7 +66,7 @@ export default function StockList({ tableRows, tableColumn }) {
   };
 
   const handleDeleteMultiUser = (selected) => {
-    const deleteUsers = userList.filter((user) => !selected.includes(user.name));
+    const deleteUsers = userList.filter((user) => !selected.includes(user.role));
     setSelected([]);
     setUserList(deleteUsers);
   };
@@ -107,41 +102,37 @@ export default function StockList({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                  {userList?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    // const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    // console.log(row, 'row.role_name');
+                    const isItemSelected = selected.indexOf(row.role) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={row.id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          {/* <Avatar alt={row.role} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {row.role_name}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {company}
+                          {row.role}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {role}
+                          {row.role}
                         </TableCell>
                         <TableCell sx={{ padding: '5px' }} align="left">
-                          {isVerified ? 'Yes' : 'No'}
+                          {!row.role ? 'Yes' : 'No'}
                         </TableCell>
                         <TableCell sx={{ padding: '5px' }} align="left">
-                          <Label
-                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(status === 'banned' && 'error') || 'success'}
-                          >
-                            {sentenceCase(status)}
-                          </Label>
+                          0
                         </TableCell>
                       </TableRow>
                     );
@@ -197,14 +188,14 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
   if (query) {
-    return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return array.filter((_user) => _user.role_name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
