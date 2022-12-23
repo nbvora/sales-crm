@@ -42,6 +42,8 @@ export default function StockList({ tableRows, tableColumn }) {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  console.log(tableRows);
+
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -107,8 +109,9 @@ export default function StockList({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {userList?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    console.log(row, 'row.role_name');
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -123,7 +126,7 @@ export default function StockList({ tableRows, tableColumn }) {
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
                           <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {row.role_name}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
@@ -197,8 +200,8 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
@@ -206,5 +209,5 @@ function applySortFilter(array, comparator, query) {
   if (query) {
     return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }
