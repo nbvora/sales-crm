@@ -33,10 +33,9 @@ export default function StockList({ tableRows, tableColumn }) {
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [checked, setchecked] = useState(true);
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('role');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -102,7 +101,7 @@ export default function StockList({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {userList?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     // const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     // console.log(row, 'row.role_name');
                     const isItemSelected = selected.indexOf(row.role) !== -1;

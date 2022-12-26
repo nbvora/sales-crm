@@ -44,7 +44,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [checked, setchecked] = useState(true);
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('category_name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -121,14 +121,13 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {userList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    // const { id, name, status, avatarUrl } = row;
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+                    const { id } = row;
                     const isItemSelected = selected.indexOf(row.category_name) !== -1;
-
                     return (
                       <TableRow
                         hover
-                        key={row.id}
+                        key={id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -141,15 +140,18 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {/* <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}>
+                          <MenuItem
+                          // component={RouterLink}
+                          // to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}
+                          >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
-                            <Label
+                            {/* <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
                               color={(status === 'banned' && 'error') || 'success'}
                             >
                               {sentenceCase(status)}
-                            </Label>
-                          </MenuItem> */}
+                            </Label> */}
+                          </MenuItem>
 
                           {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>
@@ -207,14 +209,14 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
   if (query) {
-    return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return array.filter((_user) => _user.category_name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }

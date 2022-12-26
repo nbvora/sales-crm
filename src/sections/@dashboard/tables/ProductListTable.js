@@ -128,7 +128,7 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {userList?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     // const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(row.product_name) !== -1;
 
@@ -160,15 +160,18 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                           {row.super_stockist}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {/* <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.cards}/${paramCase(row.id)}/edit`}>
+                          <MenuItem
+                          // component={RouterLink}
+                          // to={`${PATH_DASHBOARD.user.cards}/${paramCase(row.id)}/edit`}
+                          >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
-                            <Label
+                            {/* <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                              color={(status === 'banned' && 'error') || 'success'}
+                              color={(row.product_name === 'banned' && 'error') || 'success'}
                             >
-                              {sentenceCase(status)}
-                            </Label>
-                          </MenuItem> */}
+                              {sentenceCase(row.product_name)}
+                            </Label> */}
+                          </MenuItem>
 
                           {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>
@@ -233,7 +236,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return array.filter((_user) => _user.product_name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }

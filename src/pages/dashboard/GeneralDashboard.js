@@ -18,11 +18,11 @@ const TABLE_HEAD = [
   { id: 'status', label: 'Sub Total Amount', alignRight: false },
 ];
 const STOCKE_HEAD = [
-  { id: 'name', label: 'Vendors', alignRight: false },
-  { id: 'company', label: 'Vendor Type', alignRight: false },
-  { id: 'role', label: 'Total Qty', alignRight: false },
-  { id: 'isVerified', label: 'Sell Qty', alignRight: false },
-  { id: 'status', label: 'Remaining Qty', alignRight: false },
+  { id: 'role', label: 'Vendors', alignRight: false },
+  { id: 'Vendor Type', label: 'Vendor Type', alignRight: false },
+  { id: 'Total Qty', label: 'Total Qty', alignRight: false },
+  { id: 'Sell Qty', label: 'Sell Qty', alignRight: false },
+  { id: 'Remaining Qty', label: 'Remaining Qty', alignRight: false },
 ];
 
 export default function GeneralDashboard() {
