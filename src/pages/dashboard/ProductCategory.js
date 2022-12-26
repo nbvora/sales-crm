@@ -20,7 +20,6 @@ export default function ProductCategory() {
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
   });
-  console.log('isssss', isLoading);
   return (
     <Page title="User: Profile">
       {isLoading ? <LoadingScreen /> : <ProductCategoryTable tableColumn={TABLE_HEAD} tableRows={productCategory} />}

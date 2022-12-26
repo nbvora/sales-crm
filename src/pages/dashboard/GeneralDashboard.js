@@ -27,7 +27,8 @@ const STOCKE_HEAD = [
 
 export default function GeneralDashboard() {
   const edit = false;
-  const { stoks, ditributor } = useSelector((state) => state.dashboard);
+  const { stocks, ditributor, isLoading } = useSelector((state) => state.dashboard);
+
   const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
   const title = 'Dashboard';
 
@@ -37,12 +38,12 @@ export default function GeneralDashboard() {
   });
   return (
     <Page title="General: App">
-      {!stoks ? (
+      {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
           <Box>
-            <StockList tableColumn={STOCKE_HEAD} tableRows={stoks} edit={edit} />
+            <StockList tableColumn={STOCKE_HEAD} tableRows={stocks} edit={edit} />
           </Box>
           <Box sx={{ marginTop: 4 }}>
             <DistributorList tableColumn={TABLE_HEAD} tableRows={ditributor} />

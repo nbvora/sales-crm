@@ -1,7 +1,6 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getorderDetail, getviewInvoiceDetail, startLoading, hasError } from '../../slices/orderDetail';
-import { _userList } from '../../../_mock';
+import { getorderDetail, startLoading, hasError } from '../../slices/orderDetail';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* orderDetailSaga() {

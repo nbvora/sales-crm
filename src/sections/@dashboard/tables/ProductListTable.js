@@ -1,13 +1,11 @@
-import { sentenceCase, paramCase } from 'change-case';
+import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
-  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -22,7 +20,6 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
@@ -38,7 +35,6 @@ export default function ProductListTable({ tableRows, tableColumn }) {
   const importButtonName = 'Product Import';
   const addButtonName = 'Add New Product';
 
-  const theme = useTheme();
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
@@ -49,8 +45,6 @@ export default function ProductListTable({ tableRows, tableColumn }) {
   const [orderBy, setOrderBy] = useState('name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  // console.log(userList,"userList")
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -142,7 +136,6 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
                             {row.product_name}
                           </Typography>
@@ -151,7 +144,7 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                           {row.mrp}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {/* {row.product_name} */}
+                          {/* aaaa */}
                         </TableCell>
                         <TableCell align="center" sx={{ padding: '5px' }}>
                           {row.product_hsncode}
@@ -161,19 +154,17 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem
-                          // component={RouterLink}
-                          // to={`${PATH_DASHBOARD.user.cards}/${paramCase(row.id)}/edit`}
+                            component={RouterLink}
+                            to={`${PATH_DASHBOARD.user.cards}/${paramCase(`${row.id}`)}/edit`}
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             {/* <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
                               color={(row.product_name === 'banned' && 'error') || 'success'}
                             >
-                              {sentenceCase(row.product_name)}
+                              {sentenceCase(status)}
                             </Label> */}
                           </MenuItem>
-
-                          {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>
                       </TableRow>
                     );

@@ -1,13 +1,11 @@
-import { sentenceCase, paramCase } from 'change-case';
+import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
-  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -22,7 +20,6 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
@@ -35,7 +32,7 @@ ProductCategoryTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ProductCategoryTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
+  // const theme = useTheme();
   const addButtonName = 'Add New Category';
   const { themeStretch } = useSettings();
 
@@ -121,28 +118,26 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
-                    const { id } = row;
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const isItemSelected = selected.indexOf(row.category_name) !== -1;
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={row.id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
                             {row.category_name}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem
-                          // component={RouterLink}
-                          // to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}
+                            component={RouterLink}
+                            to={`${PATH_DASHBOARD.user.profile}/${paramCase(`${row.id}`)}/edit`}
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             {/* <Label
@@ -152,8 +147,6 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                               {sentenceCase(status)}
                             </Label> */}
                           </MenuItem>
-
-                          {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>
                       </TableRow>
                     );

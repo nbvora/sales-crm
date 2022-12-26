@@ -4,7 +4,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   Table,
-  Avatar,
   TableRow,
   TableBody,
   TableCell,
