@@ -121,27 +121,27 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, status, avatarUrl } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                  {userList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    // const { id, name, status, avatarUrl } = row;
+                    const isItemSelected = selected.indexOf(row.category_name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={row.id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {row.category_name}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}>
+                          {/* <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}>
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             <Label
                               variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
@@ -149,7 +149,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                             >
                               {sentenceCase(status)}
                             </Label>
-                          </MenuItem>
+                          </MenuItem> */}
 
                           {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
                         </TableCell>

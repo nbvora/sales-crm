@@ -21,6 +21,8 @@ export default function AuthGuard({ children }) {
   useEffect(() => {
     dispatch({ type: sagaActions.INTIALIZED });
     dispatch({ type: sagaActions.GET_STOCKES });
+    dispatch({ type: sagaActions.GET_PRODUCT });
+    dispatch({ type: sagaActions.GET_PRODUCT_CATEGORY });
     dispatch({ type: sagaActions.GET_DISTRIBUTERS });
     dispatch({ type: sagaActions.GET_VENDORS });
     dispatch({ type: sagaActions.GET_CUSTOMERS });

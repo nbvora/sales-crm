@@ -9,6 +9,7 @@ import { ordersSaga } from './ordersSaga';
 import { customerSaga } from './customerSaga';
 import { changePasswordSaga } from './changePasswordSaga';
 import { uploadSaga } from './uploadFileSaga';
+import { inventorySaga } from './inventorySaga';
 
 // eslint-disable-next-line
 export default function* rootSaga() {
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     changePasswordSaga,
     leadsSaga,
     ordersSaga,
+    inventorySaga,
   ];
   yield all(
     sagas.map((saga) =>

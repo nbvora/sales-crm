@@ -5,18 +5,18 @@ import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* logOut() {
-  yield put(isLogout());
-  window.localStorage.removeItem('user');
-  window.localStorage.removeItem('token');
-  setSession(null);
+  const response = yield axios.post(`${BASEURL}logout`);
+  if (response.data.message) {
+    yield put(isLogout());
+    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('token');
+    setSession(null);
+  }
 }
 
 export function* signupSaga(state) {
   try {
     const { email, password } = state.data;
-    // const response = yield axios.post('/api/account/login', {
-    //   email,
-    //   password
     const response = yield axios.post(`${BASEURL}login`, {
       email,
       mobile_no: null,
