@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getProductCategory, startLoading } from '../../slices/inventory';
+import { getProductCategory, startLoading, hasError } from '../../slices/inventory';
 import { _userList } from '../../../_mock';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
@@ -21,6 +21,7 @@ export function* inventoryProductCategorySaga() {
 
     yield put(getProductCategory(data));
   } catch (error) {
+    yield put(hasError());
     console.log(error);
   }
 }

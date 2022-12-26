@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  inventory: null,
-  productCategory: null,
+  inventory: [],
+  productCategory: [],
 };
 const inventory = createSlice({
   name: 'inventory',

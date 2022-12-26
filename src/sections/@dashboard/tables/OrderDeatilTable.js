@@ -111,36 +111,36 @@ export default function OrderDeatilTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, company, avatarUrl, isVerified } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                  {userList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    // const { id, name, role, company, avatarUrl, isVerified } = row;
+                    const isItemSelected = selected?.indexOf('aaa') !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={row.id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {/* {name} */}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {company}
+                          {/* {company} */}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {role}
+                          {/* {role} */}
                         </TableCell>
                         <TableCell align="center" sx={{ padding: '5px' }}>
-                          {isVerified ? 'Yes' : 'No'}
+                          {/* {isVerified ? 'Yes' : 'No'} */}
                         </TableCell>
                         <TableCell align="center" sx={{ padding: '5px' }}>
-                          0
+                          {/* 0 */}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.order.viewInvoiceDetail}`}>
