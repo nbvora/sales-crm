@@ -8,7 +8,7 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function StockImport() {
   const [files, setFiles] = useState([]);
   const headerDetail = [
-    { title: 'StockList', path: PATH_DASHBOARD.user.list },
+    { title: 'StockList', path: PATH_DASHBOARD.inventory.stockmanagement },
     { title: 'Import', path: null },
   ];
   const title = 'Inventory-Managment';

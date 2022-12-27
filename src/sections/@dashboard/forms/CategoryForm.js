@@ -25,7 +25,7 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 export default function CategoryForm() {
   const { id = '' } = useParams();
   const headerDetail = [
-    { title: 'ProductCategory', path: PATH_DASHBOARD.user.profile },
+    { title: 'ProductCategory', path: PATH_DASHBOARD.inventory.productcategory },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
   const title = 'Inventory-Mangment';
@@ -81,7 +81,7 @@ export default function CategoryForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.user.productcategory);
     } catch (error) {
       console.error(error);
     }
@@ -111,7 +111,7 @@ export default function CategoryForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.user.profile}`}
+                to={`${PATH_DASHBOARD.inventory.productcategory}`}
               >
                 Cancel
               </LoadingButton>

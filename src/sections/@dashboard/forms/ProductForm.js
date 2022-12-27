@@ -23,7 +23,7 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 export default function ProductForm() {
   const { id = '' } = useParams();
   const headerDetail = [
-    { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
+    { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
   const title = 'Inventody-Managment';
@@ -98,7 +98,7 @@ export default function ProductForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.user.productlist);
     } catch (error) {
       console.error(error);
     }
@@ -141,7 +141,7 @@ export default function ProductForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.user.cards}`}
+                to={`${PATH_DASHBOARD.inventory.productlist}`}
               >
                 Cancel
               </LoadingButton>

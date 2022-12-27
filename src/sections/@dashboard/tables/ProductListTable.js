@@ -155,7 +155,7 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem
                             component={RouterLink}
-                            to={`${PATH_DASHBOARD.user.cards}/${paramCase(`${row.id}`)}/edit`}
+                            to={`${PATH_DASHBOARD.inventory.productlist}/${paramCase(`${row.id}`)}/edit`}
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             {/* <Label

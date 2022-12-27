@@ -24,7 +24,7 @@ export default function StockForm() {
   const navigate = useNavigate();
   const [list, setList] = useState([{ stock: '', productName: '' }]);
   const headerDetail = [
-    { title: 'StockList', path: PATH_DASHBOARD.user.list },
+    { title: 'StockList', path: PATH_DASHBOARD.inventory.stockmanagement },
     { title: 'Add', path: null },
   ];
   const title = 'Inventory-Managment';
@@ -55,7 +55,7 @@ export default function StockForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.inventory.stockmanagement);
     } catch (error) {
       console.error(error);
     }
@@ -136,7 +136,7 @@ export default function StockForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.user.list}`}
+                to={`${PATH_DASHBOARD.inventory.stockmanagement}`}
               >
                 Cancel
               </LoadingButton>

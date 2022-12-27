@@ -137,7 +137,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <MenuItem
                             component={RouterLink}
-                            to={`${PATH_DASHBOARD.user.profile}/${paramCase(`${row.id}`)}/edit`}
+                            to={`${PATH_DASHBOARD.inventory.productcategory}/${paramCase(`${row.id}`)}/edit`}
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             {/* <Label

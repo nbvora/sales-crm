@@ -25,15 +25,15 @@ const navConfig = [
       { title: 'DashBoard', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
       {
         title: 'Inventory-Management',
-        path: PATH_DASHBOARD.user.root,
+        path: PATH_DASHBOARD.inventory.root,
         icon: ICONS.inventory,
         children: [
-          { title: 'Product Category', path: PATH_DASHBOARD.user.profile },
-          { title: 'Product', path: PATH_DASHBOARD.user.cards },
-          { title: 'Stock Management', path: PATH_DASHBOARD.user.list },
+          { title: 'Product Category', path: PATH_DASHBOARD.inventory.productcategory },
+          { title: 'Product', path: PATH_DASHBOARD.inventory.productlist },
+          { title: 'Stock Management', path: PATH_DASHBOARD.inventory.stockmanagement },
         ],
       },
-      { title: 'Vendors', path: PATH_DASHBOARD.general.employee, icon: ICONS.vendors },
+      { title: 'Vendors', path: PATH_DASHBOARD.general.vendor, icon: ICONS.vendors },
       { title: 'Customers', path: PATH_DASHBOARD.general.customer, icon: ICONS.customers },
       { title: 'Leads', path: PATH_DASHBOARD.lead.root, icon: ICONS.leads },
       { title: 'Order', path: PATH_DASHBOARD.order.root, icon: ICONS.order },
@@ -48,9 +48,9 @@ const navConfig = [
       },
       {
         title: 'invoice',
-        path: PATH_DASHBOARD.invoice.root,
+        path: PATH_DASHBOARD.general.invoice,
         icon: ICONS.invoice,
-        children: [{ title: '2022', path: PATH_DASHBOARD.invoice.root }],
+        children: [{ title: '2022', path: PATH_DASHBOARD.general.invoice }],
       },
       {
         title: 'settings',

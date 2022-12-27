@@ -26,7 +26,7 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function VendorForm() {
   const { id = '' } = useParams();
   const headerDetail = [
-    { title: 'VendorList', path: PATH_DASHBOARD.vendor.root },
+    { title: 'VendorList', path: PATH_DASHBOARD.general.vendor },
     { title: !id ? 'Add' : 'Edit', path: null },
   ];
   const title = 'Vendors';
@@ -94,7 +94,7 @@ export default function VendorForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.general.employee);
+      navigate(PATH_DASHBOARD.general.vendor);
     } catch (error) {
       console.error(error);
     }
@@ -229,7 +229,7 @@ export default function VendorForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.general.employee}`}
+                to={`${PATH_DASHBOARD.general.vendor}`}
               >
                 Cancel
               </LoadingButton>

@@ -172,7 +172,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.vendor.root}/${paramCase(id)}/edit`}
+                              to={`${PATH_DASHBOARD.general.vendor}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>

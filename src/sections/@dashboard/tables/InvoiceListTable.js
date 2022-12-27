@@ -168,7 +168,7 @@ export default function InvoiceListTable({ tableRows, tableColumn }) {
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.invoice.root}/${paramCase(id)}/edit`}
+                              to={`${PATH_DASHBOARD.general.invoice}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>

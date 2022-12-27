@@ -10,7 +10,6 @@ import LoadingScreen from '../../components/LoadingScreen';
 export default function Orders() {
   const { themeStretch } = useSettings();
   const { orderDetail, isLoading } = useSelector((state) => state.orders);
-  console.log(orderDetail);
   const headerDetail = [{ title: 'OrderList', path: null }];
   const title = 'Orders';
   useEffect(() => {
