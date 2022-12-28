@@ -20,7 +20,7 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 // ----------------------------------------------------------------------
 
 export default function ProductForm() {
-  const { inventory } = useSelector((state) => state.inventory);
+  const { productlist } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
   const index = Number(id);
   const headerDetail = [
@@ -33,7 +33,7 @@ export default function ProductForm() {
     dispatch(getTitle(title));
   });
 
-  const currentUser = inventory.find((user) => user.id === index);
+  const currentUser = productlist.find((user) => user.id === index);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
