@@ -1,4 +1,3 @@
-import { paramCase } from 'change-case';
 import * as Yup from 'yup';
 import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
@@ -11,17 +10,19 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-import { dispatch } from '../../../redux/store';
+import { dispatch, useSelector } from '../../../redux/store';
 import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // _mock
-import { countries, _userList } from '../../../_mock';
+import { countries } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ProductForm() {
+  const { inventory } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
+  const index = Number(id);
   const headerDetail = [
     { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
     { title: !id ? 'Add' : 'Edit', path: null },
@@ -32,7 +33,7 @@ export default function ProductForm() {
     dispatch(getTitle(title));
   });
 
-  const currentUser = _userList.find((user) => paramCase(user.id) === id);
+  const currentUser = inventory.find((user) => user.id === index);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -54,10 +55,10 @@ export default function ProductForm() {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
+      name: currentUser?.product_name || '',
+      email: currentUser?.mrp || '',
+      phoneNumber: currentUser?.product_hsncode || '',
+      address: currentUser?.super_stockist || '',
       country: currentUser?.country || '',
       state: currentUser?.state || '',
       city: currentUser?.city || '',

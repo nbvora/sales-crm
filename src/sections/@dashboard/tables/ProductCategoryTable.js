@@ -81,7 +81,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
-  const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(tableRows, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
   const ICON = {
@@ -140,12 +140,6 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                             to={`${PATH_DASHBOARD.inventory.productcategory}/${paramCase(`${row.id}`)}/edit`}
                           >
                             <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
-                            {/* <Label
-                              variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                              color={(status === 'banned' && 'error') || 'success'}
-                            >
-                              {sentenceCase(status)}
-                            </Label> */}
                           </MenuItem>
                         </TableCell>
                       </TableRow>

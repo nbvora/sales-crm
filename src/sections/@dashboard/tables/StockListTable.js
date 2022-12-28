@@ -29,6 +29,7 @@ export default function StockList({ tableRows, tableColumn }) {
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
+
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -72,7 +73,7 @@ export default function StockList({ tableRows, tableColumn }) {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
-  const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(tableRows, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 

@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { paramCase } from 'change-case';
 import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
@@ -10,8 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 // utils
-import { _userList } from '../../../_mock';
-import { dispatch } from '../../../redux/store';
+import { dispatch, useSelector } from '../../../redux/store';
 import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 // routes
@@ -19,11 +17,14 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
 // components
 import { FormProvider, RHFTextField } from '../../../components/hook-form';
+import LoadingScreen from '../../../components/LoadingScreen';
 
 // ----------------------------------------------------------------------
 
 export default function CategoryForm() {
+  const { productCategory } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
+  const index = Number(id);
   const headerDetail = [
     { title: 'ProductCategory', path: PATH_DASHBOARD.inventory.productcategory },
     { title: !id ? 'Add' : 'Edit', path: null },
@@ -33,8 +34,7 @@ export default function CategoryForm() {
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
   });
-
-  const currentUser = _userList.find((user) => paramCase(user.id) === id);
+  const currentUser = productCategory.find((user) => user.id === index);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -43,12 +43,11 @@ export default function CategoryForm() {
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
+      name: currentUser?.category_name || '',
       avatarUrl: currentUser?.avatarUrl || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,40 +87,46 @@ export default function CategoryForm() {
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
-            <Box
-              sx={{
-                display: 'grid',
-                columnGap: 2,
-                rowGap: 3,
-                gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
-              }}
-            >
-              <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
-                Add New Category
-              </Typography>
-              <RHFTextField name="name" label="Category Name" />
-            </Box>
+    <>
+      {productCategory.length === 0 ? (
+        <LoadingScreen />
+      ) : (
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={8}>
+              <Card sx={{ p: 3 }}>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    columnGap: 2,
+                    rowGap: 3,
+                    gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                  }}
+                >
+                  <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
+                    Add New Category
+                  </Typography>
+                  <RHFTextField name="name" label="Category Name" />
+                </Box>
 
-            <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
-              <LoadingButton
-                type="submit"
-                variant="contained"
-                component={RouterLink}
-                to={`${PATH_DASHBOARD.inventory.productcategory}`}
-              >
-                Cancel
-              </LoadingButton>
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'ADD' : 'Edit'}
-              </LoadingButton>
-            </Stack>
-          </Card>
-        </Grid>
-      </Grid>
-    </FormProvider>
+                <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    component={RouterLink}
+                    to={`${PATH_DASHBOARD.inventory.productcategory}`}
+                  >
+                    Cancel
+                  </LoadingButton>
+                  <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                    {!isEdit ? 'ADD' : 'Edit'}
+                  </LoadingButton>
+                </Stack>
+              </Card>
+            </Grid>
+          </Grid>
+        </FormProvider>
+      )}
+    </>
   );
 }

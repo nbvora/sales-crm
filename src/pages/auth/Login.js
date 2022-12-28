@@ -1,13 +1,8 @@
 import { capitalCase } from 'change-case';
-import { Link as RouterLink } from 'react-router-dom';
-// @mui
 import { styled } from '@mui/material/styles';
-import { Box, Stack, Link, Tooltip, Container, Typography } from '@mui/material';
-// routes
-import { PATH_AUTH } from '../../routes/paths';
+import { Box, Stack, Tooltip, Container, Typography } from '@mui/material';
 // hooks
 import useAuth from '../../hooks/useAuth';
-import useResponsive from '../../hooks/useResponsive';
 // components
 import Page from '../../components/Page';
 import Logo from '../../components/Logo';
@@ -54,21 +49,11 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function Login() {
   const { method } = useAuth();
 
-  const smUp = useResponsive('up', 'sm');
-
   return (
     <Page title="Login">
       <RootStyle>
         <HeaderStyle>
           <Logo />
-          {smUp && (
-            <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Don’t have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-                Get started
-              </Link>
-            </Typography>
-          )}
         </HeaderStyle>
 
         <Container maxWidth="sm">
@@ -93,15 +78,6 @@ export default function Login() {
             </Stack>
 
             <LoginForm />
-
-            {!smUp && (
-              <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                Don’t have an account?{' '}
-                <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-                  Get started
-                </Link>
-              </Typography>
-            )}
           </ContentStyle>
         </Container>
       </RootStyle>
