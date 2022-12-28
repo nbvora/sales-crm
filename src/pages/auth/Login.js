@@ -2,7 +2,7 @@ import { capitalCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Stack, Link, Alert, Tooltip, Container, Typography } from '@mui/material';
+import { Box, Stack, Link, Tooltip, Container, Typography } from '@mui/material';
 // routes
 import { PATH_AUTH } from '../../routes/paths';
 // hooks
@@ -91,10 +91,6 @@ export default function Login() {
                 </>
               </Tooltip>
             </Stack>
-
-            <Alert severity="info" sx={{ mb: 3 }}>
-              Use email : <strong>admin@swarasbeverages.com</strong> / password :<strong>Admin@123</strong>
-            </Alert>
 
             <LoginForm />
 

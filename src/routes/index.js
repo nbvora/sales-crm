@@ -29,7 +29,7 @@ export default function Router() {
       path: '',
       children: [
         {
-          path: '',
+          path: 'login',
           element: (
             <GuestGuard>
               <Login />
