@@ -8,11 +8,10 @@ import {
   updateInvoiceSuccess,
   deleteInvoiceSuccess,
 } from '../../slices/invoice';
-import { _userList } from '../../../_mock';
 import { dispatch } from '../../store';
 
 export function* invoiceListSaga() {
-  yield put(getInvoice(_userList));
+  yield put(getInvoice([]));
 }
 
 export function* deleteInvoiceRowSaga(userId) {

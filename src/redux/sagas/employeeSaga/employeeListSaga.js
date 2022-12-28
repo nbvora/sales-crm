@@ -8,11 +8,10 @@ import {
   updateEmployeeSuccess,
   deleteEmployeeSuccess,
 } from '../../slices/employee';
-import { _userList } from '../../../_mock';
 import { dispatch } from '../../store';
 
 export function* employeeListSaga() {
-  yield put(getEmployee(_userList));
+  yield put(getEmployee([]));
 }
 
 export function* deleteEmployeeRowSaga(userId) {

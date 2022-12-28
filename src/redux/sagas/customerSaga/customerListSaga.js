@@ -8,11 +8,10 @@ import {
   updateCustomerSuccess,
   deleteCustomerSuccess,
 } from '../../slices/customers';
-import { _userList } from '../../../_mock';
 import { dispatch } from '../../store';
 
 export function* customerListSaga() {
-  yield put(getCustomers(_userList));
+  yield put(getCustomers([]));
 }
 
 export function* DeleteCustomerRowSaga(userId) {

@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
-// _mock_
-import { _userList } from '../../_mock';
 // components
 import Page from '../../components/Page';
-import { dispatch } from '../../redux/store';
+import { dispatch, useSelector } from '../../redux/store';
 import StockManagementList from '../../sections/@dashboard/tables/StockManagmentTable';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
@@ -21,6 +19,8 @@ const TABLE_HEAD = [
 // ----------------------------------------------------------------------
 
 export default function StockManagement() {
+  const { stockManagment } = useSelector((state) => state.inventory);
+
   const headerDetail = [{ title: 'StockList', path: null }];
   const title = 'Inventory-Managment';
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function StockManagement() {
   });
   return (
     <Page title="User: StockList">
-      <StockManagementList tableColumn={TABLE_HEAD} tableRows={_userList} />
+      <StockManagementList tableColumn={TABLE_HEAD} tableRows={stockManagment} />
     </Page>
   );
 }

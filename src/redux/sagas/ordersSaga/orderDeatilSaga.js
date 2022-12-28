@@ -26,5 +26,5 @@ export function* orderDetailSaga() {
 }
 
 export function* viewInvoiceDetailSaga() {
-  // yield put(getviewInvoiceDetail(_userList));
+  // yield put(getviewInvoiceDetail([]));
 }

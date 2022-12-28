@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  inventory: [],
+  productList: [],
   productCategory: [],
+  stockManagment: [],
 };
 const inventory = createSlice({
   name: 'inventory',
@@ -19,14 +20,18 @@ const inventory = createSlice({
     },
     getProduct(state, action) {
       state.isLoading = false;
-      state.inventory = action.payload;
+      state.productList = action.payload;
     },
     getProductCategory(state, action) {
       state.isLoading = false;
       state.productCategory = action.payload;
     },
+    getStockManagmant(state, action) {
+      state.isLoading = false;
+      state.stockManagment = action.payload;
+    },
   },
 });
 
 export default inventory.reducer;
-export const { startLoading, hasError, getProduct, getProductCategory } = inventory.actions;
+export const { startLoading, hasError, getProduct, getProductCategory, getStockManagmant } = inventory.actions;

@@ -8,7 +8,7 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function VendorImport() {
   const [files, setFiles] = useState([]);
   const headerDetail = [
-    { title: 'VendorList', path: PATH_DASHBOARD.vendor.root },
+    { title: 'VendorList', path: PATH_DASHBOARD.general.vendor },
     { title: 'Import', path: null },
   ];
   const title = 'Vendors';

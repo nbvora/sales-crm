@@ -207,6 +207,15 @@ export default function LeadTable({ tableRows, tableColumn }) {
                       <TableCell colSpan={6} />
                     </TableRow>
                   )}
+                  {tableRows.length === 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography gutterBottom align="center" variant="subtitle1">
+                          Data not found
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
                 {isNotFound && (
                   <TableBody>
