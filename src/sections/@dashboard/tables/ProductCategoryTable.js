@@ -1,11 +1,16 @@
-import { paramCase } from 'change-case';
+import { sentenceCase, paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 
 import {
   Card,
   Table,
+  Box,
+  Tabs,
+  Tab,
+  Switch,
   TableRow,
   TableBody,
   TableCell,
@@ -17,9 +22,12 @@ import {
 } from '@mui/material';
 // hooks
 import useSettings from '../../../hooks/useSettings';
+
 // _mock_
 // components
 import Page from '../../../components/Page';
+import AlertDialogSlide from '../../../components/dialogBox/AlertDialogSlide';
+import Label from '../../../components/Label';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
@@ -32,7 +40,7 @@ ProductCategoryTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ProductCategoryTable({ tableRows, tableColumn }) {
-  // const theme = useTheme();
+  const theme = useTheme();
   const addButtonName = 'Add New Category';
   const { themeStretch } = useSettings();
 
@@ -44,6 +52,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
   const [orderBy, setOrderBy] = useState('category_name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [status, setStatus] = useState(0);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -72,7 +81,11 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
     setFilterName(filterName);
     setPage(0);
   };
-
+  const handleDeleteUser = (userId) => {
+    const deleteUser = userList.filter((user) => user.id !== userId);
+    setSelected([]);
+    setUserList(deleteUser);
+  };
   const handleDeleteMultiUser = (selected) => {
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
@@ -134,13 +147,33 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                             {row.category_name}
                           </Typography>
                         </TableCell>
+                        <TableCell sx={{ alignItems: 'center', padding: '5px' }}>
+                          {/* <Label
+                              variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
+                              color={'success'}
+                            >
+                              {sentenceCase('Active')}
+                            </Label> */}
+                          <AlertDialogSlide />
+                        </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          <MenuItem
-                            component={RouterLink}
-                            to={`${PATH_DASHBOARD.inventory.productcategory}/${paramCase(`${row.id}`)}/edit`}
-                          >
-                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
-                          </MenuItem>
+                          <Box sx={{ display: 'flex' }}>
+                            <MenuItem style={{ padding: '0px' }}>
+                              <Iconify
+                                icon={'eva:trash-2-outline'}
+                                sx={{ ...ICON }}
+                                onClick={() => handleDeleteUser(row.id)}
+                              />
+                            </MenuItem>
+
+                            <MenuItem
+                              style={{ padding: '0px' }}
+                              component={RouterLink}
+                              to={`${PATH_DASHBOARD.inventory.productcategory}/${paramCase(`${row.id}`)}/edit`}
+                            >
+                              <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
+                            </MenuItem>
+                          </Box>
                         </TableCell>
                       </TableRow>
                     );

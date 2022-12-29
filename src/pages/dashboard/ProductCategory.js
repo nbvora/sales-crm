@@ -7,6 +7,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 
 const TABLE_HEAD = [
   { id: 'category_name', label: 'Distributor', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 
