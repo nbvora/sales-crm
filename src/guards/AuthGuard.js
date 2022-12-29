@@ -38,14 +38,8 @@ export default function AuthGuard({ children }) {
     }
   }, [data]);
 
-  if (!user) {
-    return <Login />;
-  }
   if (!isAuthenticated) {
-    if (pathname !== requestedLocation) {
-      setRequestedLocation(pathname);
-    }
-    return <Login />;
+    return <Navigate to={'/login'} />;
   }
 
   if (requestedLocation && pathname !== requestedLocation) {

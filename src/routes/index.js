@@ -29,15 +29,13 @@ export default function Router() {
       path: '',
       children: [
         {
-          path: '',
+          path: 'login',
           element: (
             <GuestGuard>
               <Login />
             </GuestGuard>
           ),
         },
-
-        { path: 'login', element: <Login /> },
 
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'verify', element: <VerifyCode /> },

@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -39,7 +39,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
-
+  const data = window.localStorage.getItem('user');
   const { user } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
@@ -59,7 +59,6 @@ export default function AccountPopover() {
   const handleLogout = async () => {
     try {
       await dispatch({ type: sagaActions.LOG_OUT });
-      navigate(PATH_AUTH.login, { replace: true });
 
       if (isMountedRef.current) {
         handleClose();
@@ -69,6 +68,12 @@ export default function AccountPopover() {
       enqueueSnackbar('Unable to logout!', { variant: 'error' });
     }
   };
+
+  useEffect(() => {
+    if (data === null) {
+      navigate(PATH_AUTH.login, { replace: true });
+    }
+  }, [data]);
 
   return (
     <>

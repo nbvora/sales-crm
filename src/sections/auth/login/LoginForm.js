@@ -34,7 +34,7 @@ export default function LoginForm() {
   const defaultValues = {
     email: userDetail?.email || '',
     password: userDetail?.password || '',
-    remember: userDetail?.remember || '',
+    remember: true,
   };
 
   const methods = useForm({
