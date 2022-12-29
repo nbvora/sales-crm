@@ -32,9 +32,9 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: userDetail.email,
-    password: userDetail.password,
-    remember: userDetail.remember,
+    email: userDetail?.email || '',
+    password: userDetail?.password || '',
+    remember: userDetail?.remember || '',
   };
 
   const methods = useForm({
