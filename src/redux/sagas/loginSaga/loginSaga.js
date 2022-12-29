@@ -1,4 +1,5 @@
 import { put } from 'redux-saga/effects';
+import Cookie from 'universal-cookie';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
 import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
@@ -16,7 +17,7 @@ export function* logOut() {
 
 export function* signupSaga(state) {
   try {
-    const { email, password } = state.data;
+    const { email, password, remember } = state.data;
     const response = yield axios.post(`${BASEURL}login`, {
       email,
       mobile_no: null,
@@ -24,11 +25,18 @@ export function* signupSaga(state) {
       device_type: '3',
       device_token: 'fghdfikjvgnsjbghj',
     });
+
     const { token, data } = response.data;
     localStorage.setItem('user', JSON.stringify(data));
     const Token = window.localStorage.setItem('token', token);
 
     setSession(Token);
+    const cookies = new Cookie();
+    if (remember) {
+      cookies.set('auth-user', state.data, {
+        expires: new Date(Date.now - 82800),
+      });
+    }
     if (Token !== null) {
       yield put(isLogin(data));
     }

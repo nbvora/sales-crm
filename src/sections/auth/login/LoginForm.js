@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import * as Yup from 'yup';
 import { useState } from 'react';
+import Cookie from 'universal-cookie';
 import { Link as RouterLink } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
@@ -22,6 +23,8 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 export default function LoginForm() {
   const { invalidCredential } = useSelector((state) => state.login);
   const [showPassword, setShowPassword] = useState(false);
+  const cookies = new Cookie();
+  const userDetail = cookies.get('auth-user');
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -29,9 +32,9 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: '',
-    password: '',
-    remember: true,
+    email: userDetail.email,
+    password: userDetail.password,
+    remember: userDetail.remember,
   };
 
   const methods = useForm({
