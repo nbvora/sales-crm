@@ -25,15 +25,15 @@ export default function CategoryForm() {
   const { productCategory } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
   const index = Number(id);
-  const headerDetail = [
-    { title: 'ProductCategory', path: PATH_DASHBOARD.inventory.productcategory },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Inventory-Mangment';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'ProductCategory', path: PATH_DASHBOARD.inventory.productcategory },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Inventory-Mangment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
   const currentUser = productCategory.find((user) => user.id === index);
   const isEdit = currentUser && true;
 

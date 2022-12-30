@@ -22,11 +22,11 @@ export default function CommanTodo({ title }) {
   const [todos, setTodos] = useState([]);
   const [edit, setedit] = useState('');
   const [index, setIndex] = useState();
-  const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
 
   useEffect(() => {
+    const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
     dispatch(getHeaderDetail(headerDetail));
-  });
+  }, []);
 
   const handlechange = (e) => {
     setValue(e.target.value);

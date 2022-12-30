@@ -7,15 +7,15 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 
 export default function LeadImport() {
   const [files, setFiles] = useState([]);
-  const headerDetail = [
-    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
-    { title: 'Import', path: null },
-  ];
-  const title = 'Leads';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+      { title: 'Import', path: null },
+    ];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const handleUplodFile = () => {
     if (files.length !== 0) {

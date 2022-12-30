@@ -10,12 +10,12 @@ import LoadingScreen from '../../components/LoadingScreen';
 export default function Orders() {
   const { themeStretch } = useSettings();
   const { orderDetail, isLoading } = useSelector((state) => state.orders);
-  const headerDetail = [{ title: 'OrderList', path: null }];
-  const title = 'Orders';
   useEffect(() => {
+    const headerDetail = [{ title: 'OrderList', path: null }];
+    const title = 'Orders';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   const ORDER_DETAIL_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'company', label: 'Mobile', alignRight: false },

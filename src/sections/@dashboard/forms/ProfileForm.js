@@ -27,12 +27,12 @@ export default function ProfileForm() {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useSelector((state) => state.login);
 
-  const headerDetail = [{ title: 'Profile', path: null }];
-  const title = 'Dashboard';
   useEffect(() => {
+    const headerDetail = [{ title: 'Profile', path: null }];
+    const title = 'Dashboard';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const UpdateUserSchema = Yup.object().shape({
     displayName: Yup.string().required('Name is required'),

@@ -25,15 +25,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function InvoiceForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: '2022', path: PATH_DASHBOARD.general.invoice },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'invoice';
   useEffect(() => {
+    const headerDetail = [
+      { title: '2022', path: PATH_DASHBOARD.general.invoice },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'invoice';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;

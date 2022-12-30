@@ -73,7 +73,7 @@ export default function AccountPopover() {
     if (data === null) {
       navigate(PATH_AUTH.login, { replace: true });
     }
-  }, [data]);
+  }, [data, navigate]);
 
   return (
     <>

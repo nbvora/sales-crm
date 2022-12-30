@@ -26,15 +26,15 @@ export default function LeadForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
-  const headerDetail = [
-    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Leads';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const navigate = useNavigate();
 

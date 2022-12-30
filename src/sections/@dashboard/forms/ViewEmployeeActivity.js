@@ -14,15 +14,15 @@ const VIEW_EMP_DETAIL_HEAD = [
   { id: 'Actions', label: 'Actions', alignRight: false },
 ];
 export default function ViewInvoiceDeatilForm() {
-  const headerDetail = [
-    { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
-    { title: 'View', path: null },
-  ];
-  const title = 'Employee';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
+      { title: 'View', path: null },
+    ];
+    const title = 'Employee';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <>
       <ViewEmployeeActivityTable

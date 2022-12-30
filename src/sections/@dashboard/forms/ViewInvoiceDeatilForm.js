@@ -14,15 +14,15 @@ const ORDER_VIEW_INVOICE_DETAIL_HEAD = [
   { id: 'Actions', label: 'Actions', alignRight: false },
 ];
 export default function ViewInvoiceDeatilForm() {
-  const headerDetail = [
-    { title: 'OrderList', path: PATH_DASHBOARD.order.root },
-    { title: 'View', path: null },
-  ];
-  const title = 'Orders';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'OrderList', path: PATH_DASHBOARD.order.root },
+      { title: 'View', path: null },
+    ];
+    const title = 'Orders';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <>
       <ViewInvoiceDeatilTable

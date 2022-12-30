@@ -1,16 +1,12 @@
-import { sentenceCase, paramCase } from 'change-case';
+import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 
 import {
   Card,
   Table,
   Box,
-  Tabs,
-  Tab,
-  Switch,
   TableRow,
   TableBody,
   TableCell,
@@ -26,8 +22,7 @@ import useSettings from '../../../hooks/useSettings';
 // _mock_
 // components
 import Page from '../../../components/Page';
-import AlertDialogSlide from '../../../components/dialogBox/AlertDialogSlide';
-import Label from '../../../components/Label';
+import StatusToggle from '../../../components/dialogBox/StatusToggle';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
@@ -40,7 +35,6 @@ ProductCategoryTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ProductCategoryTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
   const addButtonName = 'Add New Category';
   const { themeStretch } = useSettings();
 
@@ -52,7 +46,6 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
   const [orderBy, setOrderBy] = useState('category_name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [status, setStatus] = useState(0);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -148,13 +141,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                           </Typography>
                         </TableCell>
                         <TableCell sx={{ alignItems: 'center', padding: '5px' }}>
-                          {/* <Label
-                              variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                              color={'success'}
-                            >
-                              {sentenceCase('Active')}
-                            </Label> */}
-                          <AlertDialogSlide />
+                          <StatusToggle />
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Box sx={{ display: 'flex' }}>

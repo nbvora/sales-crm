@@ -14,13 +14,12 @@ const TABLE_HEAD = [
 export default function ProductCategory() {
   const { productCategory, isLoading } = useSelector((state) => state.inventory);
 
-  const headerDetail = [{ title: 'ProductCategory', path: null }];
-  const title = 'Inventory-Managment';
-
   useEffect(() => {
+    const headerDetail = [{ title: 'ProductCategory', path: null }];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="User: Profile">
       {isLoading ? <LoadingScreen /> : <ProductCategoryTable tableColumn={TABLE_HEAD} tableRows={productCategory} />}

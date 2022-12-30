@@ -25,15 +25,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function VendorForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'VendorList', path: PATH_DASHBOARD.general.vendor },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Vendors';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'VendorList', path: PATH_DASHBOARD.general.vendor },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Vendors';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;

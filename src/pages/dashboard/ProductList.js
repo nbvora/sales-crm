@@ -17,13 +17,12 @@ const TABLE_HEAD = [
 export default function ProductList() {
   const { productList, isLoading } = useSelector((state) => state.inventory);
 
-  const headerDetail = [{ title: 'ProductList', path: null }];
-  const title = 'Inventory-Managment';
-
   useEffect(() => {
+    const headerDetail = [{ title: 'ProductList', path: null }];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="User: Cards">
       {isLoading ? <LoadingScreen /> : <ProductListTable tableColumn={TABLE_HEAD} tableRows={productList} />}

@@ -23,15 +23,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function StockForm() {
   const navigate = useNavigate();
   const [list, setList] = useState([{ stock: '', productName: '' }]);
-  const headerDetail = [
-    { title: 'StockList', path: PATH_DASHBOARD.inventory.stockmanagement },
-    { title: 'Add', path: null },
-  ];
-  const title = 'Inventory-Managment';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'StockList', path: PATH_DASHBOARD.inventory.stockmanagement },
+      { title: 'Add', path: null },
+    ];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const addRows = () => {
     setList([...list, { stock: '', productName: '' }]);

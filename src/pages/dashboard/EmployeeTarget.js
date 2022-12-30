@@ -14,12 +14,12 @@ const TABLE_HEAD = [
 ];
 export default function EmployeeTarget() {
   const { employee } = useSelector((state) => state.employee);
-  const headerDetail = [{ title: 'EmployeeTarget', path: null }];
-  const title = 'Employee';
   useEffect(() => {
+    const headerDetail = [{ title: 'EmployeeTarget', path: null }];
+    const title = 'Employee';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <>
       <Page title="Employee: Employeetarget">

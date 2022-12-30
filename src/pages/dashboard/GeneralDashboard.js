@@ -28,13 +28,12 @@ export default function GeneralDashboard() {
   const edit = false;
   const { stocks, ditributor } = useSelector((state) => state.dashboard);
 
-  const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
-  const title = 'Dashboard';
-
   useEffect(() => {
+    const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
+    const title = 'Dashboard';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   return (
     <Page title="General: App">

@@ -14,13 +14,13 @@ const TABLE_HEAD = [
 
 export default function Invoice() {
   const { invoice } = useSelector((state) => state.invoice);
-  const headerDetail = [{ title: '2022', path: null }];
-  const title = 'invoice';
 
   useEffect(() => {
+    const headerDetail = [{ title: '2022', path: null }];
+    const title = 'Invoice';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="General: Invoice">
       <InvoiceListTable tableColumn={TABLE_HEAD} tableRows={invoice} />

@@ -25,16 +25,16 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function EmployeeTargetForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'EmployeeTarget', path: PATH_DASHBOARD.employee.employeetarget },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-
-  const title = 'Employee';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'EmployeeTarget', path: PATH_DASHBOARD.employee.employeetarget },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+
+    const title = 'Employee';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;

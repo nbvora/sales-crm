@@ -11,13 +11,12 @@ export default function Leads() {
   const { themeStretch } = useSettings();
   const { leadTable, isLoading } = useSelector((state) => state.leads);
 
-  const headerDetail = [{ title: 'LeadList', path: null }];
-  const title = 'Leads';
-
   useEffect(() => {
+    const headerDetail = [{ title: 'LeadList', path: null }];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   const TABLE_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'role', label: 'Role', alignRight: false },

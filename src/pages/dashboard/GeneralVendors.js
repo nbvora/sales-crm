@@ -15,13 +15,12 @@ const TABLE_HEAD = [
 export default function GeneralVendors() {
   const { vendors } = useSelector((state) => state.vendors);
 
-  const headerDetail = [{ title: 'VendorList', path: null }];
-  const title = 'Vendors';
-
   useEffect(() => {
+    const headerDetail = [{ title: 'VendorList', path: null }];
+    const title = 'Vendors';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="General: Vendors">
       <VendorsList tableColumn={TABLE_HEAD} tableRows={vendors} />

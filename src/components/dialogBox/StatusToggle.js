@@ -10,18 +10,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
-
-export default function AlertDialogSlide() {
+export default function StatusToggle() {
   const [open, setOpen] = React.useState(false);
-  const [status, setStatus] = useState(0);
   const [agree, setAgree] = useState(true);
 
-  const handleClickOpen = (i) => {
+  const handleClickOpen = () => {
     setOpen(true);
-    setStatus(i);
   };
 
   const handleClose = () => {
@@ -36,12 +30,12 @@ export default function AlertDialogSlide() {
   return (
     <div>
       <Dialog open={open} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
-        <DialogTitle>
-          <ErrorOutlineIcon style={{ width: '80px', height: '80px', display: 'block' }} />
+        <DialogTitle style={{ margin: 'auto' }}>
+          <ErrorOutlineIcon style={{ width: '80px', height: '80px', display: 'block', margin: 'auto' }} />
           {'Are You Sure?'}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+          <DialogContentText id="alert-dialog-slide-description" style={{ margin: 'auto' }}>
             Are you sure want to change status ?
           </DialogContentText>
         </DialogContent>
@@ -53,8 +47,8 @@ export default function AlertDialogSlide() {
 
       <Tabs
         value={agree ? 0 : 1}
-        onChange={(event, newValue) => {
-          handleClickOpen(newValue);
+        onChange={() => {
+          handleClickOpen();
         }}
       >
         <Tab label="Active" />

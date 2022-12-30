@@ -25,15 +25,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function CustomerForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
-  const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Customers';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Customers';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();

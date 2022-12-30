@@ -23,15 +23,15 @@ export default function ProductForm() {
   const { productlist } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
   const index = Number(id);
-  const headerDetail = [
-    { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Inventody-Managment';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Inventody-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const currentUser = productlist.find((user) => user.id === index);
   const isEdit = currentUser && true;

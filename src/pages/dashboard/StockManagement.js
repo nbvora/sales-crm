@@ -21,12 +21,12 @@ const TABLE_HEAD = [
 export default function StockManagement() {
   const { stockManagment } = useSelector((state) => state.inventory);
 
-  const headerDetail = [{ title: 'StockList', path: null }];
-  const title = 'Inventory-Managment';
   useEffect(() => {
+    const headerDetail = [{ title: 'StockList', path: null }];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="User: StockList">
       <StockManagementList tableColumn={TABLE_HEAD} tableRows={stockManagment} />
