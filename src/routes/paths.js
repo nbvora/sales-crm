@@ -4,8 +4,8 @@ function path(root, sublink) {
   return `${root}${sublink}`;
 }
 
-const ROOTS_AUTH = '';
-const ROOTS_DASHBOARD = '';
+const ROOTS_AUTH = '/auth';
+const ROOTS_DASHBOARD = '/admin';
 
 // ----------------------------------------------------------------------
 
