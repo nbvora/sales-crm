@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 // hooks
 import useSettings from '../../../hooks/useSettings';
-// _mock_
+
 // components
 import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
@@ -140,19 +140,11 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                             {row.product_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {row.mrp}
-                        </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {/* aaaa */}
-                        </TableCell>
-                        <TableCell align="center" sx={{ padding: '5px' }}>
-                          {row.product_hsncode}
-                        </TableCell>
-                        <TableCell align="center" sx={{ padding: '5px' }}>
-                          {row.super_stockist}
-                        </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
+                        <TableCell align="left">{row.mrp}</TableCell>
+                        <TableCell align="left">{/* aaaa */}</TableCell>
+                        <TableCell align="left">{row.product_hsncode}</TableCell>
+                        <TableCell align="left">{row.super_stockist}</TableCell>
+                        <TableCell align="left">
                           <MenuItem
                             component={RouterLink}
                             to={`${PATH_DASHBOARD.inventory.productlist}/${paramCase(`${row.id}`)}/edit`}

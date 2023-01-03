@@ -7,6 +7,7 @@ import {
   Card,
   Table,
   Box,
+  Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -18,8 +19,6 @@ import {
 } from '@mui/material';
 // hooks
 import useSettings from '../../../hooks/useSettings';
-
-// _mock_
 // components
 import Page from '../../../components/Page';
 import StatusToggle from '../../../components/dialogBox/StatusToggle';
@@ -96,6 +95,16 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
     height: 20,
   };
 
+  function stringAvatar(name) {
+    return {
+      sx: {
+        // bgcolor: stringToColor(name),
+        mr: 1,
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
+  }
+
   return (
     <Page title="Product Category">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -136,6 +145,8 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                          <Avatar {...stringAvatar(`${row.category_name}`)} />
+
                           <Typography variant="subtitle2" noWrap>
                             {row.category_name}
                           </Typography>
@@ -143,7 +154,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                         <TableCell sx={{ alignItems: 'center', padding: '5px' }}>
                           <StatusToggle />
                         </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
+                        <TableCell align="left">
                           <Box sx={{ display: 'flex' }}>
                             <MenuItem style={{ padding: '0px' }}>
                               <Iconify

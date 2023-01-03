@@ -122,18 +122,10 @@ export default function StockList({ tableRows, tableColumn }) {
                             {row.role_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {row.role}
-                        </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {row.role}
-                        </TableCell>
-                        <TableCell sx={{ padding: '5px' }} align="left">
-                          {!row.role ? 'Yes' : 'No'}
-                        </TableCell>
-                        <TableCell sx={{ padding: '5px' }} align="left">
-                          0
-                        </TableCell>
+                        <TableCell align="left">{row.role}</TableCell>
+                        <TableCell align="left">1</TableCell>
+                        <TableCell align="left">{!row.role ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">0</TableCell>
                       </TableRow>
                     );
                   })}
