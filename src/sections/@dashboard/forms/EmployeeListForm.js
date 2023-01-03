@@ -43,22 +43,20 @@ export default function EmployeeListForm() {
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    employeeCode: Yup.string().required('Employee Code is required'),
-    designation: Yup.string().required('Designation is required'),
-    location: Yup.string().required('Location is required'),
-    state: Yup.string().required('State is required'),
+    role: Yup.string().required('Role Number is required'),
+    company: Yup.string().required('Company is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentUser?.name || '',
-      employeeCode: currentUser?.email || '',
-      designation: currentUser?.address || '',
-      location: currentUser?.country || '',
-      state: currentUser?.state || '',
       phoneNumber: currentUser?.phoneNumber || '',
+      company: currentUser?.company || '',
+      role: currentUser?.role || '',
       avatarUrl: currentUser?.avatarUrl || '',
+      file: '',
+      date: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -118,8 +116,8 @@ export default function EmployeeListForm() {
               }}
             >
               <RHFTextField name="name" label="Name" />
-              <RHFTextField name="employeeCode" label="Employee Code" />
-              <RHFSelect name="country" label="Designaton" placeholder="Role">
+              <RHFTextField name="role" label="Employee Code" />
+              <RHFSelect name="role" label="Designaton" placeholder="Role">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -127,11 +125,11 @@ export default function EmployeeListForm() {
                   </option>
                 ))}
               </RHFSelect>
-              <RHFTextField name="location" label="Location" />
-              <RHFTextField name="state" label="State" />
-              <RHFTextField name="phoneNumber" label="Mobile Number" />
-              <RHFTextField name="state" label="Password" />
-              <RHFTextField name="phoneNumber" label="Confirm Password" />
+              <RHFTextField name="phoneNumber" label="Location" />
+              <RHFTextField name="name" label="State" />
+              <RHFTextField name="role" label="Mobile Number" />
+              <RHFTextField name="company" label="Password" />
+              <RHFTextField name="company" label="Confirm Password" />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>

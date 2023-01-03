@@ -28,7 +28,12 @@ export default function EmployeeImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.employee.employeelist}`}
+      />
     </>
   );
 }

@@ -10,7 +10,7 @@ export default function ProductImport() {
 
   useEffect(() => {
     const headerDetail = [
-      { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
+      { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
       { title: 'Import', path: null },
     ];
     const title = 'Inventody-Managment';
@@ -27,7 +27,12 @@ export default function ProductImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.inventory.productlist}`}
+      />
     </>
   );
 }

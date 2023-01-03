@@ -9,7 +9,7 @@ export default function CustomerImport() {
   const [files, setFiles] = useState([]);
   useEffect(() => {
     const headerDetail = [
-      { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
+      { title: 'CustomerList', path: PATH_DASHBOARD.general.customer },
       { title: 'Import', path: null },
     ];
     const title = 'Customers';
@@ -27,7 +27,12 @@ export default function CustomerImport() {
 
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.general.customer}`}
+      />
     </>
   );
 }

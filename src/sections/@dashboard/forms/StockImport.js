@@ -26,7 +26,12 @@ export default function StockImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.inventory.stockmanagement}`}
+      />
     </>
   );
 }

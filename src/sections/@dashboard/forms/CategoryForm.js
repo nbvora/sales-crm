@@ -47,8 +47,7 @@ export default function CategoryForm() {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.category_name || '',
-      avatarUrl: currentUser?.avatarUrl || '',
+      name: currentUser?.name || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -80,7 +79,7 @@ export default function CategoryForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.productcategory);
+      navigate(PATH_DASHBOARD.inventory.productcategory);
     } catch (error) {
       console.error(error);
     }

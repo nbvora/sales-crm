@@ -26,7 +26,12 @@ export default function VendorImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.general.vendor}`}
+      />
     </>
   );
 }

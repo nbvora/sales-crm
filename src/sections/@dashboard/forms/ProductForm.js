@@ -20,7 +20,7 @@ import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-
 // ----------------------------------------------------------------------
 
 export default function ProductForm() {
-  const { productlist } = useSelector((state) => state.inventory);
+  const { productList } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
   const index = Number(id);
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function ProductForm() {
     dispatch(getTitle(title));
   }, [id]);
 
-  const currentUser = productlist.find((user) => user.id === index);
+  const currentUser = productList.find((user) => user.id === index);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -42,23 +42,21 @@ export default function ProductForm() {
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
     phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
+    email: Yup.string().required('Email is required').email(),
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    country: Yup.string().required('country is required'),
+    address: Yup.string().required('Address is required'),
+    company: Yup.string().required('Company is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.product_name || '',
-      email: currentUser?.mrp || '',
-      phoneNumber: currentUser?.product_hsncode || '',
-      address: currentUser?.super_stockist || '',
+      name: currentUser?.name || '',
+      email: currentUser?.email || '',
+      phoneNumber: currentUser?.phoneNumber || '',
+      address: currentUser?.address || '',
       country: currentUser?.country || '',
       state: currentUser?.state || '',
       city: currentUser?.city || '',
@@ -99,7 +97,7 @@ export default function ProductForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.productlist);
+      navigate(PATH_DASHBOARD.inventory.productlist);
     } catch (error) {
       console.error(error);
     }
@@ -133,8 +131,8 @@ export default function ProductForm() {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="Product Cartoon Size" />
-              <RHFTextField name="city" label="Product Stock " />
+              <RHFTextField name="address" label="Product Cartoon Size" />
+              <RHFTextField name="company" label="Product Stock " />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
