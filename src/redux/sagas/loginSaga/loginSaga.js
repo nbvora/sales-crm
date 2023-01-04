@@ -36,6 +36,8 @@ export function* signupSaga(state) {
       cookies.set('auth-user', state.data, {
         expires: new Date(Date.now - 82800),
       });
+    } else {
+      cookies.remove('auth-user');
     }
     if (Token !== null) {
       yield put(isLogin(data));

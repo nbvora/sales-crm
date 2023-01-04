@@ -53,13 +53,13 @@ export default function ProductForm() {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
+      name: currentUser?.product_name || '',
+      email: currentUser?.mrp || '',
+      phoneNumber: currentUser?.dealer_destributor || '',
+      address: currentUser?.cartoon_size || '',
       country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
+      state: currentUser?.super_stockist || '',
+      city: currentUser?.product_hsncode || '',
       zipCode: currentUser?.zipCode || '',
       avatarUrl: currentUser?.avatarUrl || '',
       isVerified: currentUser?.isVerified || true,

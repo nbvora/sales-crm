@@ -47,7 +47,7 @@ export default function CategoryForm() {
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
+      name: currentUser?.category_name || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
