@@ -1,14 +1,14 @@
 import { put } from 'redux-saga/effects';
 import axios from '../../../utils/axios';
-import { getorderDetail, startLoading, hasError } from '../../slices/orderDetail';
+import { getProductCategory, startLoading, hasError } from '../../slices/inventory';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
-export function* orderDetailSaga() {
+export function* inventoryProductCategorySaga() {
   try {
     yield put(startLoading());
     const Token = window.localStorage.getItem('token');
     const response = yield axios.post(
-      `${BASEURL}order-list?month=12-2022`,
+      `${BASEURL}stock-detail`,
       {},
       {
         headers: {
@@ -18,13 +18,9 @@ export function* orderDetailSaga() {
     );
     const { data } = response.data;
 
-    yield put(getorderDetail(data));
+    yield put(getProductCategory(data));
   } catch (error) {
     yield put(hasError());
     console.log(error);
   }
-}
-
-export function* viewInvoiceDetailSaga() {
-  // yield put(getviewInvoiceDetail([]));
 }

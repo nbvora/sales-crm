@@ -7,15 +7,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function CustomerImport() {
   const [files, setFiles] = useState([]);
-  const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
-    { title: 'Import', path: null },
-  ];
-  const title = 'Customers';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'CustomerList', path: PATH_DASHBOARD.general.customer },
+      { title: 'Import', path: null },
+    ];
+    const title = 'Customers';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const handleUplodFile = () => {
     if (files.length !== 0) {
@@ -27,7 +27,12 @@ export default function CustomerImport() {
 
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.general.customer}`}
+      />
     </>
   );
 }

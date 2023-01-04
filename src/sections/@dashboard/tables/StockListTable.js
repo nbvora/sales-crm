@@ -29,14 +29,14 @@ export default function StockList({ tableRows, tableColumn }) {
   const { themeStretch } = useSettings();
 
   const [userList, setUserList] = useState(tableRows);
+
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [checked, setchecked] = useState(true);
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('role');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -73,7 +73,7 @@ export default function StockList({ tableRows, tableColumn }) {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
-  const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(tableRows, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
 
@@ -102,7 +102,7 @@ export default function StockList({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {userList?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     // const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     // console.log(row, 'row.role_name');
                     const isItemSelected = selected.indexOf(row.role) !== -1;
@@ -122,24 +122,25 @@ export default function StockList({ tableRows, tableColumn }) {
                             {row.role_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {row.role}
-                        </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          {row.role}
-                        </TableCell>
-                        <TableCell sx={{ padding: '5px' }} align="left">
-                          {!row.role ? 'Yes' : 'No'}
-                        </TableCell>
-                        <TableCell sx={{ padding: '5px' }} align="left">
-                          0
-                        </TableCell>
+                        <TableCell align="left">{row.role}</TableCell>
+                        <TableCell align="left">1</TableCell>
+                        <TableCell align="left">{!row.role ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">0</TableCell>
                       </TableRow>
                     );
                   })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                  {tableRows.length === 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography gutterBottom align="center" variant="subtitle1">
+                          Data not found
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>

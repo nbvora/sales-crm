@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  stocks: null,
-  ditributor: null,
+  stocks: [],
+  ditributor: [],
 };
 const dashboard = createSlice({
   name: 'dashboard',
@@ -19,7 +19,7 @@ const dashboard = createSlice({
     },
     getStokes(state, action) {
       state.isLoading = false;
-      state.stoks = action.payload;
+      state.stocks = action.payload;
     },
     getDistributor(state, action) {
       state.isLoading = false;

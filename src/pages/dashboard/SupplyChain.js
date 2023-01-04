@@ -5,12 +5,12 @@ import { dispatch } from '../../redux/store';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
 
 export default function SupplyChain() {
-  const headerDetail = [{ title: 'Supply Chain', path: null }];
-  const title = 'Settings';
   useEffect(() => {
+    const headerDetail = [{ title: 'Supply Chain', path: null }];
+    const title = 'Settings';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="Supply Chain">
       <CommanTodo />

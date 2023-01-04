@@ -5,18 +5,18 @@ import LeadTable from '../../sections/@dashboard/tables/LeadTable';
 import useSettings from '../../hooks/useSettings';
 import { useSelector, dispatch } from '../../redux/store';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function Leads() {
   const { themeStretch } = useSettings();
-  const { leadTable } = useSelector((state) => state.leads);
-
-  const headerDetail = [{ title: 'LeadList', path: null }];
-  const title = 'Leads';
+  const { leadTable, isLoading } = useSelector((state) => state.leads);
 
   useEffect(() => {
+    const headerDetail = [{ title: 'LeadList', path: null }];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   const TABLE_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'role', label: 'Role', alignRight: false },
@@ -27,7 +27,7 @@ export default function Leads() {
   return (
     <Page title="Leads">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <LeadTable tableColumn={TABLE_HEAD} tableRows={leadTable} />
+        {isLoading ? <LoadingScreen /> : <LeadTable tableColumn={TABLE_HEAD} tableRows={leadTable} />}
       </Container>
     </Page>
   );

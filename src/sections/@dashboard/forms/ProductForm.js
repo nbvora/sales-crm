@@ -1,4 +1,3 @@
-import { paramCase } from 'change-case';
 import * as Yup from 'yup';
 import { useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
@@ -11,28 +10,30 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
-import { dispatch } from '../../../redux/store';
+import { dispatch, useSelector } from '../../../redux/store';
 import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // _mock
-import { countries, _userList } from '../../../_mock';
+import { countries } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function ProductForm() {
+  const { productList } = useSelector((state) => state.inventory);
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Inventody-Managment';
+  const index = Number(id);
   useEffect(() => {
+    const headerDetail = [
+      { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Inventody-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
-  const currentUser = _userList.find((user) => paramCase(user.id) === id);
+  const currentUser = productList.find((user) => user.id === index);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -41,26 +42,24 @@ export default function ProductForm() {
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
     phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
+    email: Yup.string().required('Email is required').email(),
     state: Yup.string().required('State is required'),
     city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    country: Yup.string().required('country is required'),
+    address: Yup.string().required('Address is required'),
+    company: Yup.string().required('Company is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
+      name: currentUser?.product_name || '',
+      email: currentUser?.mrp || '',
+      phoneNumber: currentUser?.dealer_destributor || '',
+      address: currentUser?.cartoon_size || '',
       country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
+      state: currentUser?.super_stockist || '',
+      city: currentUser?.product_hsncode || '',
       zipCode: currentUser?.zipCode || '',
       avatarUrl: currentUser?.avatarUrl || '',
       isVerified: currentUser?.isVerified || true,
@@ -98,7 +97,7 @@ export default function ProductForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.inventory.productlist);
     } catch (error) {
       console.error(error);
     }
@@ -132,8 +131,8 @@ export default function ProductForm() {
                 ))}
               </RHFSelect>
 
-              <RHFTextField name="state" label="Product Cartoon Size" />
-              <RHFTextField name="city" label="Product Stock " />
+              <RHFTextField name="address" label="Product Cartoon Size" />
+              <RHFTextField name="company" label="Product Stock " />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
@@ -141,7 +140,7 @@ export default function ProductForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.user.cards}`}
+                to={`${PATH_DASHBOARD.inventory.productlist}`}
               >
                 Cancel
               </LoadingButton>

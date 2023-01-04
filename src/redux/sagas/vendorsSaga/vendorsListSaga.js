@@ -8,11 +8,10 @@ import {
   createVendorSuccess,
   deleteVendorSuccess,
 } from '../../slices/vendors';
-import { _userList } from '../../../_mock';
 import { dispatch } from '../../store';
 
 export function* vendorsListSaga() {
-  yield put(getVendors(_userList));
+  yield put(getVendors([]));
 }
 
 export function* DeleteVendorRowSaga(userId) {

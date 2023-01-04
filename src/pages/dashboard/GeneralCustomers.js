@@ -13,13 +13,13 @@ const TABLE_HEAD = [
 
 export default function GeneralCustomers() {
   const { customers } = useSelector((state) => state.customers);
-  const headerDetail = [{ title: 'CustomerList', path: null }];
-  const title = 'Customers';
 
   useEffect(() => {
+    const headerDetail = [{ title: 'CustomerList', path: null }];
+    const title = 'Customers';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="General: Customers">
       <CustomerListTable tableColumn={TABLE_HEAD} tableRows={customers} />

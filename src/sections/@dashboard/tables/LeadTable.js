@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {
   Card,
   Table,
-  Avatar,
   Checkbox,
   TableRow,
   TableBody,
@@ -148,7 +147,7 @@ export default function LeadTable({ tableRows, tableColumn }) {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, company, avatarUrl } = row;
+                    const { id, name } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
@@ -164,16 +163,16 @@ export default function LeadTable({ tableRows, tableColumn }) {
                           <Checkbox checked={isItemSelected} onClick={() => handleClick(name)} />
                         </TableCell>
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          {/* <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {/* {name} */}
                           </Typography>
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {company}
+                          {/* {company} */}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
-                          {role}
+                          {/* {role} */}
                         </TableCell>
                         <TableCell align="left" sx={{ padding: '5px' }}>
                           <Box sx={{ display: 'flex' }}>
@@ -206,6 +205,15 @@ export default function LeadTable({ tableRows, tableColumn }) {
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                  {tableRows.length === 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography gutterBottom align="center" variant="subtitle1">
+                          Data not found
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>

@@ -1,12 +1,12 @@
-import { sentenceCase, paramCase } from 'change-case';
+import { paramCase } from 'change-case';
 import { Link as RouterLink } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { useTheme } from '@mui/material/styles';
 import {
   Card,
   Table,
+  Box,
   Avatar,
   TableRow,
   TableBody,
@@ -19,10 +19,9 @@ import {
 } from '@mui/material';
 // hooks
 import useSettings from '../../../hooks/useSettings';
-// _mock_
 // components
 import Page from '../../../components/Page';
-import Label from '../../../components/Label';
+import StatusToggle from '../../../components/dialogBox/StatusToggle';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import SearchNotFound from '../../../components/SearchNotFound';
@@ -35,7 +34,6 @@ ProductCategoryTable.propTypes = {
   tableColumn: PropTypes.any,
 };
 export default function ProductCategoryTable({ tableRows, tableColumn }) {
-  const theme = useTheme();
   const addButtonName = 'Add New Category';
   const { themeStretch } = useSettings();
 
@@ -44,7 +42,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
   const [checked, setchecked] = useState(true);
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('category_name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -75,7 +73,11 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
     setFilterName(filterName);
     setPage(0);
   };
-
+  const handleDeleteUser = (userId) => {
+    const deleteUser = userList.filter((user) => user.id !== userId);
+    setSelected([]);
+    setUserList(deleteUser);
+  };
   const handleDeleteMultiUser = (selected) => {
     const deleteUsers = userList.filter((user) => !selected.includes(user.name));
     setSelected([]);
@@ -84,7 +86,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - userList.length) : 0;
 
-  const filteredUsers = applySortFilter(userList, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(tableRows, getComparator(order, orderBy), filterName);
 
   const isNotFound = !filteredUsers.length && Boolean(filterName);
   const ICON = {
@@ -92,6 +94,16 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
     width: 20,
     height: 20,
   };
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        // bgcolor: stringToColor(name),
+        mr: 1,
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
+  }
 
   return (
     <Page title="Product Category">
@@ -121,37 +133,45 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, status, avatarUrl } = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
-
+                  {filteredUsers?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const isItemSelected = selected.indexOf(row.category_name) !== -1;
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={row.id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} />
+                          <Avatar {...stringAvatar(`${row.category_name}`)} />
+
                           <Typography variant="subtitle2" noWrap>
-                            {name}
+                            {row.category_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left" sx={{ padding: '5px' }}>
-                          <MenuItem component={RouterLink} to={`${PATH_DASHBOARD.user.profile}/${paramCase(id)}/edit`}>
-                            <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
-                            <Label
-                              variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                              color={(status === 'banned' && 'error') || 'success'}
-                            >
-                              {sentenceCase(status)}
-                            </Label>
-                          </MenuItem>
+                        <TableCell sx={{ alignItems: 'center', padding: '5px' }}>
+                          <StatusToggle />
+                        </TableCell>
+                        <TableCell align="left">
+                          <Box sx={{ display: 'flex' }}>
+                            <MenuItem style={{ padding: '0px' }}>
+                              <Iconify
+                                icon={'eva:trash-2-outline'}
+                                sx={{ ...ICON }}
+                                onClick={() => handleDeleteUser(row.id)}
+                              />
+                            </MenuItem>
 
-                          {/* <UserMoreMenu onDelete={() => handleDeleteUser(id)} userName={name} /> */}
+                            <MenuItem
+                              style={{ padding: '0px' }}
+                              component={RouterLink}
+                              to={`${PATH_DASHBOARD.inventory.productcategory}/${paramCase(`${row.id}`)}/edit`}
+                            >
+                              <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
+                            </MenuItem>
+                          </Box>
                         </TableCell>
                       </TableRow>
                     );
@@ -159,6 +179,15 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                  {tableRows.length === 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography gutterBottom align="center" variant="subtitle1">
+                          Data not found
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>
@@ -207,14 +236,14 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  const stabilizedThis = array?.map((el, index) => [el, index]);
+  stabilizedThis?.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
   if (query) {
-    return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return array.filter((_user) => _user.category_name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis?.map((el) => el[0]);
 }

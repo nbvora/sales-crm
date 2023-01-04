@@ -25,15 +25,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function InvoiceForm() {
   const { id = '' } = useParams();
-  const headerDetail = [
-    { title: '2022', path: PATH_DASHBOARD.invoice.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'invoice';
   useEffect(() => {
+    const headerDetail = [
+      { title: '2022', path: PATH_DASHBOARD.general.invoice },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'invoice';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
@@ -92,7 +92,7 @@ export default function InvoiceForm() {
       }
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.invoice.root);
+      navigate(PATH_DASHBOARD.general.invoice);
     } catch (error) {
       console.error(error);
     }
@@ -168,7 +168,7 @@ export default function InvoiceForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.invoice.root}`}
+                to={`${PATH_DASHBOARD.general.invoice}`}
               >
                 Cancel
               </LoadingButton>

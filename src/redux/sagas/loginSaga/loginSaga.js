@@ -1,22 +1,23 @@
 import { put } from 'redux-saga/effects';
+import Cookie from 'universal-cookie';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
 import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* logOut() {
-  yield put(isLogout());
-  window.localStorage.removeItem('user');
-  window.localStorage.removeItem('token');
-  setSession(null);
+  const response = yield axios.post(`${BASEURL}logout`);
+  if (response.data.message) {
+    yield put(isLogout());
+    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('token');
+    setSession(null);
+  }
 }
 
 export function* signupSaga(state) {
   try {
-    const { email, password } = state.data;
-    // const response = yield axios.post('/api/account/login', {
-    //   email,
-    //   password
+    const { email, password, remember } = state.data;
     const response = yield axios.post(`${BASEURL}login`, {
       email,
       mobile_no: null,
@@ -24,11 +25,20 @@ export function* signupSaga(state) {
       device_type: '3',
       device_token: 'fghdfikjvgnsjbghj',
     });
+
     const { token, data } = response.data;
     localStorage.setItem('user', JSON.stringify(data));
     const Token = window.localStorage.setItem('token', token);
 
     setSession(Token);
+    const cookies = new Cookie();
+    if (remember) {
+      cookies.set('auth-user', state.data, {
+        expires: new Date(Date.now - 82800),
+      });
+    } else {
+      cookies.remove('auth-user');
+    }
     if (Token !== null) {
       yield put(isLogin(data));
     }

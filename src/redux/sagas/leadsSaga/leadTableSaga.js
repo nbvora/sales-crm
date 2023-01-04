@@ -9,20 +9,38 @@ import {
   createLeadSuccess,
   deleteLeadSuccess,
 } from '../../slices/leadslice';
-import { _userList } from '../../../_mock';
 import { dispatch } from '../../store';
 import axios from '../../../utils/axios';
+import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* leadTableSaga() {
-  yield put(getleadTable(_userList));
+  try {
+    yield put(startLoading());
+    const Token = window.localStorage.getItem('token');
+    const response = yield axios.post(
+      `${BASEURL}assign-employee`,
+      {},
+      {
+        headers: {
+          authToken: `${Token}`,
+        },
+      }
+    );
+    const { data } = response.data;
+
+    yield put(getleadTable(data));
+  } catch (error) {
+    yield put(hasError());
+    console.log(error);
+  }
 }
 
 export function* orderTableSaga() {
-  yield put(getorderTable(_userList));
+  yield put(getorderTable([]));
 }
 
 export function* discussionTableSaga() {
-  yield put(getdiscussionTable(_userList));
+  yield put(getdiscussionTable([]));
 }
 
 export function* editLeadSaga(eventId) {

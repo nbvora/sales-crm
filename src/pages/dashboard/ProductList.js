@@ -1,30 +1,31 @@
 import { useEffect } from 'react';
 import ProductListTable from '../../sections/@dashboard/tables/ProductListTable';
 import Page from '../../components/Page';
-import { dispatch } from '../../redux/store';
-import { _userList } from '../../_mock';
+import { dispatch, useSelector } from '../../redux/store';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Product Name', alignRight: false },
-  { id: 'company', label: 'Product Price', alignRight: false },
-  { id: 'role', label: 'Product Category', alignRight: false },
-  { id: 'isVerified', label: 'Product HSN Code', alignRight: false },
+  { id: 'product_name', label: 'Product Name', alignRight: false },
+  { id: 'mrp', label: 'Product Price', alignRight: false },
+  { id: 'product_hsncode', label: 'Product Category', alignRight: false },
+  { id: 'super_stockist', label: 'Product HSN Code', alignRight: false },
   { id: 'status', label: 'Available Stock', alignRight: false },
   { id: 'Action', label: 'Action', alignRight: false },
 ];
 
 export default function ProductList() {
-  const headerDetail = [{ title: 'ProductList', path: null }];
-  const title = 'Inventory-Managment';
+  const { productList, isLoading } = useSelector((state) => state.inventory);
 
   useEffect(() => {
+    const headerDetail = [{ title: 'ProductList', path: null }];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="User: Cards">
-      <ProductListTable tableColumn={TABLE_HEAD} tableRows={_userList} />
+      {isLoading ? <LoadingScreen /> : <ProductListTable tableColumn={TABLE_HEAD} tableRows={productList} />}
     </Page>
   );
 }

@@ -7,16 +7,16 @@ import { PATH_DASHBOARD } from '../../../routes/paths';
 
 export default function ProductImport() {
   const [files, setFiles] = useState([]);
-  const headerDetail = [
-    { title: 'ProductList', path: PATH_DASHBOARD.user.cards },
-    { title: 'Import', path: null },
-  ];
-  const title = 'Inventody-Managment';
 
   useEffect(() => {
+    const headerDetail = [
+      { title: 'ProductList', path: PATH_DASHBOARD.inventory.productlist },
+      { title: 'Import', path: null },
+    ];
+    const title = 'Inventody-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const handleUplodFile = () => {
     if (files.length !== 0) {
@@ -27,7 +27,12 @@ export default function ProductImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.inventory.productlist}`}
+      />
     </>
   );
 }

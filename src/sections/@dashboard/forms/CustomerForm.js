@@ -25,15 +25,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 export default function CustomerForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
-  const headerDetail = [
-    { title: 'CustomerList', path: PATH_DASHBOARD.customer.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Customers';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'CustomerList', path: PATH_DASHBOARD.general.customer },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Customers';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
   const isEdit = currentUser && true;
 
   const navigate = useNavigate();
@@ -41,22 +41,23 @@ export default function CustomerForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    firstName: Yup.string().required('First Name is required'),
-    lastName: Yup.string().required('Last Name is required'),
-    mobileNumber: Yup.string().required('Mobile Number is required'),
-    address: Yup.string().required('Employee Name is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('New Password is required'),
-    confirmPasword: Yup.string().oneOf([Yup.ref('newPassword'), null], 'Passwords must match'),
+    name: Yup.string().required('Name is required'),
+    role: Yup.string().required('Role Number is required'),
+    company: Yup.string().required('Company is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    state: Yup.string().required('State is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      firstName: currentUser?.name || '',
-      lastName: currentUser?.name || '',
-      mobileNumber: currentUser?.company || '',
-      address: currentUser?.phoneNumber || '',
-      password: currentUser?.company || '',
-      confirmPasword: currentUser?.company || '',
+      name: currentUser?.name || '',
+      phoneNumber: currentUser?.phoneNumber || '',
+      state: currentUser?.state || '',
+      company: currentUser?.company || '',
+      role: currentUser?.role || '',
+      avatarUrl: currentUser?.avatarUrl || '',
+      file: '',
+      date: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -112,12 +113,12 @@ export default function CustomerForm() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="firstName" label="First Name" />
-              <RHFTextField name="lastName" label="Last Name" />
-              <RHFTextField name="mobileNumber" label="Mobile Number" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="password" label="Password" />
-              <RHFTextField name="confirmPasword" label="Confirm Password" />
+              <RHFTextField name="name" label="First Name" />
+              <RHFTextField name="state" label="Last Name" />
+              <RHFTextField name="phoneNumber" label="Mobile Number" />
+              <RHFTextField name="name" label="Address" />
+              <RHFTextField name="company" label="Password" />
+              <RHFTextField name="role" label="Confirm Password" />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>

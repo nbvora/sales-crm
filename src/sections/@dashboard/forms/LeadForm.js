@@ -26,15 +26,15 @@ export default function LeadForm() {
   const { id = '' } = useParams();
   const currentUser = _userList.find((user) => paramCase(user.id) === id);
   const isEdit = currentUser && true;
-  const headerDetail = [
-    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
-    { title: !id ? 'Add' : 'Edit', path: null },
-  ];
-  const title = 'Leads';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+      { title: !id ? 'Add' : 'Edit', path: null },
+    ];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, [id]);
 
   const navigate = useNavigate();
 
@@ -42,32 +42,20 @@ export default function LeadForm() {
 
   const NewUserSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email(),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
     role: Yup.string().required('Role Number is required'),
-    avatarUrl: Yup.mixed().test('required', 'Avatar is required', (value) => value !== ''),
+    company: Yup.string().required('Company is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentUser?.name || '',
-      email: currentUser?.email || '',
       phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || '',
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
       company: currentUser?.company || '',
       role: currentUser?.role || '',
+      avatarUrl: currentUser?.avatarUrl || '',
+      file: '',
+      date: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -128,7 +116,7 @@ export default function LeadForm() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFSelect name="country" label="Role" placeholder="Role">
+              <RHFSelect name="role" label="Role" placeholder="Role">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -143,6 +131,7 @@ export default function LeadForm() {
             <Box sx={{ marginTop: 3 }}>
               <TextField
                 id="outlined-textarea"
+                name="name"
                 label="Address"
                 placeholder="Address"
                 multiline
@@ -166,7 +155,7 @@ export default function LeadForm() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFSelect name="country" label="Assign Employee" placeholder="Role">
+              <RHFSelect name="role" label="Assign Employee" placeholder="Role">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>
@@ -191,10 +180,10 @@ export default function LeadForm() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="name" label="Lead Type" />
+              <RHFTextField name="company" label="Lead Type" />
               <RHFTextField name="phoneNumber" label="Lead Origin" />
-              <RHFTextField name="company" label="Value of lead" />
-              <RHFSelect name="country" label="Product Name" placeholder="Role">
+              <RHFTextField name="role" label="Value of lead" />
+              <RHFSelect name="company" label="Product Name" placeholder="Role">
                 <option value="" />
                 {countries.map((option) => (
                   <option key={option.code} value={option.label}>

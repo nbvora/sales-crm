@@ -7,15 +7,15 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function EmployeeImport() {
   const [files, setFiles] = useState([]);
-  const headerDetail = [
-    { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
-    { title: 'Import', path: null },
-  ];
-  const title = 'Employee';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'EmployeeList', path: PATH_DASHBOARD.employee.employeelist },
+      { title: 'Import', path: null },
+    ];
+    const title = 'Employee';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const handleUplodFile = () => {
     if (files.length !== 0) {
@@ -28,7 +28,12 @@ export default function EmployeeImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.employee.employeelist}`}
+      />
     </>
   );
 }

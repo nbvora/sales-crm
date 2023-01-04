@@ -172,7 +172,7 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                             <MenuItem
                               style={{ padding: '0px' }}
                               component={RouterLink}
-                              to={`${PATH_DASHBOARD.vendor.root}/${paramCase(id)}/edit`}
+                              to={`${PATH_DASHBOARD.general.vendor}/${paramCase(id)}/edit`}
                             >
                               <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
                             </MenuItem>
@@ -184,6 +184,15 @@ export default function CustomerListTable({ tableRows, tableColumn }) {
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
+                    </TableRow>
+                  )}
+                  {tableRows.length === 0 && (
+                    <TableRow style={{ height: 53 * emptyRows }}>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography gutterBottom align="center" variant="subtitle1">
+                          Data not found
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   )}
                 </TableBody>

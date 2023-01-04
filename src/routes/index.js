@@ -17,7 +17,7 @@ const Loadable = (Component) => (props) => {
   const { pathname } = useLocation();
 
   return (
-    <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/dashboard')} />}>
+    <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/')} />}>
       <Component {...props} />
     </Suspense>
   );
@@ -26,33 +26,24 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
     {
-      path: '',
+      path: 'auth',
       children: [
         {
-          path: '',
+          path: 'login',
           element: (
             <GuestGuard>
               <Login />
             </GuestGuard>
           ),
         },
-        {
-          path: 'register',
-          element: (
-            <GuestGuard>
-              <Register />
-            </GuestGuard>
-          ),
-        },
-        { path: 'login-unprotected', element: <Login /> },
-        { path: 'register-unprotected', element: <Register /> },
+
         { path: 'reset-password', element: <ResetPassword /> },
         { path: 'verify', element: <VerifyCode /> },
       ],
     },
     // Dashboard Routes
     {
-      path: '',
+      path: 'admin',
       element: (
         <AuthGuard>
           <DashboardLayout />
@@ -167,8 +158,6 @@ export default function Router() {
         {
           path: 'invoice',
           children: [
-            // { element: <Navigate to="/dashboard/invoice/posts" replace />, index: true },
-            { path: 'root', element: <Invoice /> },
             { path: 'add', element: <AddInvoice /> },
             { path: ':id/edit', element: <EditInvoice /> },
           ],
@@ -202,7 +191,6 @@ export default function Router() {
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/auth/Login')));
-const Register = Loadable(lazy(() => import('../pages/auth/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/auth/ResetPassword')));
 const VerifyCode = Loadable(lazy(() => import('../pages/auth/VerifyCode')));
 // Dashboard

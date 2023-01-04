@@ -21,12 +21,12 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 
 export default function ChangePasswordForm() {
   const { enqueueSnackbar } = useSnackbar();
-  const headerDetail = [{ title: 'Change Password', path: null }];
-  const title = 'Dashboard';
   useEffect(() => {
+    const headerDetail = [{ title: 'Change Password', path: null }];
+    const title = 'Dashboard';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   const ChangePassWordSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required'),
     newPassword: Yup.string().min(6, 'Password must be at least 6 characters').required('New Password is required'),

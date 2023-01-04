@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSnackbar } from 'notistack';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { paramCase } from 'change-case';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,7 +16,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { PATH_DASHBOARD } from '../../../routes/paths';
 import { dispatch } from '../../../redux/store';
 // _mock
-import { countries } from '../../../_mock';
+import { countries, _userList } from '../../../_mock';
 // components
 import { FormProvider, RHFSelect, RHFTextField } from '../../../components/hook-form';
 import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
@@ -21,27 +24,43 @@ import { getHeaderDetail, getTitle } from '../../../redux/slices/breadcrumbs';
 // ----------------------------------------------------------------------
 
 export default function StockForm() {
+  const { id = '' } = useParams();
   const navigate = useNavigate();
   const [list, setList] = useState([{ stock: '', productName: '' }]);
-  const headerDetail = [
-    { title: 'StockList', path: PATH_DASHBOARD.user.list },
-    { title: 'Add', path: null },
-  ];
-  const title = 'Inventory-Managment';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'StockList', path: PATH_DASHBOARD.inventory.stockmanagement },
+      { title: 'Add', path: null },
+    ];
+    const title = 'Inventory-Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   const addRows = () => {
     setList([...list, { stock: '', productName: '' }]);
   };
 
+  const currentUser = _userList.find((user) => paramCase(user.id) === id);
+
   const { enqueueSnackbar } = useSnackbar();
 
+  const NewUserSchema = Yup.object().shape({
+    country: Yup.string().required('Country is required'),
+    company: Yup.string().required('Product Stock is required'),
+  });
+
+  const defaultValues = useMemo(
+    () => ({
+      country: currentUser?.country || '',
+      company: currentUser?.company || '',
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentUser]
+  );
   const methods = useForm({
-    // resolver: yupResolver(NewUserSchema),
-    // defaultValues,
+    resolver: yupResolver(NewUserSchema),
+    defaultValues,
   });
 
   const {
@@ -55,7 +74,7 @@ export default function StockForm() {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
       enqueueSnackbar('Create success!');
-      navigate(PATH_DASHBOARD.user.list);
+      navigate(PATH_DASHBOARD.inventory.stockmanagement);
     } catch (error) {
       console.error(error);
     }
@@ -94,7 +113,7 @@ export default function StockForm() {
                   </option>
                 ))}
               </RHFSelect>
-              <RHFTextField name="state" label="Product Stock" />
+              <RHFTextField name="company" label="Product Stock" />
 
               <Box style={{ marginTop: '15px' }}>
                 <AddCircleIcon onClick={addRows} />
@@ -136,7 +155,7 @@ export default function StockForm() {
                 type="submit"
                 variant="contained"
                 component={RouterLink}
-                to={`${PATH_DASHBOARD.user.list}`}
+                to={`${PATH_DASHBOARD.inventory.stockmanagement}`}
               >
                 Cancel
               </LoadingButton>

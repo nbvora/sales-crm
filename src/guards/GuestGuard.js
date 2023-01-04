@@ -15,7 +15,7 @@ export default function GuestGuard({ children }) {
   const { isAuthenticated } = useSelector((state) => state.login);
 
   if (isAuthenticated) {
-    return <Navigate to={PATH_DASHBOARD.root} />;
+    return <Navigate to={PATH_DASHBOARD.general.app} />;
   }
 
   return <>{children}</>;

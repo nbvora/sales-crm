@@ -5,16 +5,17 @@ import OrderDetailTable from '../../sections/@dashboard/tables/OrderDeatilTable'
 import useSettings from '../../hooks/useSettings';
 import { useSelector, dispatch } from '../../redux/store';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function Orders() {
   const { themeStretch } = useSettings();
-  const { orderDetail } = useSelector((state) => state.orders);
-  const headerDetail = [{ title: 'OrderList', path: null }];
-  const title = 'Orders';
+  const { orderDetail, isLoading } = useSelector((state) => state.orders);
   useEffect(() => {
+    const headerDetail = [{ title: 'OrderList', path: null }];
+    const title = 'Orders';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   const ORDER_DETAIL_HEAD = [
     { id: 'name', label: 'Name', alignRight: false },
     { id: 'company', label: 'Mobile', alignRight: false },
@@ -26,7 +27,7 @@ export default function Orders() {
   return (
     <Page title="Order Detail">
       <Container maxWidth={themeStretch ? false : 'lg'}>
-        <OrderDetailTable tableColumn={ORDER_DETAIL_HEAD} tableRows={orderDetail} />
+        {isLoading ? <LoadingScreen /> : <OrderDetailTable tableColumn={ORDER_DETAIL_HEAD} tableRows={orderDetail} />}
       </Container>
     </Page>
   );

@@ -23,15 +23,15 @@ const TABLE_HEAD_D = [
 
 export default function ViewLeadDetailForm() {
   const { orderTable, discussionTable } = useSelector((state) => state.leads);
-  const headerDetail = [
-    { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
-    { title: 'View', path: null },
-  ];
-  const title = 'Leads';
   useEffect(() => {
+    const headerDetail = [
+      { title: 'LeadList', path: PATH_DASHBOARD.lead.root },
+      { title: 'View', path: null },
+    ];
+    const title = 'Leads';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
 
   return (
     <>

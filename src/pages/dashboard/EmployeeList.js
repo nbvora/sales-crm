@@ -16,13 +16,13 @@ const TABLE_HEAD = [
 
 export default function EmployeeList() {
   const { employee } = useSelector((state) => state.employee);
-  const headerDetail = [{ title: 'EmployeeList', path: null }];
-  const title = 'Employee';
 
   useEffect(() => {
+    const headerDetail = [{ title: 'EmployeeList', path: null }];
+    const title = 'Employee';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
-  });
+  }, []);
   return (
     <Page title="Employee: EmployeeList">
       <EmployeeListTable tableColumn={TABLE_HEAD} tableRows={employee} />

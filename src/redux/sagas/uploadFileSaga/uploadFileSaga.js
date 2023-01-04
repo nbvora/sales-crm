@@ -3,7 +3,6 @@ import { startLoading, hasError, uploadFileSuccess } from '../../slices/uploadFi
 import { dispatch } from '../../store';
 
 export function* uploadFileSaga(eventId) {
-  console.log(eventId);
   dispatch(startLoading());
   try {
     const response = yield axios.post('/api/calendar/events/update', {

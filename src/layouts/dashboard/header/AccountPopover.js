@@ -39,7 +39,6 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
-
   const { user } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
@@ -59,7 +58,9 @@ export default function AccountPopover() {
   const handleLogout = async () => {
     try {
       await dispatch({ type: sagaActions.LOG_OUT });
-      navigate(PATH_AUTH.login, { replace: true });
+      setTimeout(() => {
+        navigate(PATH_AUTH.login, { replace: true });
+      }, 1000);
 
       if (isMountedRef.current) {
         handleClose();
@@ -108,7 +109,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {user?.name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user?.email}
