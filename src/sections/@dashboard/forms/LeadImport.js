@@ -26,7 +26,12 @@ export default function LeadImport() {
   };
   return (
     <>
-      <CommanImport handleUplodFile={handleUplodFile} files={files} setFiles={setFiles} />
+      <CommanImport
+        handleUplodFile={handleUplodFile}
+        files={files}
+        setFiles={setFiles}
+        navigationLink={`${PATH_DASHBOARD.lead.root}`}
+      />
     </>
   );
 }

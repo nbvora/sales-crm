@@ -44,21 +44,21 @@ export default function EmployeeTargetForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    assignTo: Yup.string().required('Assign To is required'),
-    assignBy: Yup.string().required('Assign By is required'),
-    desingnation: Yup.string().required('Desingnation is required'),
-    month: Yup.string().required('Month is required'),
-    targetAmmount: Yup.string().required('Target Ammount is required'),
+    name: Yup.string().required('Name is required'),
+    role: Yup.string().required('Role Number is required'),
+    company: Yup.string().required('Company is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      assignTo: currentUser?.name || '',
-      assignBy: currentUser?.email || '',
-      desingnation: currentUser?.phoneNumber || '',
-      month: currentUser?.address || '',
-      targetAmmount: currentUser?.country || '',
+      name: currentUser?.name || '',
+      phoneNumber: currentUser?.phoneNumber || '',
+      company: currentUser?.company || '',
+      role: currentUser?.role || '',
       avatarUrl: currentUser?.avatarUrl || '',
+      file: '',
+      date: '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentUser]
@@ -114,10 +114,10 @@ export default function EmployeeTargetForm() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <RHFTextField name="assignBy" label="Designation" />
-              <RHFTextField name="assignTo" label="Employees" />
-              <RHFTextField name="desingnation" label="Target Ammount" />
-              <RHFTextField name="month" label="Month" />
+              <RHFTextField name="name" label="Designation" />
+              <RHFTextField name="phoneNumber" label="Employees" />
+              <RHFTextField name="company" label="Target Ammount" />
+              <RHFTextField name="role" label="Month" />
             </Box>
 
             <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>

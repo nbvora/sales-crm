@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import FileUpload from 'react-material-file-upload';
 import { Box } from '@mui/system';
 import { Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // redux
 
 CommanImport.propTypes = {
   handleUplodFile: PropTypes.func,
   files: PropTypes.array,
   setFiles: PropTypes.func,
+  navigationLink: PropTypes.any,
 };
 
-export default function CommanImport({ handleUplodFile, files, setFiles }) {
+export default function CommanImport({ handleUplodFile, files, setFiles, navigationLink }) {
   const navigate = useNavigate();
 
   return (
@@ -35,13 +35,15 @@ export default function CommanImport({ handleUplodFile, files, setFiles }) {
         >
           Cancel
         </Button>
-        <Button
-          onClick={handleUplodFile}
-          sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }}
-          variant="contained"
-        >
-          Save
-        </Button>
+        <RouterLink to={navigationLink} style={{ textDecoration: 'none' }}>
+          <Button
+            onClick={handleUplodFile}
+            sx={{ position: 'relative', borderRadius: 1, left: 100, top: 100 }}
+            variant="contained"
+          >
+            Save
+          </Button>
+        </RouterLink>
       </Box>
     </>
   );
