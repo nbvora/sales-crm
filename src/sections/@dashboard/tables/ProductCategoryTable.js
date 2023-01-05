@@ -7,7 +7,7 @@ import {
   Card,
   Table,
   Box,
-  Avatar,
+  // Avatar,
   TableRow,
   TableBody,
   TableCell,
@@ -21,6 +21,7 @@ import {
 import useSettings from '../../../hooks/useSettings';
 // components
 import Page from '../../../components/Page';
+import Avatar from '../../../components/Avatar';
 import StatusToggle from '../../../components/dialogBox/StatusToggle';
 import Scrollbar from '../../../components/Scrollbar';
 import { PATH_DASHBOARD } from '../../../routes/paths';
@@ -95,16 +96,6 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
     height: 20,
   };
 
-  function stringAvatar(name) {
-    return {
-      sx: {
-        // bgcolor: stringToColor(name),
-        mr: 1,
-      },
-      children: `${name.split(' ')[0][0]}`,
-    };
-  }
-
   return (
     <Page title="Product Category">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -145,7 +136,7 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                         aria-checked={isItemSelected}
                       >
                         <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Avatar {...stringAvatar(`${row.category_name}`)} />
+                          <Avatar name={`${row.category_name}`} />
 
                           <Typography variant="subtitle2" noWrap>
                             {row.category_name}

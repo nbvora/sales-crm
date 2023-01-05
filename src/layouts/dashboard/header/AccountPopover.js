@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -13,7 +13,7 @@ import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
-import MyAvatar from '../../../components/MyAvatar';
+import Avatar from '../../../components/Avatar';
 import MenuPopover from '../../../components/MenuPopover';
 import { IconButtonAnimate } from '../../../components/animate';
 import SettingMode from '../../../components/settings/SettingMode';
@@ -55,12 +55,15 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
+  useEffect(() => {
+    if (user === null) {
+      navigate(PATH_AUTH.login, { replace: true });
+    }
+  }, [user, navigate]);
+
   const handleLogout = async () => {
     try {
       await dispatch({ type: sagaActions.LOG_OUT });
-      setTimeout(() => {
-        navigate(PATH_AUTH.login, { replace: true });
-      }, 1000);
 
       if (isMountedRef.current) {
         handleClose();
@@ -85,12 +88,12 @@ export default function AccountPopover() {
               height: '100%',
               borderRadius: '50%',
               position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+              bgcolor: (theme) => alpha(theme.palette.grey[700], 0.5),
             },
           }),
         }}
       >
-        <MyAvatar />
+        <Avatar name={user?.name} />
       </IconButtonAnimate>
 
       <MenuPopover

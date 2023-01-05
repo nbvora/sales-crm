@@ -42,7 +42,7 @@ export default function CategoryForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().required('category name is required'),
   });
 
   const defaultValues = useMemo(

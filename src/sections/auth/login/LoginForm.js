@@ -1,8 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Cookie from 'universal-cookie';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +11,7 @@ import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
 import { dispatch, useSelector } from 'src/redux/store';
-import { PATH_AUTH } from '../../../routes/paths';
+import { PATH_AUTH, PATH_DASHBOARD } from '../../../routes/paths';
 
 import sagaActions from '../../../redux/actions';
 // components
@@ -21,10 +21,18 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { invalidCredential } = useSelector((state) => state.login);
+  const navigate = useNavigate();
+  const { invalidCredential, user } = useSelector((state) => state.login);
   const [showPassword, setShowPassword] = useState(false);
   const cookies = new Cookie();
   const userDetail = cookies.get('auth-user');
+
+  useEffect(() => {
+    const Token = window.localStorage.getItem('token');
+    if (Token) {
+      navigate(PATH_DASHBOARD.general.app, { replace: true });
+    }
+  }, [user, navigate]);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),

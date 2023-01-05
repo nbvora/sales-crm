@@ -41,13 +41,13 @@ export default function ProductForm() {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    email: Yup.string().required('Email is required').email(),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
+    name: Yup.string().required('product_name is required'),
+    phoneNumber: Yup.string().required('dealer_destributor is required'),
+    email: Yup.string().required('mrp is required'),
+    state: Yup.string().required('super_stockist is required'),
+    city: Yup.string().required('product_hsncode is required'),
     country: Yup.string().required('country is required'),
-    address: Yup.string().required('Address is required'),
+    address: Yup.string().required('cartoon_size is required'),
     company: Yup.string().required('Company is required'),
   });
 
