@@ -28,6 +28,7 @@ const login = createSlice({
         ...state,
         isAuthenticated: true,
         isInitialized: false,
+        invalidCredential: null,
         user,
       };
     },

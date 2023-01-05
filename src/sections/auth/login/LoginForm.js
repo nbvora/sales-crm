@@ -61,7 +61,9 @@ export default function LoginForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-        {!!invalidCredential && <Alert severity="error">{invalidCredential.message}</Alert>}
+        {!!invalidCredential && invalidCredential?.status === 0 && (
+          <Alert severity="error">{invalidCredential.message}</Alert>
+        )}
 
         <RHFTextField name="email" label="Email address" />
 

@@ -25,24 +25,29 @@ export function* signupSaga(state) {
       device_type: '3',
       device_token: 'fghdfikjvgnsjbghj',
     });
-
-    const { token, data } = response.data;
-    localStorage.setItem('user', JSON.stringify(data));
-    const Token = window.localStorage.setItem('token', token);
-
-    setSession(Token);
-    const cookies = new Cookie();
-    if (remember) {
-      cookies.set('auth-user', state.data, {
-        expires: new Date(Date.now - 82800),
-      });
-    } else {
-      cookies.remove('auth-user');
+    const { token, data, message } = response.data;
+    if (message !== 'Success') {
+      yield put(isError(response.data));
     }
-    if (Token !== null) {
-      yield put(isLogin(data));
+
+    if (token) {
+      localStorage.setItem('user', JSON.stringify(data));
+      const Token = window.localStorage.setItem('token', token);
+      setSession(Token);
+      const cookies = new Cookie();
+      if (remember) {
+        cookies.set('auth-user', state.data, {
+          expires: new Date(Date.now - 82800),
+        });
+      } else {
+        cookies.remove('auth-user');
+      }
+      if (Token !== null) {
+        yield put(isLogin(data));
+      }
     }
   } catch (error) {
+    console.log(error, 'error');
     yield put(isError(error));
   }
 }
