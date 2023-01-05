@@ -1,6 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import * as Yup from 'yup';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Cookie from 'universal-cookie';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,10 +10,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // routes
-import { PATH_AUTH } from '../../../routes/paths';
-// hooks
-import useAuth from '../../../hooks/useAuth';
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
+import { dispatch, useSelector } from 'src/redux/store';
+import { PATH_AUTH, PATH_DASHBOARD } from '../../../routes/paths';
+
+import sagaActions from '../../../redux/actions';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
@@ -19,11 +21,18 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { login } = useAuth();
-
-  const isMountedRef = useIsMountedRef();
-
+  const navigate = useNavigate();
+  const { invalidCredential, user } = useSelector((state) => state.login);
   const [showPassword, setShowPassword] = useState(false);
+  const cookies = new Cookie();
+  const userDetail = cookies.get('auth-user');
+
+  useEffect(() => {
+    const Token = window.localStorage.getItem('token');
+    if (Token) {
+      navigate(PATH_DASHBOARD.general.app, { replace: true });
+    }
+  }, [user, navigate]);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -31,9 +40,9 @@ export default function LoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-    remember: true,
+    email: userDetail?.email || '',
+    password: userDetail?.password || '',
+    remember: userDetail?.remember,
   };
 
   const methods = useForm({
@@ -42,28 +51,17 @@ export default function LoginForm() {
   });
 
   const {
-    reset,
-    setError,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = methods;
-
-  const onSubmit = async (data) => {
-    try {
-      await login(data.email, data.password);
-    } catch (error) {
-      console.error(error);
-      reset();
-      if (isMountedRef.current) {
-        setError('afterSubmit', error);
-      }
-    }
+  const onSubmit = (data) => {
+    dispatch({ type: sagaActions.SIGNUP_SAGA, data });
   };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-        {!!errors.afterSubmit && <Alert severity="error">{errors.afterSubmit.message}</Alert>}
+        {!!invalidCredential && <Alert severity="error">{invalidCredential.message}</Alert>}
 
         <RHFTextField name="email" label="Email address" />
 

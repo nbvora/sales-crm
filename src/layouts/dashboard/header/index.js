@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Box, Stack, AppBar, Toolbar } from '@mui/material';
+import { Box, Stack, AppBar, Toolbar, Typography, Breadcrumbs, Link } from '@mui/material';
+import useSettings from '../../../hooks/useSettings';
+
 // hooks
 import useOffSetTop from '../../../hooks/useOffSetTop';
 import useResponsive from '../../../hooks/useResponsive';
@@ -11,14 +13,11 @@ import cssStyles from '../../../utils/cssStyles';
 import { HEADER, NAVBAR } from '../../../config';
 // components
 import Logo from '../../../components/Logo';
+import { useSelector } from '../../../redux/store';
 import Iconify from '../../../components/Iconify';
 import { IconButtonAnimate } from '../../../components/animate';
 //
-import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
-import LanguagePopover from './LanguagePopover';
-import ContactsPopover from './ContactsPopover';
-import NotificationsPopover from './NotificationsPopover';
 
 // ----------------------------------------------------------------------
 
@@ -58,6 +57,8 @@ DashboardHeader.propTypes = {
 };
 
 export default function DashboardHeader({ onOpenSidebar, isCollapse = false, verticalLayout = false }) {
+  const { themeMode } = useSettings();
+  const { headerDetail, title } = useSelector((state) => state.breadcrumbs);
   const isOffset = useOffSetTop(HEADER.DASHBOARD_DESKTOP_HEIGHT) && !verticalLayout;
 
   const isDesktop = useResponsive('up', 'lg');
@@ -70,21 +71,30 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
           px: { lg: 5 },
         }}
       >
-        {isDesktop && verticalLayout && <Logo sx={{ mr: 2.5 }} />}
+        <Box sx={{ display: 'flex', flexDirection: 'rows' }}>
+          {!isDesktop && (
+            <IconButtonAnimate onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
+              <Iconify icon="eva:menu-2-fill" />
+            </IconButtonAnimate>
+          )}
+          {isDesktop && verticalLayout && <Logo sx={{ mr: 2.5 }} />}
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography variant="h4" sx={{ color: themeMode === 'dark' ? 'white' : 'black' }} gutterBottom>
+              {title}
+            </Typography>
+            <Breadcrumbs aria-label="breadcrumb">
+              {headerDetail.map((item, index) => (
+                <Link key={index} underline="hover" color="inherit" href={item.path}>
+                  {item.title}
+                </Link>
+              ))}
+            </Breadcrumbs>
+          </Box>
+        </Box>
 
-        {!isDesktop && (
-          <IconButtonAnimate onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
-            <Iconify icon="eva:menu-2-fill" />
-          </IconButtonAnimate>
-        )}
-
-        <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <LanguagePopover />
-          <NotificationsPopover />
-          <ContactsPopover />
           <AccountPopover />
         </Stack>
       </Toolbar>

@@ -1,17 +1,58 @@
-export function* signinSaga() {
-  try {
-    const data = yield { name: 'harsh' };
-    console.log(data);
-  } catch (e) {
-    // yield put({ type: "TODO_FETCH_FAILED" });
+import { put } from 'redux-saga/effects';
+import Cookie from 'universal-cookie';
+import axios from '../../../utils/axios';
+import { setSession } from '../../../utils/jwt';
+import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
+import { BASEURL } from '../../../BaseUrl/BaseUrl';
+
+export function* logOut() {
+  const response = yield axios.post(`${BASEURL}logout`);
+  if (response.data.message) {
+    yield put(isLogout());
+    window.localStorage.removeItem('user');
+    window.localStorage.removeItem('token');
+    setSession(null);
   }
 }
 
-export function* signupSaga() {
+export function* signupSaga(state) {
   try {
-    const data = yield { name: 'harsh', surname: 'limbachiya' };
-    console.log(data);
-  } catch (e) {
-    // yield put({ type: "TODO_FETCH_FAILED" });
+    const { email, password, remember } = state.data;
+    const response = yield axios.post(`${BASEURL}login`, {
+      email,
+      mobile_no: null,
+      password,
+      device_type: '3',
+      device_token: 'fghdfikjvgnsjbghj',
+    });
+
+    const { token, data } = response.data;
+    localStorage.setItem('user', JSON.stringify(data));
+    const Token = window.localStorage.setItem('token', token);
+
+    setSession(Token);
+    const cookies = new Cookie();
+    if (remember) {
+      cookies.set('auth-user', state.data, {
+        expires: new Date(Date.now - 82800),
+      });
+    } else {
+      cookies.remove('auth-user');
+    }
+    if (Token !== null) {
+      yield put(isLogin(data));
+    }
+  } catch (error) {
+    yield put(isError(error));
+  }
+}
+
+export function* initialize() {
+  try {
+    const data = window.localStorage.getItem('user');
+    const user = JSON.parse(data);
+    yield put(isInitialized(user));
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -56,8 +56,6 @@ export default function CommonTable({ tableRows, tableColumn }) {
 
   const handleSelectAllClick = () => {
     setchecked(!checked);
-    console.log('checked or unchecked ', checked);
-
     if (checked) {
       const newSelecteds = userList.map((n) => n.name);
       setSelected(newSelecteds);

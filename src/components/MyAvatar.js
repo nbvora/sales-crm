@@ -1,5 +1,5 @@
 // hooks
-import useAuth from '../hooks/useAuth';
+import { useSelector } from '../redux/store';
 // utils
 import createAvatar from '../utils/createAvatar';
 //
@@ -8,16 +8,15 @@ import Avatar from './Avatar';
 // ----------------------------------------------------------------------
 
 export default function MyAvatar({ ...other }) {
-  const { user } = useAuth();
-
+  const { user } = useSelector((state) => state.login);
   return (
     <Avatar
       src={user?.photoURL}
-      alt={user?.displayName}
-      color={user?.photoURL ? 'default' : createAvatar(user?.displayName).color}
+      alt={user?.email}
+      color={user?.name ? 'default' : createAvatar(user?.email).color}
       {...other}
     >
-      {createAvatar(user?.displayName).name}
+      {createAvatar(user?.email).name}
     </Avatar>
   );
 }

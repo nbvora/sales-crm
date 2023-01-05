@@ -1,18 +1,22 @@
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
+import { dispatch, useSelector } from '../../../redux/store';
+import sagaActions from '../../../redux/actions';
+import LanguagePopover from './LanguagePopover';
+
 // routes
 import { PATH_DASHBOARD, PATH_AUTH } from '../../../routes/paths';
 // hooks
-import useAuth from '../../../hooks/useAuth';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 // components
-import MyAvatar from '../../../components/MyAvatar';
+import Avatar from '../../../components/Avatar';
 import MenuPopover from '../../../components/MenuPopover';
 import { IconButtonAnimate } from '../../../components/animate';
+import SettingMode from '../../../components/settings/SettingMode';
 
 // ----------------------------------------------------------------------
 
@@ -23,11 +27,11 @@ const MENU_OPTIONS = [
   },
   {
     label: 'Profile',
-    linkTo: PATH_DASHBOARD.user.profile,
+    linkTo: PATH_DASHBOARD.general.profile,
   },
   {
-    label: 'Settings',
-    linkTo: PATH_DASHBOARD.user.account,
+    label: 'Change Password',
+    linkTo: PATH_DASHBOARD.general.changepassword,
   },
 ];
 
@@ -35,8 +39,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
-
-  const { user, logout } = useAuth();
+  const { user } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
 
@@ -52,10 +55,15 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
+  useEffect(() => {
+    if (user === null) {
+      navigate(PATH_AUTH.login, { replace: true });
+    }
+  }, [user, navigate]);
+
   const handleLogout = async () => {
     try {
-      await logout();
-      navigate(PATH_AUTH.login, { replace: true });
+      await dispatch({ type: sagaActions.LOG_OUT });
 
       if (isMountedRef.current) {
         handleClose();
@@ -80,12 +88,12 @@ export default function AccountPopover() {
               height: '100%',
               borderRadius: '50%',
               position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+              bgcolor: (theme) => alpha(theme.palette.grey[700], 0.5),
             },
           }),
         }}
       >
-        <MyAvatar />
+        <Avatar name={user?.name} />
       </IconButtonAnimate>
 
       <MenuPopover
@@ -104,7 +112,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {user?.name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user?.email}
@@ -114,6 +122,13 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Stack sx={{ p: 1 }}>
+          <Box>
+            <LanguagePopover />
+          </Box>
+          <Box>
+            <SettingMode />
+          </Box>
+
           {MENU_OPTIONS.map((option) => (
             <MenuItem key={option.label} to={option.linkTo} component={RouterLink} onClick={handleClose}>
               {option.label}

@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 // hooks
-import useAuth from '../hooks/useAuth';
-// pages
-import Login from '../pages/auth/Login';
-// components
-import LoadingScreen from '../components/LoadingScreen';
+import sagaActions from '../redux/actions';
+import { dispatch } from '../redux/store';
 
 // ----------------------------------------------------------------------
 
@@ -15,20 +12,32 @@ AuthGuard.propTypes = {
 };
 
 export default function AuthGuard({ children }) {
-  const { isAuthenticated, isInitialized } = useAuth();
+  const data = window.localStorage.getItem('user');
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
-  if (!isInitialized) {
-    return <LoadingScreen />;
-  }
-
-  if (!isAuthenticated) {
-    if (pathname !== requestedLocation) {
-      setRequestedLocation(pathname);
+  useEffect(() => {
+    if (data !== null) {
+      dispatch({ type: sagaActions.INTIALIZED });
+      dispatch({ type: sagaActions.GET_PRODUCT });
+      dispatch({ type: sagaActions.GET_PRODUCT_CATEGORY });
+      dispatch({ type: sagaActions.GET_DISTRIBUTERS });
+      dispatch({ type: sagaActions.GET_VENDORS });
+      dispatch({ type: sagaActions.GET_CUSTOMERS });
+      dispatch({ type: sagaActions.GET_EMPLOYEE });
+      dispatch({ type: sagaActions.GET_INVOICE });
+      dispatch({ type: sagaActions.LEADTABLE_SAGA });
+      dispatch({ type: sagaActions.ORDERTABLE_SAGA });
+      dispatch({ type: sagaActions.DISCUSSIONTABLE_SAGA });
+      dispatch({ type: sagaActions.ORDERDETAIL_SAGA });
+      dispatch({ type: sagaActions.VIEWINVOICEDETAIL_SAGA });
+      dispatch({ type: sagaActions.GET_STOCKES });
     }
-    return <Login />;
-  }
+  }, [data]);
+
+  // if (!isAuthenticated) {
+  //     return <Login/>
+  // }
 
   if (requestedLocation && pathname !== requestedLocation) {
     setRequestedLocation(null);
