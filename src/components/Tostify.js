@@ -15,7 +15,6 @@ Tostify.propTypes = {
 
 export default function Tostify({ status }) {
   const [open, setOpen] = React.useState(false);
-  const [logopen, setLogOpen] = React.useState(false);
 
   const { error } = useSelector((state) => state.login);
 
