@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import { useSelector, dispatch } from '../../redux/store';
 import Page from '../../components/Page';
+import Tostify from '../../components/Tostify';
 import StockList from '../../sections/@dashboard/tables/StockListTable';
 import DistributorList from '../../sections/@dashboard/tables/DistributorListTable';
 import { getHeaderDetail, getTitle } from '../../redux/slices/breadcrumbs';
@@ -26,7 +27,7 @@ const STOCKE_HEAD = [
 
 export default function GeneralDashboard() {
   const edit = false;
-  const { stocks, ditributor } = useSelector((state) => state.dashboard);
+  const { stocks, ditributor, isLoading, error } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     const headerDetail = [{ title: 'DistributorList & StockList', path: null }];
@@ -37,10 +38,11 @@ export default function GeneralDashboard() {
 
   return (
     <Page title="General: App">
-      {stocks.length === 0 ? (
+      {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
+          <Tostify status={error} />
           <Box>
             <StockList tableColumn={STOCKE_HEAD} tableRows={stocks} edit={edit} />
           </Box>

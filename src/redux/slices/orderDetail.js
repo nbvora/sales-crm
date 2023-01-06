@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isLoading: false,
-  error: null,
+  error: false,
   orderDetail: [],
   viewInvoiceDetail: null,
 };
@@ -13,13 +13,14 @@ const orders = createSlice({
     startLoading(state) {
       state.isLoading = true;
     },
-    hasError(state, action) {
+    hasError(state) {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = true;
     },
     getorderDetail(state, action) {
       state.isLoading = false;
       state.orderDetail = action.payload;
+      state.error = false;
     },
     getviewInvoiceDetail(state, action) {
       state.isLoading = false;

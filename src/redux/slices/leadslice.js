@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isLoading: false,
-  error: null,
+  error: false,
   leadTable: [],
   orderTable: null,
   discussionTable: null,
@@ -14,17 +14,19 @@ const leads = createSlice({
     startLoading(state) {
       state.isLoading = true;
     },
-    hasError(state, action) {
+    hasError(state) {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = true;
     },
     getleadTable(state, action) {
       state.isLoading = false;
       state.leadTable = action.payload;
+      state.error = false;
     },
     getorderTable(state, action) {
       state.isLoading = false;
       state.orderTable = action.payload;
+      state.error = false;
     },
     getdiscussionTable(state, action) {
       state.isLoading = false;

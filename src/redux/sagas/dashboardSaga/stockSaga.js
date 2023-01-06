@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { getStokes, startLoading } from '../../slices/dashboard';
+import { getStokes, startLoading, hasError } from '../../slices/dashboard';
 import axios from '../../../utils/axios';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
@@ -12,11 +12,13 @@ export function* stockSaga() {
         authToken: `${Token}`,
       },
     });
+
     const { userRoles } = response.data.data;
     yield put(getStokes(userRoles));
 
     // yield dispatch({ type: sagaActions.GET_STOCKES });
   } catch (error) {
     console.log(error);
+    yield put(hasError());
   }
 }
