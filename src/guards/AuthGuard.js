@@ -4,6 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 // hooks
 import sagaActions from '../redux/actions';
 import { dispatch } from '../redux/store';
+import { PATH_DASHBOARD, PATH_AUTH } from '../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -35,9 +36,9 @@ export default function AuthGuard({ children }) {
     }
   }, [data]);
 
-  // if (!isAuthenticated) {
-  //     return <Login/>
-  // }
+  if (data === null) {
+    return <Navigate to={PATH_AUTH.login} />;
+  }
 
   if (requestedLocation && pathname !== requestedLocation) {
     setRequestedLocation(null);
