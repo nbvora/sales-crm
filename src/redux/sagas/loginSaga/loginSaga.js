@@ -10,7 +10,7 @@ export function* logOut() {
   try {
     const response = yield axios.post(`${BASEURL}logout`);
     if (response.data.message) {
-      yield put(isLogout());
+      yield put(isLogout(response.data.message));
       window.localStorage.removeItem('user');
       window.localStorage.removeItem('token');
       setSession(null);

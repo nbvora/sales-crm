@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  invalidCredential: null,
   isAuthenticated: false,
   isInitialized: false,
-  user: null,
-  invalidCredential: null,
-  error: false,
   isLoading: false,
+  error: false,
+  user: null,
 };
 
 const login = createSlice({
@@ -16,53 +16,43 @@ const login = createSlice({
     startLoading(state) {
       state.isLoading = true;
     },
+
     hasError(state) {
       state.isLoading = false;
       state.error = true;
     },
+
     isInitialized(state, action) {
-      const user = action.payload;
-      return {
-        ...state,
-        isAuthenticated: true,
-        isLoading: false,
-        user,
-      };
+      state.isAuthenticated = true;
+      state.isLoading = false;
+      state.user = action.payload;
     },
+
     isLoding(state) {
       state.isInitialized = true;
     },
 
     isLogin(state, action) {
-      const user = action.payload;
-      return {
-        ...state,
-        isAuthenticated: true,
-        isInitialized: false,
-        invalidCredential: null,
-        isLoading: false,
-        error: false,
-        user,
-      };
+      state.isAuthenticated = true;
+      state.isInitialized = false;
+      state.invalidCredential = null;
+      state.isLoading = false;
+      state.error = false;
+      state.user = action.payload;
     },
-    isError(state, action) {
-      const invalidCredential = action.payload;
 
-      return {
-        ...state,
-        invalidCredential,
-        isLoading: false,
-      };
+    isError(state, action) {
+      state.invalidCredential = action.payload;
+      state.isLoading = false;
     },
-    isLogout(state) {
-      return {
-        ...state,
-        isAuthenticated: false,
-        isInitialized: false,
-        error: false,
-        user: null,
-        isLoading: false,
-      };
+
+    isLogout(state, action) {
+      state.isAuthenticated = false;
+      state.isInitialized = false;
+      state.error = false;
+      state.user = null;
+      state.isLoading = false;
+      state.invalidCredential = action.payload;
     },
   },
 });
