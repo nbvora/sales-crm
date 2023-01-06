@@ -2,21 +2,28 @@ import { put } from 'redux-saga/effects';
 import Cookie from 'universal-cookie';
 import axios from '../../../utils/axios';
 import { setSession } from '../../../utils/jwt';
-import { isLogin, isLogout, isInitialized, isError } from '../../slices/login';
+import { isLogin, isLogout, startLoading, hasError, isInitialized, isError } from '../../slices/login';
 import { BASEURL } from '../../../BaseUrl/BaseUrl';
 
 export function* logOut() {
-  const response = yield axios.post(`${BASEURL}logout`);
-  if (response.data.message) {
-    yield put(isLogout());
-    window.localStorage.removeItem('user');
-    window.localStorage.removeItem('token');
-    setSession(null);
+  yield put(startLoading());
+  try {
+    const response = yield axios.post(`${BASEURL}logout`);
+    if (response.data.message) {
+      yield put(isLogout(response.data.message));
+      window.localStorage.removeItem('user');
+      window.localStorage.removeItem('token');
+      setSession(null);
+    }
+  } catch (error) {
+    console.log(error);
+    yield put(hasError());
   }
 }
 
 export function* signupSaga(state) {
   try {
+    yield put(startLoading());
     const { email, password, remember } = state.data;
     const response = yield axios.post(`${BASEURL}login`, {
       email,
@@ -48,7 +55,7 @@ export function* signupSaga(state) {
     }
   } catch (error) {
     console.log(error, 'error');
-    yield put(isError(error));
+    yield put(hasError());
   }
 }
 
@@ -59,5 +66,6 @@ export function* initialize() {
     yield put(isInitialized(user));
   } catch (error) {
     console.log(error);
+    yield put(startLoading());
   }
 }

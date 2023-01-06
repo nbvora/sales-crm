@@ -39,7 +39,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.login);
+  const { user, invalidCredential } = useSelector((state) => state.login);
 
   const isMountedRef = useIsMountedRef();
 
@@ -56,10 +56,10 @@ export default function AccountPopover() {
   };
 
   useEffect(() => {
-    if (user === null) {
+    if (invalidCredential !== null) {
       navigate(PATH_AUTH.login, { replace: true });
     }
-  }, [user, navigate]);
+  }, [invalidCredential, navigate]);
 
   const handleLogout = async () => {
     try {
