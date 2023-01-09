@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 // hooks
 import sagaActions from '../redux/actions';
 import { dispatch } from '../redux/store';
-import { PATH_DASHBOARD, PATH_AUTH } from '../routes/paths';
+import { PATH_AUTH } from '../routes/paths';
 
 // ----------------------------------------------------------------------
 
