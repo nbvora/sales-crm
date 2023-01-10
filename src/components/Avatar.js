@@ -12,6 +12,8 @@ function AvatarIcon({ name }) {
       sx: {
         // bgcolor: stringToColor(name),
         mr: 1,
+        width: '32px',
+        height: '32px',
       },
       children: `${name.split(' ')[0][0]}`,
     };

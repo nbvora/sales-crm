@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // form
@@ -30,7 +30,7 @@ export default function CategoryForm() {
       { title: 'ProductCategory', path: PATH_DASHBOARD.inventory.productcategory },
       { title: !id ? 'Add' : 'Edit', path: null },
     ];
-    const title = 'Inventory-Mangment';
+    const title = 'Inventory Mangment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
   }, [id]);
@@ -84,6 +84,11 @@ export default function CategoryForm() {
       console.error(error);
     }
   };
+  const [forChange, setForChange] = useState('');
+  const handleChange = (event) => {
+    setForChange(event.target.value);
+    console.log(forChange, 'forChange');
+  };
 
   return (
     <>
@@ -105,7 +110,7 @@ export default function CategoryForm() {
                   <Typography variant="h4" sx={{ margin: 0 }} gutterBottom>
                     Add New Category
                   </Typography>
-                  <RHFTextField name="name" label="Category Name" />
+                  <RHFTextField name="name" label="Category Name" onChange={handleChange} />
                 </Box>
 
                 <Stack alignItems="flex-end" direction="row" justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>

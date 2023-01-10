@@ -135,17 +135,19 @@ export default function ProductCategoryTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                        <TableCell
+                          sx={{ display: 'flex', alignItems: 'center', padding: '6px 0px 0px 0px', height: '45px' }}
+                        >
                           <Avatar name={`${row.category_name}`} />
 
-                          <Typography variant="subtitle2" noWrap>
+                          <Typography variant="subtitle2" noWrap sx={{ fontWeight: '400' }}>
                             {row.category_name}
                           </Typography>
                         </TableCell>
-                        <TableCell sx={{ alignItems: 'center', padding: '5px' }}>
-                          <StatusToggle />
+                        <TableCell sx={{ alignItems: 'center', padding: '0px 0px 0px 0px', height: '10px' }}>
+                          {<StatusToggle />}
                         </TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left" sx={{ height: '45px' }}>
                           <Box sx={{ display: 'flex' }}>
                             <MenuItem style={{ padding: '0px' }}>
                               <Iconify

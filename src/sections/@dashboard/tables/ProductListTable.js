@@ -135,16 +135,24 @@ export default function ProductListTable({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
-                          <Typography variant="subtitle2" noWrap>
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '7px 5px 5px 0px' }}>
+                          <Typography variant="subtitle2" noWrap sx={{ fontWeight: '400' }}>
                             {row.product_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{row.mrp}</TableCell>
-                        <TableCell align="left">{/* aaaa */}</TableCell>
-                        <TableCell align="left">{row.product_hsncode}</TableCell>
-                        <TableCell align="left">{row.super_stockist}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left" sx={{ padding: '2px 5px 2px 20px' }}>
+                          {row.mrp}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '2px 5px 2px 20px' }}>
+                          {/* aaaa */}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '2px 5px 2px 20px' }}>
+                          {row.product_hsncode}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '2px 5px 2px 20px' }}>
+                          {row.super_stockist}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '2px 5px 2px 20px' }}>
                           <MenuItem
                             component={RouterLink}
                             to={`${PATH_DASHBOARD.inventory.productlist}/${paramCase(`${row.id}`)}/edit`}

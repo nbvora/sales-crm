@@ -16,7 +16,7 @@ export default function ProductCategory() {
 
   useEffect(() => {
     const headerDetail = [{ title: 'ProductCategory', path: null }];
-    const title = 'Inventory-Managment';
+    const title = 'Inventory Managment';
     dispatch(getHeaderDetail(headerDetail));
     dispatch(getTitle(title));
   }, []);
