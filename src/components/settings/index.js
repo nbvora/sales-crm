@@ -9,13 +9,12 @@ import useSettings from '../../hooks/useSettings';
 // utils
 import cssStyles from '../../utils/cssStyles';
 // config
-import { NAVBAR, defaultSettings } from '../../config';
+import { NAVBAR } from '../../config';
 //
 import Iconify from '../Iconify';
 import Scrollbar from '../Scrollbar';
 import { IconButtonAnimate, varFade } from '../animate';
 //
-import ToggleButton from './ToggleButton';
 import SettingStretch from './SettingStretch';
 import SettingFullscreen from './SettingFullscreen';
 import SettingColorPresets from './SettingColorPresets';
@@ -46,15 +45,8 @@ const RootStyle = styled(m.div)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Settings() {
-  const { themeMode, themeDirection, themeColorPresets, themeStretch, themeLayout, onResetSetting } = useSettings();
+  const { themeDirection, onResetSetting } = useSettings();
   const [open, setOpen] = useState(false);
-
-  const notDefault =
-    themeMode !== defaultSettings.themeMode ||
-    themeDirection !== defaultSettings.themeDirection ||
-    themeColorPresets !== defaultSettings.themeColorPresets ||
-    themeLayout !== defaultSettings.themeLayout ||
-    themeStretch !== defaultSettings.themeStretch;
 
   const varSidebar =
     themeDirection !== 'rtl'
@@ -77,10 +69,6 @@ export default function Settings() {
     }
   }, [open]);
 
-  const handleToggle = () => {
-    setOpen((prev) => !prev);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -92,9 +80,6 @@ export default function Settings() {
         onClick={handleClose}
         sx={{ background: 'transparent', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       />
-
-      {!open && <ToggleButton open={open} notDefault={notDefault} onToggle={handleToggle} />}
-
       <AnimatePresence>
         {open && (
           <>

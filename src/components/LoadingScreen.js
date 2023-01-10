@@ -4,7 +4,7 @@ import { m } from 'framer-motion';
 import { alpha, styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 //
-import Logo from './Logo';
+// import Logo from './Logo';
 import ProgressBar from './ProgressBar';
 
 // ----------------------------------------------------------------------
@@ -44,9 +44,7 @@ export default function LoadingScreen({ isDashboard, ...other }) {
               repeatDelay: 1,
               repeat: Infinity,
             }}
-          >
-            <Logo disabledLink sx={{ width: 64, height: 64 }} />
-          </m.div>
+          />
 
           <Box
             component={m.div}
