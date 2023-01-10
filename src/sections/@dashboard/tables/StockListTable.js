@@ -116,16 +116,24 @@ export default function StockList({ tableRows, tableColumn }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px' }}>
+                        <TableCell sx={{ display: 'flex', alignItems: 'center', padding: '5px 5px 5px 0px' }}>
                           {/* <Avatar alt={row.role} src={avatarUrl} sx={{ mr: 2, width: '30px', height: '30px' }} /> */}
                           <Typography variant="subtitle2" noWrap>
                             {row.role_name}
                           </Typography>
                         </TableCell>
-                        <TableCell align="left">{row.role}</TableCell>
-                        <TableCell align="left">1</TableCell>
-                        <TableCell align="left">{!row.role ? 'Yes' : 'No'}</TableCell>
-                        <TableCell align="left">0</TableCell>
+                        <TableCell align="left" sx={{ padding: '5px 5px 5px 20px' }}>
+                          {row.role}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px 5px 5px 20px' }}>
+                          1
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px 5px 5px 20px' }}>
+                          {!row.role ? 'Yes' : 'No'}
+                        </TableCell>
+                        <TableCell align="left" sx={{ padding: '5px 5px 5px 20px' }}>
+                          0
+                        </TableCell>
                       </TableRow>
                     );
                   })}
